@@ -13,21 +13,22 @@ local config = {
   },
 
   default_theme = {
-    diagnostics_style = {},
+    diagnostics_style = "none",
   },
 
   enabled = {
-    which_key = true,
     bufferline = true,
     neo_tree = true,
     lualine = true,
     gitsigns = true,
     colorizer = true,
     toggle_term = true,
-    comment = true,
+    comment = false,
     symbols_outline = true,
     indent_blankline = true,
     dashboard = true,
+    which_key = true,
+    neoscroll = false,
     ts_rainbow = true,
     ts_autotag = true,
   },

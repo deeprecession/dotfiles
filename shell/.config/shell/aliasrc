@@ -35,7 +35,7 @@ alias \
 	ka="killall" \
 	g="git" \
 	e="$EDITOR" \
-	v="$EDITOR" \
+	v="nvim" \
 	p="pacman" \
 	z="zathura" \
 	la="ls -a" \

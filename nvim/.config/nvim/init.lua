@@ -1,4 +1,4 @@
-vim.opt.rtp:append(vim.fn.stdpath "config" .. "/../astronvim")
+vim.opt.rtp:append(vim.fn.stdpath "config" .. "/../astrovim")
 
 local impatient_ok, impatient = pcall(require, "impatient")
 if impatient_ok then

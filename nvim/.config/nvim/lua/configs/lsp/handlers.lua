@@ -57,16 +57,22 @@ local function lsp_highlight_document(client)
 end
 
 M.on_attach = function(client, bufnr)
-  if client.name == "tsserver" or client.name == "jsonls" or client.name == "html" or client.name == "sumneko_lua" then
+  if client.name == "tsserver" then
+    client.resolved_capabilities.document_formatting = false
+  elseif client.name == "jsonls" then
+    client.resolved_capabilities.document_formatting = false
+  elseif client.name == "html" then
+    client.resolved_capabilities.document_formatting = false
+  elseif client.name == "sumneko_lua" then
     client.resolved_capabilities.document_formatting = false
   end
 
   local on_attach_override = require("core.utils").user_plugin_opts "lsp.on_attach"
-  if type(on_attach_override) == "function" then
+  if on_attach_override ~= nil then
     on_attach_override(client, bufnr)
   end
 
-  vim.api.nvim_create_user_command("Format", vim.lsp.buf.formatting, { desc = "Format file with LSP" })
+  vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
   lsp_highlight_document(client)
 end
 

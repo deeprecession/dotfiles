@@ -2,7 +2,7 @@ local M = {}
 
 local supported_configs = {
   vim.fn.stdpath "config",
-  vim.fn.stdpath "config" .. "/../astronvim",
+  vim.fn.stdpath "config" .. "/../astrovim",
 }
 
 local g = vim.g
@@ -76,7 +76,7 @@ local function load_options(module, default)
   return default
 end
 
-M.base_notification = { title = "AstroNvim" }
+M.base_notification = { title = "AstroVim" }
 
 function M.bootstrap()
   local fn = vim.fn
@@ -90,8 +90,8 @@ function M.bootstrap()
       "https://github.com/wbthomason/packer.nvim",
       install_path,
     }
-    print "Cloning packer...\nSetup AstroNvim"
-    vim.cmd "packadd packer.nvim"
+    print "Cloning packer...\nSetup AstroVim"
+    vim.cmd [[packadd packer.nvim]]
   end
 end
 
@@ -158,33 +158,17 @@ function M.list_registered_linters(filetype)
   return registered_providers[formatter_method] or {}
 end
 
-function M.url_opener_cmd()
-  local cmd = function()
-    vim.notify("gx is not supported on this OS!", "error", M.base_notification)
-  end
-  if vim.fn.has "mac" == 1 then
-    cmd = '<Cmd>call jobstart(["open", expand("<cfile>")], {"detach": v:true})<CR>'
-  elseif vim.fn.has "unix" == 1 then
-    cmd = '<Cmd>call jobstart(["xdg-open", expand("<cfile>")], {"detach": v:true})<CR>'
-  end
-  return cmd
-end
-
 -- term_details can be either a string for just a command or
 -- a complete table to provide full access to configuration when calling Terminal:new()
 function M.toggle_term_cmd(term_details)
   if type(term_details) == "string" then
     term_details = { cmd = term_details, hidden = true }
   end
-  local term_key = term_details.cmd
-  if vim.v.count > 0 and term_details.count == nil then
-    term_details.count = vim.v.count
-    term_key = term_key .. vim.v.count
+  local cmd = term_details.cmd
+  if M.user_terminals[cmd] == nil then
+    M.user_terminals[cmd] = require("toggleterm.terminal").Terminal:new(term_details)
   end
-  if M.user_terminals[term_key] == nil then
-    M.user_terminals[term_key] = require("toggleterm.terminal").Terminal:new(term_details)
-  end
-  M.user_terminals[term_key]:toggle()
+  M.user_terminals[cmd]:toggle()
 end
 
 function M.add_cmp_source(source, priority)
@@ -216,30 +200,6 @@ end
 
 function M.is_available(plugin)
   return packer_plugins ~= nil and packer_plugins[plugin] ~= nil
-end
-
-function M.delete_url_match()
-  for _, match in ipairs(vim.fn.getmatches()) do
-    if match.group == "HighlightURL" then
-      vim.fn.matchdelete(match.id)
-    end
-  end
-end
-
-function M.set_url_match()
-  M.delete_url_match()
-  if vim.g.highlighturl_enabled then
-    vim.fn.matchadd(
-      "HighlightURL",
-      "\\v\\c%(%(h?ttps?|ftp|file|ssh|git)://|[a-z]+[@][a-z]+[.][a-z]+:)%([&:#*@~%_\\-=?!+;/0-9a-z]+%(%([.;/?]|[.][.]+)[&:#*@~%_\\-=?!+/0-9a-z]+|:\\d+|,%(%(%(h?ttps?|ftp|file|ssh|git)://|[a-z]+[@][a-z]+[.][a-z]+:)@![0-9a-z]+))*|\\([&:#*@~%_\\-=?!+;/.0-9a-z]*\\)|\\[[&:#*@~%_\\-=?!+;/.0-9a-z]*\\]|\\{%([&:#*@~%_\\-=?!+;/.0-9a-z]*|\\{[&:#*@~%_\\-=?!+;/.0-9a-z]*})\\})+",
-      15
-    )
-  end
-end
-
-function M.toggle_url_match()
-  vim.g.highlighturl_enabled = not vim.g.highlighturl_enabled
-  M.set_url_match()
 end
 
 function M.update()
