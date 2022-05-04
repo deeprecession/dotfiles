@@ -51,7 +51,6 @@ require('packer').startup(function(use)
   use "steelsojka/pears.nvim" -- autopairs
 end)
 
-require "pears".setup()
 
 --Set highlight on search
 vim.o.hlsearch = false
@@ -60,6 +59,12 @@ vim.o.hlsearch = false
 vim.wo.number = true
 vim.wo.relativenumber = true
 
+--Tabulation
+vim.bo.tabstop = 4
+vim.bo.shiftwidth = 4
+vim.bo.expandtab = true
+vim.bo.smartindent = true
+vim.bo.autoindent = true
 
 --Enable mouse mode
 vim.o.mouse = 'a'
@@ -78,6 +83,7 @@ vim.o.smartcase = true
 vim.o.updatetime = 250
 vim.wo.signcolumn = 'yes'
 
+require "pears".setup()
 
 require('kanagawa').setup({
     undercurl = true,           -- enable undercurls
