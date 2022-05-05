@@ -52,6 +52,14 @@ require('packer').startup(function(use)
   use "steelsojka/pears.nvim" -- autopairs
 end)
 
+--WSL clipboard support
+local win_clip = io.open('/mnt/c/Windows/System32/clip.exe', "r")
+if win_clip~=nil then
+  vim.api.nvim_command([[
+      autocmd TextYankPost * if v:event.operator ==# 'y' | call system('/mnt/c/Windows/System32/clip.exe', @0) | endif
+  ]])
+  io.close(win_clip)
+end
 
 --Set highlight on search
 vim.o.hlsearch = false
