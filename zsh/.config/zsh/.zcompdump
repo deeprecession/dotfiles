@@ -1,4 +1,4 @@
-#files: 810	version: 5.9
+#files: 800	version: 5.9
 
 _comps=(
 '-' '_precommand'
@@ -50,7 +50,6 @@ _comps=(
 'appletviewer' '_java'
 'apropos' '_man'
 'apvlv' '_pdf'
-'arch-chroot' '_archinstallscripts'
 'arduino-ctags' '_ctags'
 'arecord' '_alsa-utils'
 'arena' '_webbrowser'
@@ -81,10 +80,8 @@ _comps=(
 'basename' '_basename'
 'basenc' '_basenc'
 'bash' '_bash'
-'bat' '_bat'
 'batch' '_at'
 'baz' '_baz'
-'bazel' '_bazel'
 'beep' '_beep'
 'bg' '_jobs_bg'
 'bibtex' '_bibtex'
@@ -262,8 +259,6 @@ _comps=(
 'dmesg' '_dmesg'
 'dmidecode' '_dmidecode'
 'doas' '_doas'
-'docker' '_docker'
-'dockerd' '_docker'
 'domainname' '_yp'
 'dos2unix' '_dos2unix'
 'drill' '_drill'
@@ -403,7 +398,6 @@ _comps=(
 'geany' '_geany'
 'gegrep' '_grep'
 'gem' '_gem'
-'genfstab' '_archinstallscripts'
 'genisoimage' '_genisoimage'
 'genv' '_env'
 'get' '_sccs'
@@ -850,7 +844,6 @@ _comps=(
 'nocorrect' '_precommand'
 'noglob' '_precommand'
 'nohup' '_precommand'
-'notmuch' '_notmuch'
 'nova' '_openstack'
 'npm' '_npm'
 'ns' '_hosts'
@@ -885,7 +878,6 @@ _comps=(
 'pacman-key' '_pacman'
 'pacman.static' '_pacman'
 'pacmd' '_pulseaudio'
-'pacstrap' '_archinstallscripts'
 'pactl' '_pulseaudio'
 'padsp' '_pulseaudio'
 'pandoc' '_pandoc'
@@ -893,7 +885,6 @@ _comps=(
 '-parameter-' '_parameter'
 'parec' '_pulseaudio'
 'parecord' '_pulseaudio'
-'pass' '_pass'
 'passwd' '_users'
 'paste' '_paste'
 'pasuspender' '_pulseaudio'
@@ -1022,7 +1013,6 @@ _comps=(
 'ranlib' '_ranlib'
 'rar' '_rar'
 'rc' '_sh'
-'_rclone' '_rclone'
 'rclone' '_rclone'
 'rcp' '_rlogin'
 'rcs' '_rcs'
@@ -1499,9 +1489,7 @@ _comps=(
 'ypwhich' '_yp'
 'ypxfr' '_yp'
 'ytalk' '_other_accounts'
-'yt-dlp' '_yt-dlp'
 'zargs' '_zargs'
-'zathura' '_zathura'
 'zcalc' '_zcalc'
 '-zcalc-line-' '_zcalc_line'
 'zcat' '_zcat'
@@ -1598,7 +1586,6 @@ _services=(
 
 _patcomps=(
 '*/(init|rc[0-9S]#).d/*' '_init_d'
-'notmuch-*' '_notmuch'
 )
 
 _postpatcomps=(
@@ -1663,16 +1650,14 @@ bindkey '^[,' _history-complete-newer
 bindkey '^[/' _history-complete-older
 bindkey '^[~' _bash_complete-word
 
-autoload -Uz _archinstallscripts _bat _bazel _bootctl _busctl \
-            _bwrap _coredumpctl _curl _docker _email-notmuch \
+autoload -Uz _bootctl _busctl _bwrap _coredumpctl _curl \
             _hostnamectl _journalctl _kernel-install _libinput _localectl \
             _loginctl _machinectl _mkinitcpio _mpv _networkctl \
-            _notmuch _oomctl _pacman _pass _pulseaudio \
-            _rclone _resolvectl _sd_hosts_or_user_at_host _sd_machines _sd_outputmodes \
-            _sd_unit_files _systemctl _systemd _systemd-analyze _systemd-delta \
-            _systemd-inhibit _systemd-nspawn _systemd-path _systemd-run _systemd-tmpfiles \
-            _timedatectl _udevadm _xwallpaper _yay _yt-dlp \
-            _zathura _cdr _all_labels _all_matches _alternative \
+            _oomctl _pacman _pulseaudio _resolvectl _sd_hosts_or_user_at_host \
+            _sd_machines _sd_outputmodes _sd_unit_files _systemctl _systemd \
+            _systemd-analyze _systemd-delta _systemd-inhibit _systemd-nspawn _systemd-path \
+            _systemd-run _systemd-tmpfiles _timedatectl _udevadm _xwallpaper \
+            _yay _cdr _all_labels _all_matches _alternative \
             _approximate _arg_compile _arguments _bash_completions _cache_invalid \
             _call_function _combination _complete _complete_debug _complete_help \
             _complete_help_generic _complete_tag _comp_locale _correct _correct_filename \
