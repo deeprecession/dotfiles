@@ -49,7 +49,7 @@ require('packer').startup(function(use)
 
   use 'voldikss/vim-floaterm' -- floatterm
 
-  use "steelsojka/pears.nvim" -- autopairs
+  -- use "steelsojka/pears.nvim" -- autopairs
 end)
 
 --WSL clipboard support

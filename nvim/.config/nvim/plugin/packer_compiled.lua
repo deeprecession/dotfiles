@@ -139,11 +139,6 @@ _G.packer_plugins = {
     path = "/home/sofia/.local/share/nvim/site/pack/packer/start/packer.nvim",
     url = "https://github.com/wbthomason/packer.nvim"
   },
-  ["pears.nvim"] = {
-    loaded = true,
-    path = "/home/sofia/.local/share/nvim/site/pack/packer/start/pears.nvim",
-    url = "https://github.com/steelsojka/pears.nvim"
-  },
   ["plenary.nvim"] = {
     loaded = true,
     path = "/home/sofia/.local/share/nvim/site/pack/packer/start/plenary.nvim",

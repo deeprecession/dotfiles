@@ -1,0 +1,383 @@
+exit
+zsh
+mkd ~/dotfiles/zsh/.cache/zsh
+touch ~/dotfiles/zsh/.cache/zsh/history
+zsh
+cd dotfiles
+stow zsh
+zsh
+xbacklight -dec 30
+sudo xbacklight -dec 30
+sudo xbacklight -dec 20
+sudo xbacklight -inc 20
+sudo xbacklight -inc 20
+sudo xbacklight -inc 20
+sudo xbacklight -inc 20
+systemctl suspend
+gcc -v
+g++ -v
+g++ --version 
+lfcd
+mkd codeforces
+cd codeforces
+v a.cpp
+v a.cpp
+v a.cpp
+lfcd
+reboot
+lfcd
+v a.cpp
+v b.cpp
+g++ b.cpp
+./a.out
+v b.cpp
+g++ b.cpp
+./a.out
+v b.cpp
+g++ b.cpp
+./a.out
+5
+./a.out
+v b.cpp
+g++ b.cpp
+./a.out
+./a.out
+g++ b.cpp
+v b.cpp
+g++ b.cpp
+./a.out
+./a.out
+v a.cpp
+g++ a.cpp
+./a.out
+./a.out
+v a.cpp
+g++ a.cpp
+./a.out
+gdb a.out
+lfcd
+v a.cpp
+./a.out
+./a.out
+./a.out
+g++ a.cpp
+v a.cpp
+g++ a.cpp
+./a.out
+v a.cpp
+./a.out
+./a.out
+v a.cpp
+g++ a.cpp
+./a.out
+v a.cpp
+g++ a.cpp
+./a.out
+./a.out
+./a.out
+v a.cpp
+./a.out
+v a.cpp
+g++ a.cpp
+./a.out
+./a.out
+./a.out
+g++ a.cpp
+v a.cpp
+g++ a.cpp
+./a.out
+./a.out
+v a.cpp
+./a.out
+./a.out
+v a.cpp
+g++ a.cpp
+./a.out
+v a.cpp
+g++ a.cpp
+./a.out
+v a.cpp
+./a.out
+g++ a.cpp
+./a.out
+v a.cpp
+g++ a.cpp
+./a.out
+v a.cpp
+./a.out
+./a.out
+v a.cpp
+v b.cpp
+v b-ez.cpp
+g++ b-ez.cpp
+./a.out
+g++ b-ez.cpp
+v b-ez.cpp
+./a.out
+./a.out
+./a.out
+./a.out
+./a.out
+./a.out
+./a.out
+v b.cpp
+v b-ez.cpp
+g++ b-ez.cpp
+./a.out
+./a.out
+v b-ez.cpp
+./a.out
+./a.out
+./a.out
+./a.out
+v c-dumb.cpp
+v b-ez.cpp
+g++ b-ez.cpp
+./a.out
+./a.out
+v ./b-ez.cpp
+g++ b-ez.cpp
+./a.out
+v ./b-ez.cpp
+./a.out
+./a.out
+./a.out
+v ./b-ez.cpp
+g++ b-ez.cpp
+./a.out
+./a.out
+v ./b-ez.cpp
+v a.cpp
+g++ a.cpp
+./a.out
+./a.out
+./a.out
+./a.out
+g++ a.cpp
+./a.out
+./a.out
+./a.out
+./a.out
+g++ a.cpp
+./a.out
+./a.out
+./a.out
+./a.out
+./a.out
+./a.out
+./a.out
+./a.out
+g++ a.cpp
+./a.out
+g++ a.cpp
+./a.out
+g++ a.cpp
+./a.out
+g++ a.cpp
+./a.out
+./a.out
+g++ a.cpp
+./a.out
+1 6
+./a.out
+./a.out
+g++ a.cpp
+g++ a.cpp
+./a.out
+./a.out
+./a.out
+./a.out
+./a.out
+./a.out
+g++ a.cpp
+./a.out
+g++ a.cpp
+./a.out
+./a.out
+./a.out
+./a.out
+./a.out
+./a.out
+lfcd
+lfcd
+p -Q lua
+p -Q | grep lua
+p -Ss lua
+p -S lua
+lfcd
+p -Syyu 
+lfcd
+git init
+lfcd
+git status
+git init
+lfcd
+g++ a.cpp 
+./a.out
+./a.out
+./a.out
+./a.out
+lfcd
+g++ a.cpp
+./a.out
+lfcd
+v a.cpp
+compile a.cpp
+g++ a.cpp
+./a.out
+v a.cpp
+g++ a.cpp
+./a.out
+lfcd
+lfcd
+g++ a.cpp
+./a.out
+lfcd
+g++ a.cpp
+./a.out
+./a.out
+./a.out
+./a.out
+lfcd
+lfcd
+sudo xbacklight -inc 50
+sudo xbacklight -inc 50
+pulsemixer
+lfcd
+lfcd
+reboot
+lfcd
+reboot
+neofetch
+sudo xbacklight -inc 100
+lfcd
+exit
+pulsemixer
+lfcd
+lfcd
+v backspase-string-compare.cpp
+lfcd
+sudo visudo
+lfcd
+sudoedit sudoers
+sudo rm sudoers
+sudo cp ~/dotfiles/sudo/sudoers .
+sudo cp /home/sofia/dotfiles/sudo/sudoers .
+sudo cp /home/sofia/dotfiles/sudo/sudoers /etc/sudoers
+su
+touch sudoers
+v sudoers
+lfcd
+sudo lf
+sudo visudo
+which xbacklight
+sudo visudo
+xbacklight
+xbacklight -inc 3
+xbacklight -dec 3
+xbacklight -dec 5 
+reboot
+redshift -P -r -l 56:44 &\
+
+redshift -P -r -l 56:44 \
+
+pkill redshift
+redshift -P -r -l 56:44 \
+
+xbacklight -dec 5 
+iwctl
+ip addr
+systemctl status iwd
+iwctl
+ip link set wlan0 up
+iwd
+systemctl restart iwd
+lfcd
+chgrp -R backlighters /sys/class/backlight\
+chmod g+w /sys/class/backlight/*/*
+sudo chgrp -R backlighters /sys/class/backlight
+sudo chmod g+w /sys/class/backlight/*/*
+sudo usermod -a -G backlighters sofia
+sudo chgrp -R wheel /sys/class/backlight
+groups sofia
+xbacklight -inc 32
+xbacklight -dec 32
+sudo chmod g+w /sys/class/backlight/*/*
+xbacklight -dec 32
+sudo chgrp -R wheel /sys/class/backlight
+visudo
+sudo visudo
+xbacklight -dec 32
+sudo visudo
+sudoedit /etc/sudoers
+xbacklight -dec 32
+xbacklight -dec 32
+sudoedit /etc/sudoers
+sudo chmod a+w /sys/class/backlight/
+xbacklight -dec 32
+sudo chmod a+w /sys/class/backlight/**
+sudo chmod a+w /sys/class/backlight/*/**
+lfcd
+p -Ss mypaint
+p -S mypaint
+lfcd
+lfcd
+ls
+v backspase-string-compare.cpp
+v backspase-string-compare.cpp
+v majority-element.cpp
+p -S gdb
+g++ majority-element.cpp
+v majority-element.cpp
+g++ majority-element.cpp
+gdb a.out
+g++ majority-element.cpp -g
+gdb a.out
+gdb a.out -tui
+lfcd
+v majority-element.cpp
+reboot
+systemctl suspend
+sudo xbacklight -inc 50
+csc
+exit
+csc
+lfcd
+exit
+zsh
+zsh
+gp
+prj
+ls
+lfcd
+let
+let
+leet
+leet
+ls
+lfcd
+gp
+zsh
+csc
+csc
+v shortcutrc
+exit
+cd cf
+cf
+lfcd
+stow dwm
+lfcd
+lfcd
+zsh
+exti
+exit
+csc
+gp
+csc
+csc
+cfX
+zsh
+csc
+lfcd
+cd
+csc
