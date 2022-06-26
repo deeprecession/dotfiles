@@ -15,9 +15,9 @@ case $BLOCK_BUTTON in
 esac
 
 case "$location" in
-	"/home"* ) icon="🏠" ;;
-	"/mnt"* ) icon="💾" ;;
-	*) icon="🖥";;
+	"/home"* ) icon="Home" ;;
+	"/mnt"* ) icon="Mnt" ;;
+	*) icon="Drive";;
 esac
 
-printf "%s: %s\n" "$icon" "$(df -h "$location" | awk ' /[0-9]/ {print $3 "/" $2}')"
+printf "| %s: %s\n" "$icon" "$(df -h "$location" | awk ' /[0-9]/ {print $3 "/" $2}')"
