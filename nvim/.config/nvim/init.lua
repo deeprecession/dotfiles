@@ -50,6 +50,11 @@ require('packer').startup(function(use)
   use 'voldikss/vim-floaterm' -- floatterm
 
   -- use "steelsojka/pears.nvim" -- autopairs
+  use {
+    "windwp/nvim-autopairs",
+    config = function() require("nvim-autopairs").setup {} end
+  }
+
 end)
 
 --WSL clipboard support
@@ -92,7 +97,7 @@ vim.o.smartcase = true
 vim.o.updatetime = 250
 vim.wo.signcolumn = 'yes'
 
-require "pears".setup()
+-- require "pears".setup()
 
 require('kanagawa').setup({
     undercurl = true,           -- enable undercurls
