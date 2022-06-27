@@ -18,6 +18,8 @@ require('packer').startup(function(use)
 
   use 'numToStr/Comment.nvim' -- "gc" to comment visual regions/lines
 
+  use 'kdheepak/lazygit.nvim'
+
   use 'ludovicchabant/vim-gutentags' -- Automatic tags management
 
   -- UI to select things (files, grep results, open buffers...)
@@ -173,6 +175,8 @@ require('gitsigns').setup {
 }
 
 
+-- LazyGit
+vim.keymap.set('n', '<leader>lg', ":LazyGit<CR>")
 
 
 -- Telescope
