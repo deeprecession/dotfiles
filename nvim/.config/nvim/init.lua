@@ -99,6 +99,9 @@ vim.o.smartcase = true
 vim.o.updatetime = 250
 vim.wo.signcolumn = 'yes'
 
+--Turn off comment on new line after comment line
+vim.o.formatoptions = 'tcqnj'
+
 -- require "pears".setup()
 
 require('kanagawa').setup({
