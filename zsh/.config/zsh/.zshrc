@@ -77,5 +77,8 @@ bindkey '^[[P' delete-char
 # Load git shortcuts
 source ~/.config/zsh/plugins/git-shortcuts/git-shortcuts.zsh 2>/dev/null
 
+# Load git shortcuts
+source ~/.config/zsh/plugins/poetry 2>/dev/null
+
 # Load syntax highlighting; should be last.
 source ~/.config/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh  2>/dev/null
