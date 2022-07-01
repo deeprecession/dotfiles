@@ -104,6 +104,9 @@ vim.o.formatoptions = 'tcqnj'
 
 -- require "pears".setup()
 
+-- Bind F5 to compile current file
+vim.keymap.set('n', '<F5>', ":!compiler %<CR>", { silent = true })
+
 require('kanagawa').setup({
     undercurl = true,           -- enable undercurls
     commentStyle = { italic = true },
