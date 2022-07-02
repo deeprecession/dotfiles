@@ -9,13 +9,13 @@ xrdb ${XDG_CONFIG_HOME:-$HOME/.config}/x11/xresources & xrdbpid=$!	# Uncomment t
 remaps &		# run the remaps script, switching caps/esc and more; check it for more info
 
 
-rclone mount --daemon gdrive: ~/gdrive &
-rclone mount --daemon gphotos: ~/Pictures/gphotos/ &
+# rclone mount --daemon gdrive: ~/gdrive &
+# rclone mount --daemon gphotos: ~/Pictures/gphotos/ &
 
 
 
 
-# Keyboard setup
+# Input setup
 setxkbmap -layout us,ru -option grp:alt_shift_toggle
 xset r rate 230 30
 
