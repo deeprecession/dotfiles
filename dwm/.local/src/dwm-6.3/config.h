@@ -216,18 +216,18 @@ static Key keys[] = {
 	/* { MODKEY,			XK_F3,		spawn,		SHCMD("displayselect") }, */
 	/* { MODKEY,			XK_F4,		spawn,		SHCMD(TERMINAL " -e pulsemixer; kill -44 $(pidof dwmblocks)") }, */
 
-	/* { MODKEY,			XK_F8,		spawn,		SHCMD("mw -Y") }, */
+	{ MODKEY,			XK_F8,		spawn,		SHCMD("mw -Y") }, 
 
-	/* { MODKEY,			XK_F9,		spawn,		SHCMD("dmenumount") }, */
-	/* { MODKEY,			XK_F10,		spawn,		SHCMD("dmenuumount") }, */
+	{ MODKEY,			XK_F9,		spawn,		SHCMD("dmenumount") }, 
+	{ MODKEY,			XK_F10,		spawn,		SHCMD("dmenuumount") },
 
-	/* { MODKEY,			XK_F11,		spawn,		SHCMD("mpv --untimed --no-cache --no-osc --no-input-default-bindings --profile=low-latency --input-conf=/dev/null --title=webcam $(ls /dev/video[0,2,4,6,8] | tail -n 1)") }, */
+	 { MODKEY,			XK_F11,		spawn,		SHCMD("mpv --untimed --no-cache --no-osc --no-input-default-bindings --profile=low-latency --input-conf=/dev/null --title=webcam $(ls /dev/video[0,2,4,6,8] | tail -n 1)") }, 
 
 	{ MODKEY,			XK_Return,	zoom,		{0} },
 	{ MODKEY|ShiftMask,		XK_space,	togglefloating,	{0} },
 
-	/* { 0,				XK_Print,	spawn,		SHCMD("maim pic-full-$(date '+%y%m%d-%H%M-%S').png") }, */
-	/* { ShiftMask,			XK_Print,	spawn,		SHCMD("maimpick") }, */
+	{ 0,				XK_Print,	spawn,		SHCMD("maim pic-full-$(date '+%y%m%d-%H%M-%S').png") }, 
+	{ ShiftMask,			XK_Print,	spawn,		SHCMD("maimpick") }, 
 
 	{ 0, XF86XK_AudioMute,		spawn,		SHCMD("pamixer -t; kill -44 $(pidof dwmblocks)") },
 	{ 0, XF86XK_AudioRaiseVolume,	spawn,		SHCMD("pamixer --allow-boost -i 3; kill -44 $(pidof dwmblocks)") },
