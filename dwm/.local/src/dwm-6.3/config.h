@@ -226,8 +226,8 @@ static Key keys[] = {
 	{ MODKEY,			XK_Return,	zoom,		{0} },
 	{ MODKEY|ShiftMask,		XK_space,	togglefloating,	{0} },
 
-	{ 0,				XK_Print,	spawn,		SHCMD("maim pic-full-$(date '+%y%m%d-%H%M-%S').png") }, 
-	{ ShiftMask,			XK_Print,	spawn,		SHCMD("maimpick") }, 
+	{ ShiftMask,				XK_Print,	spawn,		SHCMD("maim pic-full-$(date '+%y%m%d-%H%M-%S').png") }, 
+	{ 0,			XK_Print,	spawn,		SHCMD("maimpick") }, 
 
 	{ 0, XF86XK_AudioMute,		spawn,		SHCMD("pamixer -t; kill -44 $(pidof dwmblocks)") },
 	{ 0, XF86XK_AudioRaiseVolume,	spawn,		SHCMD("pamixer --allow-boost -i 3; kill -44 $(pidof dwmblocks)") },
