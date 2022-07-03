@@ -42,11 +42,6 @@ alias \
 	ll="ls -l" \
 	lal="ls -la"
 
-# upload obsidian to gdrive
-alias obup="rclone sync --create-empty-src-dirs -i ~/obsidian/gdrive-local/ gdrive:obsidian-shared"
-# download obsidian to gdrive
-alias obdown="rclone sync --create-empty-src-dirs -i gdrive:obsidian-shared/ ~/obsidian/gdrive-local/"
-
 
 alias \
 	lf="lfub" \
