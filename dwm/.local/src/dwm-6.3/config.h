@@ -193,14 +193,14 @@ static Key keys[] = {
 
 	{ MODKEY,			XK_t,	spawn,		{.v = termcmd } },
 
-	{ MODKEY|ShiftMask,			XK_equal,		incrgaps,	{.i = +3 } },
-	{ MODKEY|ShiftMask,			XK_minus,		incrgaps,	{.i = -3 } },
+	{ MODKEY|ShiftMask,			XK_equal,		incrgaps,	{.i = +5 } },
+	{ MODKEY|ShiftMask,			XK_minus,		incrgaps,	{.i = -5 } },
 
 	/* V is automatically bound above in STACKKEYS */
 	{ MODKEY,			XK_b,		togglebar,	{0} },
-	/* { MODKEY,			XK_m,		spawn,		SHCMD(TERMINAL " -e ncmpcpp") }, */
-	/* { MODKEY,			XK_comma,	spawn,		SHCMD("mpc prev") }, */
-	/* { MODKEY,			XK_period,	spawn,		SHCMD("mpc next") }, */
+	{ MODKEY,			XK_m,		spawn,		SHCMD(TERMINAL " -e ncmpcpp") },
+	{ MODKEY|ShiftMask,			XK_n,	spawn,		SHCMD("mpc prev") },
+	{ MODKEY,			XK_n,	spawn,		SHCMD("mpc next") },
 	/* { MODKEY|ShiftMask,		XK_period,	spawn,		SHCMD("mpc repeat") }, */
 
 	{ MODKEY,			XK_comma,	focusmon,	{.i = -1 } },
