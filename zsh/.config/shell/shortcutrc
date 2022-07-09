@@ -9,6 +9,7 @@ h="cd ~ && ls -a" \
 cdmsc="cd ~/Music && ls -a" \
 mn="cd /mnt && ls -a" \
 cdpic="cd ~/Pictures && ls -a" \
+cdwall="cd ~/Pictures/wallpapers && ls -a" \
 cdbin="cd ~/.local/bin && ls -a" \
 vid="cd ~/Videos && ls -a" \
 leet="cd ~/garbage_programming/problems/leetcode" \
