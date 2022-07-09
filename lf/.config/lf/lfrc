@@ -52,6 +52,8 @@ cmd open ${{
 
 cmd mkdir $mkdir -p "$(echo $* | tr ' ' '\ ')"
 
+cmd touch $touch -p "$(echo $* | tr ' ' '\ ')"
+
 cmd extract ${{
 	clear; tput cup $(($(tput lines)/3)); tput bold
 	set -f
@@ -105,6 +107,7 @@ map E extract
 map C copyto
 map M moveto
 map <c-n> push :mkdir<space>
+map <c-n> push :touch<space>
 map <c-r> reload
 map <c-s> set hidden!
 map <enter> shell
