@@ -31,4 +31,4 @@ done >/dev/null 2>&1
 
 
 # Orange light
-redshift -P -r -l 56:44 &
+redshift -P -r -l 56:44 -b 1:0.7 &
