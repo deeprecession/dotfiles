@@ -65,7 +65,7 @@ bindkey -s '^r' 'lfcd\n'
 
 bindkey -s '^g' 'cat ~/dotfiles/zsh/.config/zsh/plugins/git-shortcuts/git-shortcuts.md | fzf \n'
 
-bindkey -s '^b' 'cat $HISTFILE | fzf --tac --no-sort  \n'
+bindkey -s '^b' '{history | cut -c 8- & tac $HISTFILE} | fzf --no-sort \n'
 
 # bindkey -s '^a' 'bc -lq\n'
 #
