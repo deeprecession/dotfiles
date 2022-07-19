@@ -2,7 +2,7 @@
 
 # This script is called on startup to remap keys.
 # Decrease key repeat delay to 300ms and increase key repeat rate to 50 per second.
-xset r rate 230 30
+xset r rate 250 40
 # Map the caps lock key to super, and map the menu key to right super.
 setxkbmap -option altwin:menu_win
 # turn off caps on caps lock 
