@@ -74,6 +74,13 @@ bindkey -s '^f' 'cd "$(dirname "$(fzf)")"\n'
 
 bindkey '^[[P' delete-char
 
+
+# if auto execute tmuxl
+if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+    exec tmux new-session -A -s main
+fi
+
+
 # Edit line in vim with ctrl-e:
 # autoload edit-command-line; zle -N edit-command-line
 # bindkey '^e' edit-command-line
