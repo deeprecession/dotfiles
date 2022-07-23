@@ -20,7 +20,8 @@ cddwm="cd ~/.local/src/dwm-6.3 && ls -a" \
 cdst="cd ~/.local/src/st && ls -a" \
 cdbooks="cd ~/books && ls -a" \
 cddwmblocks="cd ~/.local/src/dwmblocks && ls -a" \
-cxres="$EDITOR ~/.config/x11/xresources" \
+
+alias cxres="$EDITOR ~/.config/x11/xresources" \
 cxprof="$EDITOR ~/.config/x11/xprofile" \
 cdbc="$EDITOR ~/.local/src/dwmblocks/config.h" \
 cvc="$EDITOR ~/.config/nvim/init.lua" \
