@@ -56,6 +56,14 @@ require('packer').startup(function(use)
 
   use 'voldikss/vim-floaterm' -- floatterm
 
+  -- Debugging
+  use 'mfussenegger/nvim-dap'
+  use 'leoluz/nvim-dap-go'
+  use 'mfussenegger/nvim-dap-python'
+  use 'rcarriga/nvim-dap-ui'
+  use 'theHamsta/nvim-dap-virtual-text'
+  use 'nvim-telescope/telescope-dap.nvim'
+
   -- use "steelsojka/pears.nvim" -- autopairs
   use {
     "windwp/nvim-autopairs",
@@ -109,8 +117,13 @@ vim.o.formatoptions = 'tcqnj'
 
 -- require "pears".setup()
 
--- Bind F5 to compile current file
-vim.keymap.set('n', '<F5>', ":!compiler %<CR>", { silent = true })
+--Remap space as leader key
+vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
+
+-- Bind compile current file
+vim.keymap.set('n', '<F17>', ":!compiler %<CR>", { silent = true })
 
 require('kanagawa').setup({
     undercurl = true,           -- enable undercurls
@@ -145,14 +158,8 @@ require('lualine').setup {
   },
 }
 
-
 --Enable Comment.nvim
 require('Comment').setup()
-
---Remap space as leader key
-vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
 
 --Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
@@ -216,6 +223,7 @@ vim.keymap.set('n', '<leader>tt', require('telescope.builtin').tags)
 vim.keymap.set('n', '<leader>tg', require('telescope.builtin').grep_string)
 vim.keymap.set('n', '<leader>tl', require('telescope.builtin').live_grep)
 vim.keymap.set('n', '<leader>to', require('telescope.builtin').oldfiles)
+vim.keymap.set('n', '<leader>tk', require('telescope.builtin').keymaps)
 -- vim.keyman.set('n', '<leader>tct', function()
 --   require('telescope.builtin').tags{ only_current_buffer = true }
 -- end)
@@ -276,6 +284,63 @@ require('nvim-treesitter.configs').setup {
     },
   },
 }
+
+
+
+
+--Debugging setup
+vim.keymap.set("n", "<F5>", ":lua require'dap'.continue()<CR>")
+vim.keymap.set("n", "<F10>", ":lua require'dap'.step_over()<CR>")
+vim.keymap.set("n", "<F11>", ":lua require'dap'.step_into()<CR>")
+vim.keymap.set("n", "<F23>", ":lua require'dap'.step_out()<CR>")
+vim.keymap.set("n", "<leader>b", ":lua require'dap'.toggle_breakpoint()<CR>")
+vim.keymap.set("n", "<leader>B", ":lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>")
+vim.keymap.set("n", "<leader>lp", ":lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>")
+vim.keymap.set("n", "<leader>dr", ":lua require'dap'.repl.open()<CR>")
+vim.keymap.set("n", "<F6>", ":lua require'dapui'.toggle()<CR>")
+
+require("nvim-dap-virtual-text").setup()
+require('dapui').setup()
+require('dap-python').test_runner = 'pytest'
+
+local dap = require('dap')
+local dapui = require('dapui')
+
+dap.listeners.after.event_initialized["dapui_config"] = function ()
+   dapui.open() 
+end
+
+dap.adapters.python = {
+  type = 'executable';
+  command = '/usr/bin/python';
+  args = { '-m', 'debugpy.adapter' };
+}
+dap.configurations.python = {
+  {
+    -- The first three options are required by nvim-dap
+    type = 'python'; -- the type here established the link to the adapter definition: `dap.adapters.python`
+    request = 'launch';
+    name = "Launch file";
+
+    -- Options below are for debugpy, see https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings for supported options
+
+    program = "${file}"; -- This configuration will launch the current file if used.
+    pythonPath = function()
+      -- debugpy supports launching an application with a different interpreter then the one used to launch debugpy itself.
+      -- The code below looks for a `venv` or `.venv` folder in the current directly and uses the python within.
+      -- You could adapt this - to for example use the `VIRTUAL_ENV` environment variable.
+      local cwd = vim.fn.getcwd()
+      if vim.fn.executable(cwd .. '/venv/bin/python') == 1 then
+        return cwd .. '/venv/bin/python'
+      elseif vim.fn.executable(cwd .. '/.venv/bin/python') == 1 then
+        return cwd .. '/.venv/bin/python'
+      else
+        return '/usr/bin/python'
+      end
+    end;
+  },
+}
+
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
