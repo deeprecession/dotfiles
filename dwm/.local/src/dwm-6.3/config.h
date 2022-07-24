@@ -216,6 +216,12 @@ static Key keys[] = {
 	/* { MODKEY,			XK_F3,		spawn,		SHCMD("displayselect") }, */
 	/* { MODKEY,			XK_F4,		spawn,		SHCMD(TERMINAL " -e pulsemixer; kill -44 $(pidof dwmblocks)") }, */
 
+	{ MODKEY,			XK_F5,	spawn,		SHCMD("temperature-redshift --dec-bright") },
+	{ MODKEY,			XK_F6,	spawn,		SHCMD("temperature-redshift --inc-bright") },
+
+	{ MODKEY|ShiftMask,			XK_F5,	spawn,		SHCMD("temperature-redshift --dec-temp") },
+	{ MODKEY|ShiftMask,			XK_F6,	spawn,		SHCMD("temperature-redshift --inc-temp") },
+
 	{ MODKEY,			XK_F8,		spawn,		SHCMD("mw -Y") }, 
 
 	{ MODKEY,			XK_F9,		spawn,		SHCMD("dmenumount") }, 
@@ -255,8 +261,8 @@ static Key keys[] = {
 	{ 0, XF86XK_TouchpadOff,	spawn,		SHCMD("synclient TouchpadOff=1") },
 	{ 0, XF86XK_TouchpadOn,		spawn,		SHCMD("synclient TouchpadOff=0") },
 
-	{ 0, XF86XK_MonBrightnessUp,	spawn,		SHCMD("sudo xbacklight -inc 15") },
-	{ 0, XF86XK_MonBrightnessDown,	spawn,		SHCMD("sudo xbacklight -dec 15") },
+	{ 0, XF86XK_MonBrightnessUp,	spawn,		SHCMD("temperature-redshift --inc-bright") },
+	{ 0, XF86XK_MonBrightnessDown,	spawn,		SHCMD("temperature-redshift --dec-bright") },
 
 };
 

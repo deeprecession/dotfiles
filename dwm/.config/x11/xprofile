@@ -26,5 +26,5 @@ done >/dev/null 2>&1
 [ -n "$xrdbpid" ] && wait "$xrdbpid"
 
 
-# Orange light
-redshift -P -r -l 56:44 -b 1:0.7 &
+# redshift
+temperature-redshift &
