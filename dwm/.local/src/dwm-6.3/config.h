@@ -222,6 +222,8 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,			XK_F5,	spawn,		SHCMD("temperature-redshift --dec-temp") },
 	{ MODKEY|ShiftMask,			XK_F6,	spawn,		SHCMD("temperature-redshift --inc-temp") },
 
+	{ MODKEY, XK_F7,	spawn,		SHCMD("(synclient | grep 'TouchpadOff.*1' && synclient TouchpadOff=0) || synclient TouchpadOff=1") },
+
 	{ MODKEY,			XK_F8,		spawn,		SHCMD("mw -Y") }, 
 
 	{ MODKEY,			XK_F9,		spawn,		SHCMD("dmenumount") }, 
