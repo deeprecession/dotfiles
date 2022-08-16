@@ -8,7 +8,7 @@ pacman:
 
 yay:
 
-    libxft-git, lf, brave-bin, viber
+    libxft-git, lf, brave-bin, viber, xkblayout-state-git
     
 
 AMD drivers:
