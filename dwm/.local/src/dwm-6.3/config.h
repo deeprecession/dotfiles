@@ -191,7 +191,7 @@ static Key keys[] = {
 
 	/* { MODKEY,			XK_apostrophe,	togglescratch,	{.ui = 1} }, */
 
-	{ MODKEY,			XK_t,	spawn,		{.v = termcmd } },
+	{ MODKEY,			XK_t,	spawn,		SHCMD(TERMINAL " -e tmux new-session -A -s main") },
 
 	{ MODKEY|ShiftMask,			XK_equal,		incrgaps,	{.i = +5 } },
 	{ MODKEY|ShiftMask,			XK_minus,		incrgaps,	{.i = -5 } },
