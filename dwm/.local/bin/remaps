@@ -9,3 +9,5 @@ setxkbmap -option altwin:menu_win
 # setxkbmap -option ctrl:nocaps 
 # Map Russian layout on alt-shift toggle
 setxkbmap -layout us,ru -option grp:caps_toggle
+# turn of touchpad when typing
+syndaemon -K -i 0.5 -R -d
