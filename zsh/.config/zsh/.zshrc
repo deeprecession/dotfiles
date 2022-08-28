@@ -85,10 +85,13 @@ bindkey '^[[P' delete-char
 # autoload edit-command-line; zle -N edit-command-line
 # bindkey '^e' edit-command-line
 
+# Load system clipboard
+source ~/.config/zsh/plugins/zsh-system-clipboard/zsh-system-clipboard.zsh 2>/dev/null
+
 # Load git shortcuts
 source ~/.config/zsh/plugins/git-shortcuts/git-shortcuts.zsh 2>/dev/null
 
-# Load git shortcuts
+# Load poetry shortcuts
 source ~/.config/zsh/plugins/poetry 2>/dev/null
 
 # Load syntax highlighting; should be last.
