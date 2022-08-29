@@ -16,7 +16,7 @@ remaps &		# run the remaps script, switching caps/esc and more; check it for mor
 
 
 
-autostart="mpd xcompmgr dunst unclutter pipewire pipewire-pulse pipewire-media-session"
+autostart="mpd xcompmgr dunst unclutter"
 
 for program in $autostart; do
 	pidof -s "$program" || setsid -f "$program"
