@@ -32,6 +32,7 @@ clfc="$EDITOR ~/.config/lf/lfrc" \
 clfs="$EDITOR ~/.config/lf/scope" \
 cshc="$EDITOR ~/.config/shell/shortcutrc" \
 ctmuxc="$EDITOR ~/.tmux.conf" \
+calac="$EDITOR ~/.config/alacritty/alacritty.yml " \
 
 # bf="$EDITOR ~/.config/shell/bm-files" \
 # bd="$EDITOR ~/.config/shell/bm-dirs" \
