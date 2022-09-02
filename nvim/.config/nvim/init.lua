@@ -120,6 +120,10 @@ vim.o.formatoptions = 'tcqnj'
 
 -- require "pears".setup()
 
+-- center widow when use crtl+d and crtl+u
+vim.keymap.set({ 'n', 'v' }, '<C-d>', '<C-d>zz')
+vim.keymap.set({ 'n', 'v' }, '<C-u>', '<C-u>zz')
+
 --Remap space as leader key
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.g.mapleader = ' '
