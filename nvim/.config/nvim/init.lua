@@ -10,6 +10,8 @@ vim.api.nvim_create_autocmd('BufWritePost', { command = 'source <afile> | Packer
 
 require('packer').startup(function(use)
 
+  use 'nvim-lua/plenary.nvim'
+
   use 'wbthomason/packer.nvim' -- Package manager
 
   use 'tpope/vim-fugitive' -- Git commands in nvim
@@ -73,6 +75,8 @@ require('packer').startup(function(use)
   -- Test Runner
   use "klen/nvim-test" 
 
+  -- Harpoon
+  use "ThePrimeagen/harpoon"
 end)
 
 --WSL clipboard support
@@ -164,6 +168,45 @@ require('lualine').setup {
     section_separators = '',
   },
 }
+
+
+-- Harpoon
+require("harpoon").setup({
+    -- sets the marks upon calling `toggle` on the ui, instead of require `:w`
+    save_on_toggle = false,
+
+    -- saves the harpoon file upon every change. disabling is unrecommended
+    save_on_change = true,
+
+    -- sets harpoon to run the command immediately as it's passed to the terminal when calling `sendCommand`
+    enter_on_sendcmd = false,
+
+    -- closes any tmux windows harpoon that harpoon creates when you close Neovim
+    tmux_autoclose_windows = false,
+
+    -- filetypes that you want to prevent from adding to the harpoon list menu
+    excluded_filetypes = { "harpoon" },
+
+    -- set marks specific to each git branch inside git repository
+    mark_branch = false,
+
+    width = vim.api.nvim_win_get_width(0) - 4
+})
+
+require("telescope").load_extension('harpoon')
+
+vim.keymap.set('n', '<leader>hh', ":lua require('harpoon.ui').toggle_quick_menu()<CR>")
+vim.keymap.set('n', '<leader>ha', ":lua require('harpoon.mark').add_file()<CR>")
+
+vim.keymap.set('n', '<leader>hn', ":lua require('harpoon.ui').nav_next()<CR>")
+vim.keymap.set('n', '<leader>hp', ":lua require('harpoon.ui').nav_prev()<CR>")
+vim.keymap.set('n', '<leader>hp', ":lua require('harpoon.ui').nav_prev()<CR>")
+
+vim.keymap.set('n', '<leader>hj', ":lua require('harpoon.ui').nav_file(1)<CR>")
+vim.keymap.set('n', '<leader>hk', ":lua require('harpoon.ui').nav_file(2)<CR>")
+vim.keymap.set('n', '<leader>hl', ":lua require('harpoon.ui').nav_file(3)<CR>")
+vim.keymap.set('n', '<leader>h;', ":lua require('harpoon.ui').nav_file(4)<CR>")
+
 
 --Enable Comment.nvim
 require('Comment').setup()
