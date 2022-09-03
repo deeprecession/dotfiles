@@ -157,7 +157,7 @@ static Key keys[] = {
 	{ MODKEY,			XK_c,		killclient,	{0} },
 	{ MODKEY,			XK_w,		spawn,		SHCMD("$BROWSER") },
 	{ MODKEY|ShiftMask,		XK_w,		spawn,		SHCMD(TERMINAL " -e sudo nmtui") },
-	{ MODKEY,			XK_e,		spawn,		SHCMD(TERMINAL " -e neomutt ; pkill -RTMIN+12 dwmblocks; rmdir ~/.abook") },
+	{ MODKEY,			XK_e,		spawn,		SHCMD("thunderbird") },
 	{ MODKEY,			XK_r,		spawn,		SHCMD(TERMINAL " -e lfub") },
 	{ MODKEY|ShiftMask,		XK_r,		spawn,		SHCMD(TERMINAL " -e htop") },
 
@@ -180,41 +180,26 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,		XK_p,		spawn,		SHCMD("passmenu") },
 	{ MODKEY,			XK_f,		togglefullscr,	{0} },
 
-	/* { MODKEY,			XK_g,		shiftview,	{ .i = -1 } }, */
-	/* { MODKEY|ShiftMask,		XK_g,		shifttag,	{ .i = -1 } }, */
-	/* { MODKEY,			XK_semicolon,	shiftview,	{ .i = 1 } }, */
-	/* { MODKEY|ShiftMask,		XK_semicolon,	shifttag,	{ .i = 1 } }, */
 
-	/* J and K are automatically bound above in STACKEYS */
 	{ MODKEY,			XK_h,		setmfact,	{.f = -0.05} },
 	{ MODKEY,			XK_l,		setmfact,      	{.f = +0.05} },
 
-	/* { MODKEY,			XK_apostrophe,	togglescratch,	{.ui = 1} }, */
 
 	{ MODKEY,			XK_t,	spawn,		SHCMD(TERMINAL " -e tmux new-session -A -s main") },
 
 	{ MODKEY|ShiftMask,			XK_equal,		incrgaps,	{.i = +5 } },
 	{ MODKEY|ShiftMask,			XK_minus,		incrgaps,	{.i = -5 } },
 
-	/* V is automatically bound above in STACKKEYS */
 	{ MODKEY,			XK_b,		togglebar,	{0} },
 	{ MODKEY,			XK_m,		spawn,		SHCMD(TERMINAL " -e ncmpcpp") },
 	{ MODKEY|ShiftMask,			XK_n,	spawn,		SHCMD("mpc prev") },
 	{ MODKEY,			XK_n,	spawn,		SHCMD("mpc next") },
-	/* { MODKEY|ShiftMask,		XK_period,	spawn,		SHCMD("mpc repeat") }, */
 
 	{ MODKEY,			XK_comma,	focusmon,	{.i = -1 } },
 	{ MODKEY|ShiftMask,		XK_comma,	tagmon,		{.i = -1 } },
 	{ MODKEY,			XK_period,	focusmon,	{.i = +1 } },
 	{ MODKEY|ShiftMask,		XK_period,	tagmon,		{.i = +1 } },
 
-	/* { MODKEY,			XK_Page_Up,	shiftview,	{ .i = -1 } }, */
-	/* { MODKEY|ShiftMask,		XK_Page_Up,	shifttag,	{ .i = -1 } }, */
-	/* { MODKEY,			XK_Page_Down,	shiftview,	{ .i = +1 } }, */
-	/* { MODKEY|ShiftMask,		XK_Page_Down,	shifttag,	{ .i = +1 } }, */
-
-	/* { MODKEY,			XK_F3,		spawn,		SHCMD("displayselect") }, */
-	/* { MODKEY,			XK_F4,		spawn,		SHCMD(TERMINAL " -e pulsemixer; kill -44 $(pidof dwmblocks)") }, */
 
 	{ MODKEY,			XK_F5,	spawn,		SHCMD("temperature-redshift --dec-bright") },
 	{ MODKEY,			XK_F6,	spawn,		SHCMD("temperature-redshift --inc-bright") },
@@ -255,7 +240,7 @@ static Key keys[] = {
 	{ 0, XF86XK_DOS,		spawn,		SHCMD(TERMINAL) },
 	{ 0, XF86XK_ScreenSaver,	spawn,		SHCMD("slock & xset dpms force off; mpc pause; pauseallmpv") },
 	{ 0, XF86XK_TaskPane,		spawn,		SHCMD(TERMINAL " -e htop") },
-	{ 0, XF86XK_Mail,		spawn,		SHCMD(TERMINAL " -e neomutt ; pkill -RTMIN+12 dwmblocks") },
+	{ 0, XF86XK_Mail,		spawn,		SHCMD("thunderbird") },
 	{ 0, XF86XK_MyComputer,		spawn,		SHCMD(TERMINAL " -e lfub /") },
 	{ 0, XF86XK_Launch1,		spawn,		SHCMD("xset dpms force off") },
 	{ 0, XF86XK_TouchpadToggle,	spawn,		SHCMD("(synclient | grep 'TouchpadOff.*1' && synclient TouchpadOff=0) || synclient TouchpadOff=1") },
