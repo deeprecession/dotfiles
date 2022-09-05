@@ -1,0 +1,6 @@
+window:
+  opacity: 0.9
+  decorations: none
+
+key_bindings:
+  - { key: F, mods: Control|Shift, action: ReceiveChar }
