@@ -1,0 +1,222 @@
+#!/usr/bin/python
+from abc import ABC, abstractmethod
+from dataclasses import dataclass
+import os
+import pydantic
+from pydantic.json import pydantic_encoder
+import json
+from time import sleep
+import argparse
+
+
+class SaveError(Exception):
+    pass
+
+@dataclass
+class TimerMode:
+    name: str
+    duration: int
+
+
+class TimerState(pydantic.BaseModel):
+    time: int
+    mode: TimerMode
+    is_paused: bool = False
+    to_stop: bool = False
+
+
+class ModeManager:
+    def __init__(self):
+        self.current_mode_inx = 0
+        self.mode_list = [TimerMode("work", 25*60), TimerMode("rest", 5*60)]
+
+    def get_mode(self) -> TimerMode:
+        return self.mode_list[self.current_mode_inx]
+
+    def next(self) -> None:
+        self.current_mode_inx += 1
+        if self.current_mode_inx >= len(self.mode_list):
+            self.current_mode_inx = 0
+
+
+class SavingManager(ABC):
+    @abstractmethod
+    def save_timer_state(self, timer_state: TimerState):
+        pass
+
+    @abstractmethod
+    def get_timer_state(self) -> TimerState:
+        pass
+
+
+class SavingManagerUnixFS(SavingManager):
+    def __init__(self, path: str = '~/.local/share/pomodoro_timer.json'):
+        self.save_path = os.path.expanduser(path)
+
+    def save_timer_state(self, timer_state: TimerState):
+        if not os.path.exists(self.save_path):
+            raise FileNotFoundError(f'file {self.save_path} is not found')
+
+        with open(self.save_path, 'w') as f:
+            json_state = json.dumps(timer_state, default=pydantic_encoder)
+            f.write(json_state)
+
+    def get_timer_state(self) -> TimerState:
+        with open(self.save_path, 'r') as f:
+            data = json.load(f)
+            return TimerState(**data)
+
+
+
+class Timer:
+    def __init__(self, save_manager: SavingManager, mode_manager: ModeManager):
+        self.save_manager = save_manager
+        self.mode_manager = mode_manager
+        
+    def start(self):
+        self._initialize_timer()
+        self._start_clock_cycle()
+
+    def reset(self):
+        state = self._get_state()
+        state.time = state.mode.duration
+        self.save_manager.save_timer_state(state)
+
+    def stop(self):
+        state = self._get_state()
+        state.to_stop = True
+        self.save_manager.save_timer_state(state)
+
+    def pause(self):
+        state = self._get_state()
+        state.is_paused = True
+        self.save_manager.save_timer_state(state)
+
+    def continue_timer(self):
+        state = self._get_state()
+        state.is_paused = False
+        self.save_manager.save_timer_state(state)
+
+    def toggle(self):
+        state = self._get_state()
+        state.is_paused = not state.is_paused
+        self.save_manager.save_timer_state(state)
+
+    def get_mode_name(self) -> str:
+        return self._get_state().mode.name
+
+    def get_time(self) -> int:
+        return self._get_state().time
+
+    def get_time_formatted(self) -> str:
+        time = self.get_time()
+        minutes = time // 60
+        seconds = time % 60
+        return f'{minutes:02}:{seconds:02}'
+
+    def is_paused(self) -> bool:
+        return self._get_state().is_paused
+
+    def is_stopped(self) -> bool:
+        return self._get_state().to_stop
+
+    def _get_state(self) -> TimerState:
+        try:
+            state = self.save_manager.get_timer_state()
+        except:
+            raise SaveError("Could not get savings!")
+
+        return state
+
+    def _is_initialized(self) -> bool:
+        try:
+            state = self._get_state()
+        except:
+            return False
+
+        if state.to_stop:
+            return False 
+        else:
+            return True
+        
+    def _initialize_timer(self):
+        mode = self.mode_manager.get_mode()
+        initial_state = TimerState(time=mode.duration, mode=mode, is_paused=False)
+        self.save_manager.save_timer_state(initial_state)
+
+    def _start_clock_cycle(self):
+        while True:
+            sleep(1)
+            state = self._get_state()
+
+            if state.to_stop:
+                print("Timer is stopped!")
+                return
+
+            if state.is_paused:
+                continue
+
+            self._tick_clock(state)
+
+    def _tick_clock(self, state: TimerState):
+        time_left = state.time
+
+        if time_left > 0:
+            state.time = state.time - 1
+            self.save_manager.save_timer_state(state)
+        else:
+            self._switch_mode()
+
+    def _switch_mode(self):
+        self.mode_manager.next()
+
+        next_mode = self.mode_manager.get_mode()
+        next_state = TimerState(time=next_mode.duration, mode=next_mode)
+
+        self.save_manager.save_timer_state(next_state)
+
+
+
+
+parser = argparse.ArgumentParser()
+
+parser.add_argument('--start', action='store_true')
+parser.add_argument('--stop', action='store_true')
+parser.add_argument('--reset', action='store_true')
+
+parser.add_argument('--continue-timer', action='store_true')
+parser.add_argument('--pause', action='store_true')
+parser.add_argument('--toggle', action='store_true')
+
+parser.add_argument('--mode', action='store_true')
+parser.add_argument('--time', action='store_true')
+parser.add_argument('--is-paused', action='store_true')
+parser.add_argument('--is-stopped', action='store_true')
+
+args = parser.parse_args()
+
+
+timer = Timer(SavingManagerUnixFS(), ModeManager())
+
+if args.start:
+    timer.start()
+elif args.stop:
+    timer.stop()
+elif args.reset:
+    timer.reset()
+elif args.continue_timer:
+    timer.continue_timer()
+elif args.pause:
+    timer.pause()
+elif args.toggle:
+    timer.toggle()
+elif args.mode:
+    print(timer.get_mode_name())
+elif args.time:
+    print(timer.get_time_formatted())
+elif args.is_paused:
+    print(timer.is_paused())
+elif args.is_stopped:
+    print(timer.is_stopped())
+else:
+    parser.print_help()
