@@ -177,7 +177,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,		XK_a,		defaultgaps,	{0} },
 
 	{ MODKEY,			XK_p,		spawn,          SHCMD("dmenu_run") },
-	{ MODKEY|ShiftMask,		XK_p,		spawn,		SHCMD("passmenu") },
+	{ MODKEY|ShiftMask,		XK_p,		spawn,		SHCMD("pkill pomodoro ; pomodoro --start") },
 	{ MODKEY,			XK_f,		togglefullscr,	{0} },
 
 

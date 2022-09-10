@@ -3,27 +3,27 @@
 # Prints Pomodoro Timer status and time
 
 case $BLOCK_BUTTON in
-	3) notify-send " Pomodoro Timer. " ;;
+	1) pomodoro --toggle ;;
+	2) pomodoro --stop ;;
+	3) pomodoro --next-mode ;;
+	4) pomodoro --increase-time ;;
+	5) pomodoro --decrease-time ;;
 	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
-status = pomodoro --status
-time = pomodoro --time
+[ "$(pomodoro --is-stopped)" == "True" ] && exit 1
 
-case "$(cat "$battery/status" 2>&1)" in
-    "Full") status="⚡" ;;
-    "Discharging") status="🔋" ;;
-    "Charging") status="🔌" ;;
-    "Not charging") status="🛑" ;;
-    "Unknown") status="♻️" ;;
-    *) exit 1 ;;
+case "$(pomodoro --mode)" in
+    "rest") status="🟢" ;;
+    "work") status="🍅" ;;
 esac
 
-capacity="$(cat "$battery/capacity" 2>&1)"
-# Will make a warn variable if discharging and low
-[ "$status" = "🔋" ] && [ "$capacity" -le 25 ] && warn="❗"
-# Prints the info
-printf "| %s%s%d%%" "$status" "$warn" "$capacity"; unset warn
+case "$(pomodoro --is-paused)" in
+    "True") paused="⏸️";;
+esac
 
-done && printf "\\n"
+
+time="$(pomodoro --time-formatted)"
+
+printf "| %s %s %s" "$paused""$status" "$time" ;
 

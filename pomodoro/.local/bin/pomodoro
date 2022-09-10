@@ -1,4 +1,5 @@
 #!/usr/bin/python
+
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
 import os
@@ -7,6 +8,7 @@ from pydantic.json import pydantic_encoder
 import json
 from time import sleep
 import argparse
+import atexit
 
 
 class SaveError(Exception):
@@ -23,12 +25,13 @@ class TimerState(pydantic.BaseModel):
     mode: TimerMode
     is_paused: bool = False
     to_stop: bool = False
+    to_next: bool = False
 
 
 class ModeManager:
     def __init__(self):
         self.current_mode_inx = 0
-        self.mode_list = [TimerMode("work", 25*60), TimerMode("rest", 5*60)]
+        self.mode_list = [TimerMode("work", 50*60), TimerMode("rest", 10*60)]
 
     def get_mode(self) -> TimerMode:
         return self.mode_list[self.current_mode_inx]
@@ -74,6 +77,7 @@ class Timer:
         self.mode_manager = mode_manager
         
     def start(self):
+        self._set_stop_on_exit()
         self._initialize_timer()
         self._start_clock_cycle()
 
@@ -120,11 +124,28 @@ class Timer:
     def is_stopped(self) -> bool:
         return self._get_state().to_stop
 
+    def decrease_time(self):
+        state = self._get_state()
+        state.time -= 10
+        self.save_manager.save_timer_state(state)
+
+    def increase_time(self):
+        state = self._get_state()
+        state.time += 10
+        self.save_manager.save_timer_state(state)
+
+    def next_mode(self):
+        state = self._get_state()
+        state.to_next = True
+        self.save_manager.save_timer_state(state)
+
     def _get_state(self) -> TimerState:
         try:
             state = self.save_manager.get_timer_state()
         except:
-            raise SaveError("Could not get savings!")
+            pass
+            return TimerState(time=0, mode=TimerMode("", 0), to_stop=True)
+            # raise SaveError("Could not get savings!")
 
         return state
 
@@ -140,6 +161,9 @@ class Timer:
             return True
         
     def _initialize_timer(self):
+        if self._is_initialized():
+            return
+
         mode = self.mode_manager.get_mode()
         initial_state = TimerState(time=mode.duration, mode=mode, is_paused=False)
         self.save_manager.save_timer_state(initial_state)
@@ -153,6 +177,11 @@ class Timer:
                 print("Timer is stopped!")
                 return
 
+            if state.to_next:
+                self._switch_mode()
+                state.to_next = False
+                continue
+                
             if state.is_paused:
                 continue
 
@@ -175,6 +204,8 @@ class Timer:
 
         self.save_manager.save_timer_state(next_state)
 
+    def _set_stop_on_exit(self):
+        atexit.register(self.stop)
 
 
 
@@ -187,9 +218,12 @@ parser.add_argument('--reset', action='store_true')
 parser.add_argument('--continue-timer', action='store_true')
 parser.add_argument('--pause', action='store_true')
 parser.add_argument('--toggle', action='store_true')
+parser.add_argument('--next-mode', action='store_true')
+parser.add_argument('--increase-time', action='store_true')
+parser.add_argument('--decrease-time', action='store_true')
 
 parser.add_argument('--mode', action='store_true')
-parser.add_argument('--time', action='store_true')
+parser.add_argument('--time-formatted', action='store_true')
 parser.add_argument('--is-paused', action='store_true')
 parser.add_argument('--is-stopped', action='store_true')
 
@@ -212,11 +246,17 @@ elif args.toggle:
     timer.toggle()
 elif args.mode:
     print(timer.get_mode_name())
-elif args.time:
+elif args.time_formatted:
     print(timer.get_time_formatted())
 elif args.is_paused:
     print(timer.is_paused())
 elif args.is_stopped:
     print(timer.is_stopped())
+elif args.increase_time:
+    timer.increase_time()
+elif args.decrease_time:
+    timer.decrease_time()
+elif args.next_mode:
+    timer.next_mode()
 else:
     parser.print_help()
