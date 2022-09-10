@@ -73,7 +73,10 @@ require('packer').startup(function(use)
   }
 
   -- Test Runner
-  use "klen/nvim-test" 
+  use "klen/nvim-test"
+
+  -- Harpoon
+  use "ThePrimeagen/harpoon"
 
   -- Harpoon
   use "ThePrimeagen/harpoon"
@@ -474,7 +477,7 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 -- Enable the following language servers
-local servers = { 'ccls', 'rust_analyzer', 'pyright', 'tsserver', 'sumneko_lua' }
+local servers = { 'ccls', 'rust_analyzer', 'pyright', 'tsserver', 'sumneko_lua', 'bashls' }
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
     on_attach = on_attach,
