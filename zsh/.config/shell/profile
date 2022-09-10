@@ -13,7 +13,7 @@ unsetopt PROMPT_SP
 
 # Default programs:
 export EDITOR="nvim"
-export TERMINAL="st"
+export TERMINAL="alacrity"
 export BROWSER="brave"
 
 # ~/ Clean-up:
