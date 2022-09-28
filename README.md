@@ -8,7 +8,7 @@ pacman:
 
 yay:
 
-    libxft-git lf brave-bin viber xkblayout-state-git noto-fonts
+    libxft-git lf brave-bin viber xkblayout-state-git noto-fonts zaread-git
     
 
     
