@@ -19,7 +19,7 @@ case "$(pomodoro --mode)" in
 esac
 
 case "$(pomodoro --is-paused)" in
-    "True") paused="⏸️";;
+    "True") paused="- ";;
 esac
 
 
