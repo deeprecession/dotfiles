@@ -382,6 +382,8 @@ require('dap-python').test_runner = 'pytest'
 local dap = require('dap')
 local dapui = require('dapui')
 
+require('dap-go').setup()
+
 dap.listeners.after.event_initialized["dapui_config"] = function ()
    dapui.open() 
 end
@@ -477,7 +479,7 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 -- Enable the following language servers
-local servers = { 'ccls', 'rust_analyzer', 'pyright', 'texlab', 'tsserver', 'sumneko_lua', 'bashls' }
+local servers = { 'ccls', 'rust_analyzer', 'pyright', 'texlab', 'tsserver', 'sumneko_lua', 'bashls', 'gopls' }
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
     on_attach = on_attach,
