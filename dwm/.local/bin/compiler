@@ -29,12 +29,12 @@ textype() { \
 case "$ext" in
 	# Try to keep these cases in alphabetical order.
 	[0-9]) preconv "$file" | refer -PS -e | groff -mandoc -T pdf > "$base".pdf ;;
-	c) cc "$file" -o "$base" && "$base" ;;
+	c) cc "$file" -Wall -o  "$base" && "$base" ;;
 	cpp) g++ "$file" -o "$base" && "$base" ;;
 	cs) mcs "$file" && mono "$base".exe ;;
 	go) go run "$file" ;;
 	h) sudo make install ;;
-	java) javac -d classes "$file" && java -cp classes "${1%.*}" ;;
+	java) java "$file" ;;
     py) python "$file" ;;
 	m) octave "$file" ;;
 	md)	if  [ -x "$(command -v lowdown)" ]; then
