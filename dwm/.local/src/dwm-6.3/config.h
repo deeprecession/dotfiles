@@ -157,7 +157,8 @@ static Key keys[] = {
 	{ MODKEY,			XK_c,		killclient,	{0} },
 	{ MODKEY,			XK_w,		spawn,		SHCMD("$BROWSER") },
 	{ MODKEY|ShiftMask,		XK_w,		spawn,		SHCMD(TERMINAL " -e sudo nmtui") },
-	{ MODKEY,			XK_e,		spawn,		SHCMD("thunderbird") },
+	{ MODKEY|ShiftMask,			XK_e,		spawn,		SHCMD("thunderbird") },
+	{ MODKEY,			XK_e,		spawn,		SHCMD("telegram-desktop") },
 	{ MODKEY,			XK_r,		spawn,		SHCMD(TERMINAL " -e lfub") },
 	{ MODKEY|ShiftMask,		XK_r,		spawn,		SHCMD(TERMINAL " -e htop") },
 
