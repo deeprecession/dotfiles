@@ -14,8 +14,8 @@ fi
 
 brightshift=0
 
-[[ $* == *--inc-bright* ]] && brightshift=10
-[[ $* == *--dec-bright* ]] && brightshift=-10
+[[ $* == *--inc-bright* ]] && brightshift=5
+[[ $* == *--dec-bright* ]] && brightshift=-5
 
 brightness=$(($brightness + brightshift))
 (($brightness > 99)) && brightness=99 
@@ -36,8 +36,8 @@ fi
 
 tempshift=0
 
-[[ $* == *--inc-temp* ]] && tempshift=500
-[[ $* == *--dec-temp* ]] && tempshift=-500
+[[ $* == *--inc-temp* ]] && tempshift=100
+[[ $* == *--dec-temp* ]] && tempshift=-100
 
 temperature=$(($temperature + tempshift))
 
