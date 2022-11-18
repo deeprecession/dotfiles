@@ -37,7 +37,7 @@ require('packer').startup(function(use)
   use { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } }
 
   -- Highlight, edit, and navigate code using a fast incremental parsing library
-  use 'nvim-treesitter/nvim-treesitter'
+  use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
 
   -- Additional textobjects for treesitter
   use 'nvim-treesitter/nvim-treesitter-textobjects'
