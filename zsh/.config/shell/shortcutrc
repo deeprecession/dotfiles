@@ -15,12 +15,14 @@ vid="cd ~/Videos && ls -a" \
 leet="cd ~/garbage_programming/problems/leetcode && ls -a" \
 prj="cd ~/garbage_programming/pet_projects && ls -a" \
 prog="cd ~/garbage_programming && ls -a" \
+playground="cd ~/garbage_programming/playground/ && ls -a" \
 dot="cd ~/dotfiles && ls -a" \
 cddwm="cd ~/.local/src/dwm-6.3 && ls -a" \
 cdst="cd ~/.local/src/st && ls -a" \
 books="cd ~/books && ls -a" \
 cddwmblocks="cd ~/.local/src/dwmblocks && ls -a" \
 innop="cd ~/innop/ && ls -a" \
+english="cd ~/innop/english/ && ls -a" \
 
 alias cxres="$EDITOR ~/.config/x11/xresources" \
 cxprof="$EDITOR ~/.config/x11/xprofile" \
