@@ -2,5 +2,8 @@ window:
   opacity: 0.9
   decorations: none
 
+font:
+  size: 14.0
+
 key_bindings:
   - { key: F, mods: Control|Shift, action: ReceiveChar }
