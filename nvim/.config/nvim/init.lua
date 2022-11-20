@@ -78,9 +78,6 @@ require('packer').startup(function(use)
   -- Harpoon
   use "ThePrimeagen/harpoon"
 
-  -- Harpoon
-  use "ThePrimeagen/harpoon"
-
   -- Java LSP
   use 'mfussenegger/nvim-jdtls'
 end)
