@@ -11,3 +11,4 @@ setxkbmap -option altwin:menu_win
 setxkbmap -layout us,ru -option grp:caps_toggle
 # turn of touchpad when typing
 syndaemon -K -i 0.5 -R -d
+synclient TapButton1=1

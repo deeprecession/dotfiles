@@ -381,3 +381,59 @@ csc
 lfcd
 cd
 csc
+{history | cut -c 8- & tac $HISTFILE} | fzf --no-sort 
+syncthing
+systemctl --user start syncthing.service
+systemctl --user enable syncthing.service
+systemctl --user status syncthing.service
+dot
+stow zsh
+lfcd
+lfcd
+cxprof
+cdbin
+v remaps
+v remaps
+dot
+lg
+git config --global user.email 67899905+aDeepRecession@users.noreply.github.com
+git config --global user.name "Vladislav Kishkovskiy"
+ssh-keygen -t ed25519 -C "work52vlad@gmail.com"
+p -S ssh
+ssh-add ~/.ssh/id_ed25519
+bat ~/.ssh/id_ed25519
+bat ~/.ssh/id_ed25519.pub
+git remote set-url git@github.com:aDeepRecession/dotfiles.git
+git remote set-url origin git@github.com:aDeepRecession/dotfiles.git
+git pull
+lg
+gp
+lg
+git reset HEAD^ zsh/.cache/
+lg
+git reset --hard HEAD^ zsh/.cache/
+git reset --hard HEAD^ zsh/.cache/*
+git checkout HEAD^ zsh/.cache/
+lg
+git checkout HEAD^ zsh/.cache
+git checkout HEAD^ -- zsh/.cache
+lg
+git checkout HEAD^ -- zsh/.cache 
+git restore --source=HEAD --staged --worktree zsh/.cache
+lg
+git restore --source=^HEAD --staged --worktree zsh/.cache
+lg
+git reset --hard HEAD 
+lg
+git reset  ^HEAD 
+git reset --mixed ^HEAD 
+lg
+lg
+dot
+stow zsh
+stow zsh
+lfcd
+lg
+lfcd
+lg
+lfcd
