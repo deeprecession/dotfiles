@@ -192,6 +192,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,			XK_minus,		incrgaps,	{.i = -5 } },
 
 	{ MODKEY,			XK_b,		togglebar,	{0} },
+	{ MODKEY|ShiftMask,			XK_b,		spawn,		SHCMD(TERMINAL " -e lfub ~/books/cs/golang") },
 	{ MODKEY,			XK_m,		spawn,		SHCMD(TERMINAL " -e ncmpcpp") },
 	{ MODKEY|ShiftMask,			XK_n,	spawn,		SHCMD("mpc prev") },
 	{ MODKEY,			XK_n,	spawn,		SHCMD("mpc next") },
