@@ -26,6 +26,7 @@ english="cd ~/innop/english/ && ls -a" \
 
 alias cxres="$EDITOR ~/.config/x11/xresources" \
 cxprof="$EDITOR ~/.config/x11/xprofile" \
+cxinit="$EDITOR ~/.config/x11/xinitrc" \
 cdbc="$EDITOR ~/.local/src/dwmblocks/config.h" \
 cvc="$EDITOR ~/.config/nvim/init.lua" \
 czc="$EDITOR ~/.config/zsh/.zshrc" \
