@@ -1,0 +1,207 @@
+#
+# wm independent hotkeys
+#
+
+# terminal emulator
+super + t
+ 	st tmux new-session -A -s main
+
+# browser
+super + w 
+ 	brave
+
+Print
+	maimpick-rofi
+
+# nmtui
+super + shift + w
+ 	st nmtui
+
+# telegram
+super + e
+ 	telegram-desktop
+
+# ncmpcpp
+super + m
+ 	st ncmpcpp
+
+# thunderbird
+super + shift + e
+ 	thunderbird
+
+# htop
+super + shift + r
+ 	st htop
+
+# books
+super + shift + b
+ 	st lfub ~/books/cs/golang/
+
+# program launcher
+super + p
+	rofi -terminal st -show run -icon-theme "Papirus" -show-icons
+
+# emoji picker
+super + shift + p
+	rofi -terminal st -show emoji -icon-theme "Papirus" -show-icons
+
+# volume
+super + {minus, equal}
+	pamixer --allow-boost -{d,i} 5
+
+XF86AudioRaiseVolume
+	pamixer --allow-boost -i 5
+
+XF86AudioLowerVolume
+	pamixer --allow-boost -d 5
+
+XF86AudioMute
+	pamixer -t
+
+# powermenu
+super + BackSpace
+	powermenu
+
+# cam
+super + F11
+	mpv --untimed --no-cache --no-osc --no-input-default-bindings --profile=low-latency --input-conf=/dev/null --title=webcam $(ls /dev/video[0,2,4,6,8] | tail -n 1)
+
+# sceen temperature
+super + ctrl + {minus, equal}
+	temperature-redshift {--dec-temp,--inc-temp}
+
+# brightness
+super + shift + {minus, equal}
+	temperature-redshift {--dec-bright,--inc-bright}
+
+XF86MonBrightnessUp
+	temperature-redshift --inc-bright
+
+XF86MonBrightnessDown
+	temperature-redshift --dec-bright
+
+
+# make sxhkd reload its configuration files:
+super + Escape
+	pkill -USR1 -x sxhkd
+
+
+# restart polybar
+super + shift + Escape
+	$HOME/.config/polybar/launch.sh
+
+
+super + b
+	polybar-toggle
+
+#
+# bspwm hotkeys
+#
+
+
+# quit/restart bspwm
+super + alt + {q,r}
+	bspc {quit,wm -r}
+
+# close and kill
+super + {_,shift + }c
+	bspc node -{c,k}
+
+# alternate between the tiled and monocle layout
+super + f
+	bspc desktop -l next
+
+# send the newest marked node to the newest preselected node
+# super + y
+# 	bspc node newest.marked.local -n newest.!automatic.local
+
+# swap the current node and the biggest window
+super + Return
+	bspc node -s biggest.window
+
+#
+# state/flags
+#
+
+# set the window state
+super + {t,shift + t,s,f}
+	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+
+# set the node flags
+super + ctrl + {m,x,y,z}
+	bspc node -g {marked,locked,sticky,private}
+
+#
+# focus/swap
+#
+
+# focus the node in the given direction
+# super + {_,shift + }{h,j,k,l}
+# 	bspc node -{f,s} {west,south,north,east}
+
+# focus the node for the given path jump
+# super + {p,b,comma,period}
+# 	bspc node -f @{parent,brother,first,second}
+
+# focus the next/previous window in the current desktop
+super + k
+	bspc node -f next.local.!hidden.window
+super + j
+	bspc node -f prev.local.!hidden.window
+
+super + shift + j 
+	bspc node -s next.local.!hidden.window
+super + shift + k 
+	bspc node -s prev.local.!hidden.window
+
+# focus the next/previous desktop in the current monitor
+super + bracket{left,right}
+	bspc desktop -f {prev,next}.local
+
+# focus the last node/desktop
+super + {grave,Tab}
+	bspc {node,desktop} -f last
+
+# focus the older or newer node in the focus history
+# super + {o,i}
+# 	bspc wm -h off; \
+# 	bspc node {older,newer} -f; \
+# 	bspc wm -h on
+
+# focus or send to the given desktop
+super + {_,shift + }{1-9,0}
+	bspc {desktop -f,node -d} '^{1-9,10}'
+
+#
+# preselect
+#
+
+# preselect the direction
+# super + ctrl + {h,j,k,l}
+# 	bspc node -p {west,south,north,east}
+
+# preselect the ratio
+# super + ctrl + {1-9}
+# 	bspc node -o 0.{1-9}
+
+# cancel the preselection for the focused node
+# super + ctrl + space
+# 	bspc node -p cancel
+
+# cancel the preselection for the focused desktop
+# super + ctrl + shift + space
+# 	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
+
+#
+# move/resize
+#
+
+super + h
+    /bin/sh ~/.config/sxhkd/resize/shrinkx.sh
+super + l
+    /bin/sh ~/.config/sxhkd/resize/expandx.sh
+# super + shift + k
+#     /bin/sh ~/.config/sxhkd/resize/shrinky.sh
+# super + shift + j
+#     /bin/sh ~/.config/sxhkd/resize/expandy.sh
+
