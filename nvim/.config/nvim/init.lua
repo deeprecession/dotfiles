@@ -80,6 +80,11 @@ require('packer').startup(function(use)
 
   -- Java LSP
   use 'mfussenegger/nvim-jdtls'
+
+  use {
+    'nmac427/guess-indent.nvim',
+    config = function() require('guess-indent').setup {} end,
+  }
 end)
 
 --WSL clipboard support
