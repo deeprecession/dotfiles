@@ -3,21 +3,18 @@
 # This file runs when a DM logs you into a graphical session.
 # If you use startx/xinit like a Chad, this file will also be sourced.
 
-xrandr --dpi 100 		# Set DPI. User may want to use a larger number for larger screens.
+xrandr --dpi 130 		# Set DPI. User may want to use a larger number for larger screens.
 autorandr --load default &
 setbg --change-colors &			# set the background with the `setbg` script
 xrdb ${XDG_CONFIG_HOME:-$HOME/.config}/x11/xresources & xrdbpid=$!	# Uncomment to use Xresources colors/settings on startup
 remaps &		# run the remaps script, switching caps/esc and more; check it for more info
 xidlehook --not-when-audio --not-when-fullscreen --timer 1800 'systemctl suspend' '' &
 
+picom -b
 
-# rclone mount --daemon gdrive: ~/gdrive &
-# rclone mount --daemon gphotos: ~/Pictures/gphotos/ &
+xrdb merge ${HOME}/.Xresources &
 
-
-
-
-autostart="mpd xcompmgr dunst unclutter"
+autostart="mpd dunst unclutter"
 
 for program in $autostart; do
 	pidof -s "$program" || setsid -f "$program"
