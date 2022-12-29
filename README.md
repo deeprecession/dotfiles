@@ -4,7 +4,7 @@
 
 ### pacman:
 
-xorg-xinit xwallpaper xorg  dunst  libnotify  dosfstools  xcompmgr  ueberzug  rclone  exfat-utils  neovim  man-db  dhcpcd  acpilight  unzip  maim  mpd  mpc  mpv  ncmpcpp  noto-fonts-emoji  pipewire  pipewire-pulse  pulsemixer  pamixer  unclutter  xclip  yt-dlp  zathura  zathura-pdf-mupdf  mediainfo  atool  fzf  bat  moreutils  telegram-desktop  ttf-ubuntu-font-family  redshift  syncthing  lazygit  tmux  autorandr  python-debugpy python-pywal gnome-keyring cmake lua-language-server pyright sxiv ccls base-devel alacritty usbutils bash-language-server perl-file-mimeinfo delve go gopls ctags obsidian okular libreoffice-still python-pip xf86-input-synaptics thunderbird rofi rofi-emoji bspwm polybar source-han-sans-cn-fonts calcurse playerctl
+xorg-xinit xwallpaper xorg  dunst  libnotify  dosfstools  xcompmgr  ueberzug  rclone  exfat-utils  neovim  man-db  dhcpcd  acpilight  unzip  maim  mpd  mpc  mpv  ncmpcpp  noto-fonts-emoji  pipewire  pipewire-pulse  pulsemixer  pamixer  unclutter  xclip  yt-dlp  zathura  zathura-pdf-mupdf  mediainfo  atool  fzf  bat  moreutils  telegram-desktop  ttf-ubuntu-font-family  redshift  syncthing  lazygit  tmux  autorandr  python-debugpy python-pywal gnome-keyring cmake sxiv base-devel alacritty usbutils perl-file-mimeinfo delve go ctags obsidian okular libreoffice-still python-pip xf86-input-synaptics thunderbird rofi rofi-emoji bspwm polybar source-han-sans-cn-fonts calcurse playerctl
 
 
 ### yay:
