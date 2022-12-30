@@ -24,8 +24,16 @@ require('packer').startup(function(use)
 
   use 'ludovicchabant/vim-gutentags' -- Automatic tags management
 
+  use {
+      'j-hui/fidget.nvim';
+      require('fidget').setup()
+  }
+
   -- UI to select things (files, grep results, open buffers...)
-  use { 'nvim-telescope/telescope.nvim', requires = { 'nvim-lua/plenary.nvim' } }
+  use {
+    'nvim-telescope/telescope.nvim',
+    requires = { 'nvim-lua/plenary.nvim' }
+  }
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
   use 'nvim-lualine/lualine.nvim' -- Fancier statusline
@@ -43,7 +51,11 @@ require('packer').startup(function(use)
   use 'nvim-treesitter/nvim-treesitter-textobjects'
 
   use 'neovim/nvim-lspconfig' -- Collection of configurations for built-in LSP client
-  use 'williamboman/nvim-lsp-installer'
+  -- LSP downloader
+  use {
+      'williamboman/mason.nvim';
+        require("mason").setup()
+  }
 
   use 'hrsh7th/nvim-cmp' -- Autocompletion plugin
   use 'hrsh7th/cmp-nvim-lsp'
@@ -66,6 +78,9 @@ require('packer').startup(function(use)
   use 'theHamsta/nvim-dap-virtual-text'
   use 'nvim-telescope/telescope-dap.nvim'
 
+  -- Golang
+  use 'fatih/vim-go'
+
   -- use "steelsojka/pears.nvim" -- autopairs
   use {
     "windwp/nvim-autopairs",
@@ -78,13 +93,8 @@ require('packer').startup(function(use)
   -- Harpoon
   use "ThePrimeagen/harpoon"
 
-  -- Java LSP
-  use 'mfussenegger/nvim-jdtls'
-
-  use {
-    'nmac427/guess-indent.nvim',
-    config = function() require('guess-indent').setup {} end,
-  }
+  -- guess indent
+  use 'tpope/vim-sleuth'
 end)
 
 --WSL clipboard support
@@ -129,6 +139,16 @@ vim.wo.signcolumn = 'yes'
 
 --Turn off comment on new line after comment line
 vim.o.formatoptions = 'tcqnj'
+
+
+vim.api.nvim_create_autocmd({'BufEnter'}, {
+  pattern = '*',
+  callback = function()
+    vim.opt.fo:remove('c')
+    vim.opt.fo:remove('r')
+    vim.opt.fo:remove('o')
+  end
+})
 
 -- require "pears".setup()
 
@@ -270,22 +290,22 @@ require('telescope').setup {
 -- Enable telescope fzf native
 require('telescope').load_extension 'fzf'
 
---Add leader shortcuts
-vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers)
-vim.keymap.set('n', '<leader>ff', function()
-  require('telescope.builtin').find_files { previewer = false }
-end)
-vim.keymap.set('n', '<leader>tcb', require('telescope.builtin').current_buffer_fuzzy_find)
-vim.keymap.set('n', '<leader>th', require('telescope.builtin').help_tags)
-vim.keymap.set('n', '<leader>tt', require('telescope.builtin').tags)
-vim.keymap.set('n', '<leader>tg', require('telescope.builtin').grep_string)
-vim.keymap.set('n', '<leader>tl', require('telescope.builtin').live_grep)
-vim.keymap.set('n', '<leader>to', require('telescope.builtin').oldfiles)
-vim.keymap.set('n', '<leader>tk', require('telescope.builtin').keymaps)
--- vim.keyman.set('n', '<leader>tct', function()
---   require('telescope.builtin').tags{ only_current_buffer = true }
--- end)
+--  Telescope shortcuts
+vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
+vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
+vim.keymap.set('n', '<leader>/', function()
+  -- You can pass additional configuration to telescope to change theme, layout, etc.
+  require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
+    winblend = 10,
+    previewer = false,
+  })
+end, { desc = '[/] Fuzzily search in current buffer]' })
 
+vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
+vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
+vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
+vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
+vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 
 
 
@@ -376,7 +396,7 @@ local dapui = require('dapui')
 require('dap-go').setup()
 
 dap.listeners.after.event_initialized["dapui_config"] = function ()
-   dapui.open() 
+   dapui.open()
 end
 
 dap.configurations.cpp = {
@@ -445,24 +465,46 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
 -- LSP settings
 local lspconfig = require 'lspconfig'
 local on_attach = function(_, bufnr)
-  local opts = { buffer = bufnr }
-  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
-  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-  vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
-  vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+  -- NOTE: Remember that lua is a real programming language, and as such it is possible
+  -- to define small helper and utility functions so you don't have to repeat yourself
+  -- many times.
+  --
+  -- In this case, we create a function that lets us more easily define mappings specific
+  -- for LSP related items. It sets the mode, buffer and description for us each time.
+  local nmap = function(keys, func, desc)
+    if desc then
+      desc = 'LSP: ' .. desc
+    end
 
-  vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-  vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
-  vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, opts)
-  vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, opts)
-  vim.keymap.set('n', '<leader>wl', function()
-    vim.inspect(vim.lsp.buf.list_workspace_folders())
-  end, opts)
-  vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, opts)
-  vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
-  vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, opts)
-  vim.keymap.set('n', '<leader>so', require('telescope.builtin').lsp_document_symbols, opts)
-  vim.api.nvim_create_user_command("Format", vim.lsp.buf.formatting, {})
+    vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
+  end
+
+  nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
+  nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
+
+  nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
+  nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+  nmap('gI', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
+  nmap('<leader>D', vim.lsp.buf.type_definition, 'Type [D]efinition')
+  nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
+  nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
+
+  -- See `:help K` for why this keymap
+  nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
+  nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
+
+  -- Lesser used LSP functionality
+  nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+  nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
+  nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
+  nmap('<leader>wl', function()
+    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+  end, '[W]orkspace [L]ist Folders')
+
+  -- Create a command `:Format` local to the LSP buffer
+  vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
+    vim.lsp.buf.format()
+  end, { desc = 'Format current buffer with LSP' })
 end
 
 -- nvim-cmp supports additional completion capabilities
@@ -530,7 +572,7 @@ cmp.setup {
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete(),
     ['<CR>'] = cmp.mapping.confirm {
-      behavior = cmp.ConfirmBehavior.Insert,
+      behavior = cmp.ConfirmBehavior.Replace,
       select = true,
     },
     ['<Tab>'] = cmp.mapping(function(fallback)
@@ -559,5 +601,21 @@ cmp.setup {
     { name = 'path' },
   },
 }
--- vim: ts=2 sts=2 sw=2 et
 
+
+vim.api.nvim_create_autocmd({'BufWritePre'}, {
+  pattern = '*.go',
+  callback = function()
+    vim.lsp.buf.formatting_sync(nil, 3000)
+  end
+})
+
+local TrimWhiteSpaceGrp = vim.api.nvim_create_augroup('TrimWhiteSpaceGrp', {})
+vim.api.nvim_create_autocmd('BufWritePre', {
+	group = TrimWhiteSpaceGrp,
+  pattern = '*',
+  command = '%s/\\s\\+$//e',
+})
+
+-- The line beneath this is called `modeline`. See `:help modeline`
+-- vim: ts=2 sts=2 sw=2 et
