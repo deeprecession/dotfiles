@@ -7,7 +7,7 @@ super + t
  	st tmux new-session -A -s main
 
 # browser
-super + w 
+super + w
  	brave
 
 Print
@@ -90,9 +90,21 @@ super + Escape
 super + shift + Escape
 	$HOME/.config/polybar/launch.sh
 
-
+# toggle polybar
 super + b
 	polybar-toggle
+
+# restart pipewire
+super + ctrl + p
+	systemctl --user restart pipewire.service
+
+# open bluetoothctl
+super + ctrl + shift + b
+	st bluetoothctl
+
+# open blueberry
+super + ctrl + b
+	blueberry
 
 #
 # bspwm hotkeys
@@ -149,9 +161,10 @@ super + k
 super + j
 	bspc node -f prev.local.!hidden.window
 
-super + shift + j 
+super + shift + j
 	bspc node -s next.local.!hidden.window
-super + shift + k 
+
+super + shift + k
 	bspc node -s prev.local.!hidden.window
 
 # focus the next/previous desktop in the current monitor
