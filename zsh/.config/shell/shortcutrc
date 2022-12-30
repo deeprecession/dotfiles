@@ -1,21 +1,17 @@
 # vim: filetype=sh
-alias cac="cd ~/.cache && ls -a" \
+alias \
 cf="cd ~/.config && ls -a" \
 dow="cd ~/Downloads && ls -a" \
-cddoc="cd ~/Documents && ls -a" \
-cdshare="cd ~/.local/share && ls -a" \
-cdsrc="cd ~/.local/src && ls -a" \
 h="cd ~ && ls -a" \
-msc="cd ~/Music && ls -a" \
-mn="cd /mnt && ls -a" \
 cdpic="cd ~/Pictures && ls -a" \
 cdwal="cd ~/Pictures/wallpapers && ls -a" \
 cdbin="cd ~/.local/bin && ls -a" \
 vid="cd ~/Videos && ls -a" \
 leet="cd ~/garbage_programming/problems/leetcode && ls -a" \
+cdproblems="cd ~/garbage_programming/problems/" \
 prj="cd ~/garbage_programming/pet_projects && ls -a" \
 prog="cd ~/garbage_programming && ls -a" \
-playground="cd ~/garbage_programming/playground/ && ls -a" \
+cdplayground="cd ~/garbage_programming/playground/ && ls -a" \
 dot="cd ~/dotfiles && ls -a" \
 cddwm="cd ~/.local/src/dwm-6.3 && ls -a" \
 cdst="cd ~/.local/src/st && ls -a" \
@@ -46,12 +42,4 @@ cpicom="$EDITOR ~/.config/picom/picom.conf " \
 cbspwm="$EDITOR ~/.config/bspwm/bspwmrc " \
 csxhkd="$EDITOR ~/.config/sxhkd/sxhkdrc " \
 cpolybar="$EDITOR ~/.config/polybar/config.ini " \
-
-# bf="$EDITOR ~/.config/shell/bm-files" \
-# bd="$EDITOR ~/.config/shell/bm-dirs" \
-# cfn="$EDITOR ~/.config/newsboat/config" \
-# cfu="$EDITOR ~/.config/newsboat/urls" \
-# cfmb="$EDITOR ~/.config/ncmpcpp/bindings" \
-# cfmc="$EDITOR ~/.config/ncmpcpp/config" \
-# cfm="$EDITOR ~/.config/mutt/muttrc" \
 
