@@ -26,7 +26,6 @@ require('packer').startup(function(use)
 
   use {
       'j-hui/fidget.nvim';
-      require('fidget').setup()
   }
 
   -- UI to select things (files, grep results, open buffers...)
@@ -54,7 +53,6 @@ require('packer').startup(function(use)
   -- LSP downloader
   use {
       'williamboman/mason.nvim';
-        require("mason").setup()
   }
 
   use 'hrsh7th/nvim-cmp' -- Autocompletion plugin
@@ -96,6 +94,13 @@ require('packer').startup(function(use)
   -- guess indent
   use 'tpope/vim-sleuth'
 end)
+
+
+require("mason").setup()
+
+require('fidget').setup()
+
+
 
 --WSL clipboard support
 local win_clip = io.open('/mnt/c/Windows/System32/clip.exe', "r")
