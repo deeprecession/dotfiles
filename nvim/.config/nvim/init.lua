@@ -63,8 +63,19 @@ require('packer').startup(function(use)
   use 'hrsh7th/cmp-buffer'
   use 'hrsh7th/cmp-nvim-lua'
 
+  -- Snippets
   use 'saadparwaiz1/cmp_luasnip'
-  use 'L3MON4D3/LuaSnip' -- Snippets plugin
+  use 'rafamadriz/friendly-snippets'
+  use {
+    'L3MON4D3/LuaSnip',
+    -- after = 'friendly-snippets',
+    config = function()
+      require('luasnip/loaders/from_vscode').load({
+       paths = { '~/.local/share/nvim/site/pack/packer/start/friendly-snippets' }
+      })
+    end
+  }
+
 
   use "rebelot/kanagawa.nvim" -- colorscheme
 
@@ -78,8 +89,10 @@ require('packer').startup(function(use)
   use 'theHamsta/nvim-dap-virtual-text'
   use 'nvim-telescope/telescope-dap.nvim'
 
-  -- -- Golang
-  -- use 'fatih/vim-go'
+  -- Golang
+  use 'fatih/vim-go'
+
+
 
   -- use "steelsojka/pears.nvim" -- autopairs
   use {
@@ -645,8 +658,8 @@ cmp.setup {
     ['<Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
-      -- elseif luasnip.expand_or_jumpable() then
-      --   luasnip.expand_or_jump()
+      elseif luasnip.expand_or_jumpable() then
+        luasnip.expand_or_jump()
       else
         fallback()
       end
@@ -663,8 +676,8 @@ cmp.setup {
   }),
 
   sources = {
-    { name = 'nvim_lsp' },
     { name = 'luasnip' },
+    { name = 'nvim_lsp' },
     { name = 'path' },
   },
 }
