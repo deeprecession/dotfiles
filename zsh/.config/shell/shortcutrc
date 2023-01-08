@@ -6,6 +6,7 @@ h="cd ~ && ls -a" \
 cdpic="cd ~/Pictures && ls -a" \
 cdwal="cd ~/Pictures/wallpapers && ls -a" \
 cdbin="cd ~/.local/bin && ls -a" \
+cdcache="cd ~/.cache && ls -a" \
 vid="cd ~/Videos && ls -a" \
 leet="cd ~/garbage_programming/problems/leetcode && ls -a" \
 cdproblems="cd ~/garbage_programming/problems/" \
