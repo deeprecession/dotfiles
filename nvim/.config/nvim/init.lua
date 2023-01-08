@@ -20,7 +20,9 @@ require('packer').startup(function(use)
 
   use 'numToStr/Comment.nvim' -- "gc" to comment visual regions/lines
 
-  use 'kdheepak/lazygit.nvim'
+  use 'kdheepak/lazygit.nvim' -- lazygit
+
+  use 'jose-elias-alvarez/null-ls.nvim' -- linter
 
   use 'ludovicchabant/vim-gutentags' -- Automatic tags management
 
@@ -76,8 +78,8 @@ require('packer').startup(function(use)
   use 'theHamsta/nvim-dap-virtual-text'
   use 'nvim-telescope/telescope-dap.nvim'
 
-  -- Golang
-  use 'fatih/vim-go'
+  -- -- Golang
+  -- use 'fatih/vim-go'
 
   -- use "steelsojka/pears.nvim" -- autopairs
   use {
@@ -93,6 +95,18 @@ require('packer').startup(function(use)
 
   -- guess indent
   use 'tpope/vim-sleuth'
+
+  -- surround
+  use({
+    "kylechui/nvim-surround",
+    tag = "*", -- Use for stability; omit to use `main` branch for the latest features
+    config = function()
+        require("nvim-surround").setup({
+            -- Configuration here, or leave empty to use defaults
+        })
+    end
+  })
+
 end)
 
 
@@ -100,6 +114,54 @@ require("mason").setup()
 
 require('fidget').setup()
 
+-- Linter
+local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+require("null-ls").setup({
+    -- you can reuse a shared lspconfig on_attach callback here
+    on_attach = function(client, bufnr)
+        if client.supports_method("textDocument/formatting") then
+            vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+            vim.api.nvim_create_autocmd("BufWritePre", {
+                group = augroup,
+                buffer = bufnr,
+                callback = function()
+                    vim.lsp.buf.format({ bufnr = bufnr })
+                end,
+            })
+        end
+    end,
+    sources = {
+        -- Golang
+        require('null-ls').builtins.diagnostics.golangci_lint,
+        require('null-ls').builtins.formatting.gofumpt,
+        require('null-ls').builtins.formatting.goimports_reviser,
+        require('null-ls').builtins.formatting.goimports,
+        require('null-ls').builtins.formatting.golines,
+        -- require('null-ls').builtins.formatting.fmt,
+
+        -- Python
+        require('null-ls').builtins.diagnostics.flake8,
+        require('null-ls').builtins.diagnostics.pylint,
+        require('null-ls').builtins.formatting.black,
+        require('null-ls').builtins.formatting.autopep8,
+        require('null-ls').builtins.formatting.autoflake,
+        -- require('null-ls').builtins.diagnostics.mypy,
+
+        -- JSON/YAML
+        require('null-ls').builtins.diagnostics.jsonlint,
+        require('null-ls').builtins.diagnostics.yamllint,
+
+        -- Markdown
+        require('null-ls').builtins.formatting.markdownlint,
+
+        -- C/C++
+        require('null-ls').builtins.diagnostics.cpplint,
+        require('null-ls').builtins.formatting.clang_format,
+
+        -- Vim
+        require('null-ls').builtins.diagnostics.vint,
+    },
+})
 
 
 --WSL clipboard support
@@ -611,7 +673,7 @@ cmp.setup {
 vim.api.nvim_create_autocmd({'BufWritePre'}, {
   pattern = '*.go',
   callback = function()
-    vim.lsp.buf.formatting_sync(nil, 3000)
+    vim.lsp.buf.format(nil, 3000)
   end
 })
 
