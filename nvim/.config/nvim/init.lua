@@ -676,9 +676,9 @@ cmp.setup {
   }),
 
   sources = {
-    { name = 'luasnip' },
-    { name = 'nvim_lsp' },
-    { name = 'path' },
+    { name = 'luasnip', priority = 40 },
+    { name = 'nvim_lsp', priority = 30 },
+    { name = 'path', priority = 10 },
   },
 }
 
