@@ -17,9 +17,9 @@ Print
 super + shift + w
  	st nmtui
 
-# telegram
-super + e
- 	telegram-desktop
+# # telegram
+# super + e
+#  	telegram-desktop
 
 # ncmpcpp
 super + m
@@ -101,6 +101,10 @@ super + ctrl + p
 # open bluetoothctl
 super + ctrl + shift + b
 	st bluetoothctl
+
+# connect bluetooth devices
+super + ctrl + shift + c
+	bluetooth-connect
 
 # open blueberry
 super + ctrl + b

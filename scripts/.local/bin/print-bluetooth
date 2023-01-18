@@ -1,0 +1,8 @@
+#!/usr/bin/bash
+
+info=`bluetoothctl info 6C:D3:EE:59:D2:C3`
+if echo "$info" | grep -q "Connected: yes"; then
+   echo " "
+else
+   echo " "
+fi
