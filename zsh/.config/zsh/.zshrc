@@ -29,6 +29,15 @@ _comp_options+=(globdots)		# Include hidden files.
 bindkey -v
 export KEYTIMEOUT=1
 
+# Yank to the system clipboard
+function vi-yank-xclip {
+    zle vi-yank
+   echo -n "$CUTBUFFER" | xclip -sel clip
+}
+
+zle -N vi-yank-xclip
+bindkey -M vicmd 'y' vi-yank-xclip
+
 # Use vim keys in tab complete menu:
 bindkey -M menuselect 'h' vi-backward-char
 bindkey -M menuselect 'k' vi-up-line-or-history
