@@ -1,0 +1,2 @@
+0 0 * * * echo $(pacman -Qqen) > '/home/sofia/dotfiles/pacman-packages'
+0 0 * * * echo $(pacman -Qqem) > '/home/sofia/dotfiles/aur-packages'
