@@ -632,8 +632,24 @@ lspconfig.sumneko_lua.setup {
   },
 }
 
+
+function leave_snippet()
+    if
+        ((vim.v.event.old_mode == 's' and vim.v.event.new_mode == 'n') or vim.v.event.old_mode == 'i')
+        and require('luasnip').session.current_nodes[vim.api.nvim_get_current_buf()]
+        and not require('luasnip').session.jump_active
+    then
+        require('luasnip').unlink_current()
+    end
+end
+
+-- stop snippets when you leave to normal mode
+vim.api.nvim_command([[
+    autocmd ModeChanged * lua leave_snippet()
+]])
+
 -- luasnip setup
-local luasnip = require 'luasnip'
+local luasnip = require('luasnip')
 
 -- nvim-cmp setup
 local cmp = require 'cmp'
@@ -675,10 +691,29 @@ cmp.setup {
     end, { 'i', 's' }),
   }),
 
+  experimental = {
+    native_menu = false,
+    ghost_text = true,
+  },
+
   sources = {
     { name = 'luasnip', priority = 40 },
     { name = 'nvim_lsp', priority = 30 },
     { name = 'path', priority = 10 },
+    { name = 'orgmode', priority = 5 },
+  },
+  sorting = {
+    priority_weight = 1.0,
+    comparators = {
+      cmp.config.compare.locality,
+      cmp.config.compare.recently_used,
+      cmp.config.compare.score, -- based on :  score = score + ((#sources - (source_index - 1)) * sorting.priority_weight)
+      cmp.config.compare.offset,
+      cmp.config.compare.order,
+      -- cmp.config.compare.sort_text,
+      -- cmp.config.exact,
+      -- cmp.config.compare.kind,
+    },
   },
 }
 
