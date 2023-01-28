@@ -25,6 +25,22 @@ super + shift + w
 super + m
  	st ncmpcpp
 
+# next song
+super + n
+	mpc next
+
+# previous song
+super + shift + n
+	mpc prev
+
+# move song forward
+super + ctrl + n
+	mpc seek +00:00:05
+
+# move song back
+super + ctrl + shift + n
+	mpc seek -00:00:05
+
 # thunderbird
 super + shift + e
  	thunderbird
@@ -173,25 +189,29 @@ super + shift + k
 
 # focus the next/previous desktop in the current monitor
 super + bracket{left,right}
-	bspc desktop -f {prev,next}.local
+	bspc {desktop -f,node -d} focused:'^{1-9,10}'
 
 # focus the last node/desktop
 super + {grave,Tab}
 	bspc {node,desktop} -f last
 
-# focus the older or newer node in the focus history
-# super + {o,i}
-# 	bspc wm -h off; \
-# 	bspc node {older,newer} -f; \
-# 	bspc wm -h on
 
-# focus or send to the given desktop
-super + {_,shift + }{1-9,0}
-	bspc {desktop -f,node -d} '^{1-9,10}'
+# Change monitor
+super + {comma,period}
+    bspc monitor -f {next,prev}
 
-#
-# preselect
-#
+# Move to monitor
+super + shift + {comma,period}
+    bspc node -m {next,prev}
+
+
+# Change desktop
+super + {1-9,0}
+    bspc desktop --focus ^{1-9,10}
+
+# Move to desktop
+super + shift + {1-9,0}
+    bspc node --to-desktop ^{1-9,10}
 
 # preselect the direction
 # super + ctrl + {h,j,k,l}
