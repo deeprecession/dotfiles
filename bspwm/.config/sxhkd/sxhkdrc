@@ -112,7 +112,7 @@ super + Escape
 
 # restart polybar
 super + shift + Escape
-	$HOME/.config/polybar/launch.sh
+	launch-polybar
 
 # toggle polybar
 super + b

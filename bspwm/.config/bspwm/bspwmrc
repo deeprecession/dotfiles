@@ -1,6 +1,5 @@
 #! /bin/sh
 pgrep -x sxhkd > /dev/null || sxhkd &
-$HOME/.config/polybar/launch.sh
 $HOME/.config/bspwm/masterlayout.sh
 bspc config external_rules_command $HOME/.config/bspwm/external_rules.sh
 
