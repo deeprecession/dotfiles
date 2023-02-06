@@ -51,7 +51,7 @@ super + shift + r
 
 # books
 super + shift + b
- 	alacritty -e lfub ~/books/cs/golang/
+	rofi-books
 
 # program launcher
 super + p
