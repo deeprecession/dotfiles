@@ -11,15 +11,17 @@ super + w
  	brave
 
 Print
+	maim -o -s | xclip -selection clipboard -t image/png
+
+Shift + Print
 	maimpick-rofi
 
-# nmtui
 super + shift + w
  	alacritty -e nmtui
 
-# # telegram
-# super + e
-#  	telegram-desktop
+# telegram
+super + e
+ 	telegram-desktop
 
 # ncmpcpp
 super + m
