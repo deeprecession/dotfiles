@@ -479,9 +479,9 @@ local dapui = require('dapui')
 
 require('dap-go').setup()
 
-dap.listeners.after.event_initialized["dapui_config"] = function ()
-   dapui.open()
-end
+-- dap.listeners.after.event_initialized["dapui_config"] = function ()
+--    dapui.open()
+-- end
 
 dap.configurations.cpp = {
   {
@@ -500,12 +500,22 @@ dap.configurations.cpp = {
 
 -- If you want to use this for Rust and C, add something like this:
 
-dap.configurations.c = dap.configurations.cpp
-dap.configurations.rust = dap.configurations.cpp
+dap.adapters.executable = {
+    type = 'executable',
+    command = vim.fn.stdpath("data") .. '/mason/bin/codelldb',
+    name = 'lldb1',
+    host = '127.0.0.1',
+    port = 13000
+}
+
 dap.adapters.lldb = {
-  type = 'executable',
-  command = '/usr/bin/lldb-vscode', -- adjust as needed, must be absolute path
-  name = 'lldb'
+    name = "codelldb server",
+    type = 'server',
+    port = "${port}",
+    executable = {
+        command = vim.fn.stdpath("data") .. '/mason/bin/codelldb',
+        args = { "--port", "${port}" },
+    }
 }
 
 dap.adapters.python = {
@@ -628,6 +638,7 @@ lspconfig.sumneko_lua.setup {
       workspace = {
         -- Make the server aware of Neovim runtime files
         library = vim.api.nvim_get_runtime_file('', true),
+        checkThirdParty = false,
       },
       -- Do not send telemetry data containing a randomized but unique identifier
       telemetry = {
