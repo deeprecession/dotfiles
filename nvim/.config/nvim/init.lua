@@ -177,6 +177,12 @@ require("null-ls").setup({
         -- Latex
         require('null-ls').builtins.diagnostics.chktex,
         require('null-ls').builtins.formatting.latexindent,
+
+        -- Bash
+        require('null-ls').builtins.diagnostics.shellcheck,
+        require('null-ls').builtins.formatting.shellharden,
+        require('null-ls').builtins.formatting.shfmt,
+        require('null-ls').builtins.formatting.beautysh,
     },
 })
 
@@ -606,7 +612,7 @@ end
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 -- Enable the following language servers
-local servers = { 'ccls', 'rust_analyzer', 'jdtls', 'pyright', 'texlab', 'tsserver', 'sumneko_lua', 'bashls', 'gopls', 'html' }
+local servers = { 'clangd', 'rust_analyzer', 'jdtls', 'pyright', 'texlab', 'tsserver', 'sumneko_lua', 'bashls', 'gopls', 'html' }
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
     on_attach = on_attach,
