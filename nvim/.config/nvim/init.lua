@@ -145,7 +145,7 @@ require("null-ls").setup({
     end,
     sources = {
         -- Golang
-        require('null-ls').builtins.diagnostics.golangci_lint,
+        -- require('null-ls').builtins.diagnostics.golangci_lint,
         require('null-ls').builtins.formatting.gofumpt,
         require('null-ls').builtins.formatting.goimports_reviser,
         require('null-ls').builtins.formatting.goimports,
@@ -673,7 +673,7 @@ cmp.setup {
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete(),
     ['<CR>'] = cmp.mapping.confirm {
-      behavior = cmp.ConfirmBehavior.Replace,
+      behavior = cmp.ConfirmBehavior.Insert,
       select = true,
     },
     ['<Tab>'] = cmp.mapping(function(fallback)
