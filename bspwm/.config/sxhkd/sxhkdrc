@@ -53,6 +53,10 @@ super + shift + r
 super + shift + b
 	rofi-books
 
+# books
+super + i
+	rofi-innop
+
 # program launcher
 super + p
 	rofi -terminal alacritty -show run -icon-theme "Papirus" -show-icons
