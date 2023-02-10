@@ -160,8 +160,14 @@ require("null-ls").setup({
         require('null-ls').builtins.formatting.autoflake,
         -- require('null-ls').builtins.diagnostics.mypy,
 
-        -- JSON/YAML
+        -- JSON
         require('null-ls').builtins.diagnostics.jsonlint,
+        require('null-ls').builtins.formatting.fixjson,
+        require('null-ls').builtins.formatting.jq,
+        require('null-ls').builtins.diagnostics.cfn_lint,
+        -- require('null-ls').builtins.diagnostics.spectral,
+
+        -- YAML
         require('null-ls').builtins.diagnostics.yamllint,
 
         -- Markdown
