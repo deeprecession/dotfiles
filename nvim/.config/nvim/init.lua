@@ -189,6 +189,15 @@ require("null-ls").setup({
         require('null-ls').builtins.formatting.shellharden,
         require('null-ls').builtins.formatting.shfmt,
         require('null-ls').builtins.formatting.beautysh,
+
+        -- SQL
+        require('null-ls').builtins.formatting.sqlfluff.with({
+            extra_args = { "--dialect", "postgres" }, -- change to your dialect
+        }),
+        require('null-ls').builtins.formatting.sql_formatter,
+        -- require('null-ls').builtins.diagnostics.sqlfluff.with({
+        --     extra_args = { "--dialect", "postgres" }, -- change to your dialect
+        -- }),
     },
 })
 
@@ -618,7 +627,7 @@ end
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 -- Enable the following language servers
-local servers = { 'clangd', 'rust_analyzer', 'jdtls', 'pyright', 'texlab', 'tsserver', 'sumneko_lua', 'bashls', 'gopls', 'html' }
+local servers = { 'clangd', 'rust_analyzer', 'jdtls', 'pyright', 'texlab', 'tsserver', 'sumneko_lua', 'bashls', 'gopls', 'html', 'sqlls' }
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
     on_attach = on_attach,
@@ -696,7 +705,7 @@ cmp.setup {
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete(),
     ['<CR>'] = cmp.mapping.confirm {
-      behavior = cmp.ConfirmBehavior.Insert,
+      behavior = cmp.ConfirmBehavior.Replace,
       select = true,
     },
     ['<Tab>'] = cmp.mapping(function(fallback)
