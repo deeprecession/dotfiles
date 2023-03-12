@@ -93,7 +93,6 @@ require('packer').startup(function(use)
   use 'fatih/vim-go'
 
 
-
   -- use "steelsojka/pears.nvim" -- autopairs
   use {
     "windwp/nvim-autopairs",
@@ -269,26 +268,38 @@ vim.g.maplocalleader = ' '
 -- Bind compile current file
 vim.keymap.set('n', '<F17>', ":!compiler %<CR>", { silent = true })
 
+-- Default options:
 require('kanagawa').setup({
-    undercurl = true,           -- enable undercurls
+    compile = false,             -- enable compiling the colorscheme
+    undercurl = true,            -- enable undercurls
     commentStyle = { italic = true },
-    -- functionStyle = "NONE",
-    keywordStyle = { italic = true },
+    functionStyle = {},
+    keywordStyle = { italic = true},
     statementStyle = { bold = true },
-    -- typeStyle = "NONE",
-    variablebuiltinStyle = { italic = true },
-    specialReturn = true,       -- special highlight for the return keyword
-    specialException = true,    -- special highlight for exception handling keywords
-    transparent = true,        -- do not set background color
-    dimInactive = false,        -- dim inactive window `:h hl-NormalNC`
-    globalStatus = false,       -- adjust window separators highlight for laststatus=3
-    colors = {},
-    overrides = {},
+    typeStyle = {},
+    transparent = true,         -- do not set background color
+    dimInactive = false,         -- dim inactive window `:h hl-NormalNC`
+    terminalColors = true,       -- define vim.g.terminal_color_{0,17}
+    colors = {                   -- add/modify theme and palette colors
+        palette = {},
+        theme = { wave = {}, lotus = {}, dragon = {},
+            all = {
+                 ui = { bg_gutter = 'none' }
+            },
+        },
+    },
+    overrides = function(colors) -- add/modify highlights
+        return {}
+    end,
+    theme = "wave",              -- Load "wave" theme when 'background' option is not set
+    background = {               -- map the value of 'background' option to a theme
+        dark = "wave",           -- try "dragon" !
+        light = "lotus"
+    },
 })
 
---Set colorscheme
+-- setup must be called before loading
 vim.cmd("colorscheme kanagawa")
-
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
 
