@@ -1,3 +1,6 @@
 #!/usr/bin/bash
 
+bluetoothctl power off
+bluetoothctl power on
+bluetoothctl power on
 bluetoothctl connect 6C:D3:EE:59:D2:C3
