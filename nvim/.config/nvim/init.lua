@@ -151,6 +151,11 @@ require("null-ls").setup({
         require('null-ls').builtins.formatting.golines,
         -- require('null-ls').builtins.formatting.fmt,
 
+        -- Protobuf
+        require('null-ls').builtins.diagnostics.buf,
+        require('null-ls').builtins.formatting.buf,
+        require('null-ls').builtins.diagnostics.protolint,
+
         -- Python
         require('null-ls').builtins.diagnostics.flake8,
         require('null-ls').builtins.diagnostics.pylint,
@@ -638,7 +643,7 @@ end
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 -- Enable the following language servers
-local servers = { 'clangd', 'rust_analyzer', 'jdtls', 'pyright', 'texlab', 'tsserver', 'bashls', 'gopls', 'html', 'sqlls' }
+local servers = { 'clangd', 'rust_analyzer', 'jdtls', 'pyright', 'texlab', 'tsserver', 'bashls', 'gopls', 'html', 'sqlls', 'bufls' }
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
     on_attach = on_attach,
