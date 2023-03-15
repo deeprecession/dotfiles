@@ -643,7 +643,7 @@ end
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 -- Enable the following language servers
-local servers = { 'clangd', 'rust_analyzer', 'jdtls', 'pyright', 'texlab', 'tsserver', 'bashls', 'gopls', 'html', 'sqlls', 'bufls' }
+local servers = { 'rust_analyzer', 'jdtls', 'pyright', 'texlab', 'tsserver', 'bashls', 'gopls', 'html', 'sqlls', 'bufls' }
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
     on_attach = on_attach,
@@ -683,6 +683,12 @@ lspconfig['lua_ls'].setup {
       },
     },
   },
+}
+
+lspconfig['clangd'].setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
 }
 
 
