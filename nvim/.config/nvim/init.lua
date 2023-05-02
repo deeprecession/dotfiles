@@ -154,7 +154,7 @@ require("null-ls").setup({
         -- Protobuf
         require('null-ls').builtins.diagnostics.buf,
         require('null-ls').builtins.formatting.buf,
-        require('null-ls').builtins.diagnostics.protolint,
+        -- require('null-ls').builtins.diagnostics.protolint,
 
         -- Python
         require('null-ls').builtins.diagnostics.flake8,
@@ -179,7 +179,7 @@ require("null-ls").setup({
 
         -- C/C++
         require('null-ls').builtins.diagnostics.cpplint,
-        require('null-ls').builtins.formatting.clang_format,
+        -- require('null-ls').builtins.formatting.clang_format,
 
         -- Vim
         require('null-ls').builtins.diagnostics.vint,
