@@ -3,6 +3,8 @@ pgrep -x sxhkd > /dev/null || sxhkd &
 $HOME/.config/bspwm/masterlayout.sh
 bspc config external_rules_command $HOME/.config/bspwm/external_rules.sh
 
+bspc rule -a Zathura state=tiled
+
 #Configs side of monitors BSPWM
 SECOND_MONITOR_SIDE="left"
 THIRD_MONITOR_SIDE="rigth"
