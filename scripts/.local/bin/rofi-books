@@ -1,4 +1,4 @@
 #!/bin/bash
 
-zathura "$(find ~/books -type f -print | rofi -dmenu -i -no-fixed-num-lines -theme-str 'window {width: env(WIDTH, 80%);}' -icon-theme \"Papirus\")"
+sioyek "$(find ~/books -type f -print | rofi -dmenu -i -no-fixed-num-lines -theme-str 'window {width: env(WIDTH, 80%);}' -icon-theme \"Papirus\")"
 
