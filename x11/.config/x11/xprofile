@@ -21,7 +21,7 @@ picom -b &
 
 xrdb merge ${HOME}/.Xresources &
 
-autostart="mpd dunst unclutter blueman-applet launch_polybar"
+autostart="mpd dunst unclutter blueman-applet"
 
 for program in $autostart; do
     pidof -s "$program" || setsid -f "$program"
@@ -29,6 +29,11 @@ done >/dev/null 2>&1
 
 # Ensure that xrdb has finished running before moving on to start the WM/DE.
 [ -n "$xrdbpid" ] && wait "$xrdbpid"
+
+# prevent screen for turning off
+xset s off
+xset -dpms
+xset s noblank
 
 # redshift
 temperature-redshift &

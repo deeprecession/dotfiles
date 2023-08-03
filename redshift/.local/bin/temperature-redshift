@@ -2,15 +2,26 @@
 
 sudo xbacklight -set 100
 
+declare -i temperature
+temperaturepath=~/.config/redshift/temperature
+
+if [ -f "$temperaturepath" ]; then
+    read temperature < $temperaturepath
+else
+    temperature=6000
+fi
 
 declare -i brightness
 brightnesspath=~/.config/redshift/brightness
 
 if [ -f "$brightnesspath" ]; then
-    read brightness< $brightnesspath 
+    read brightness< $brightnesspath
 else
     brightness=100
 fi
+
+[[ $* == *--brightness* ]] && echo $(($brightness+1)) && exit 0
+[[ $* == *--temperature* ]] && echo $temperature && exit 0
 
 brightshift=0
 
@@ -18,21 +29,10 @@ brightshift=0
 [[ $* == *--dec-bright* ]] && brightshift=-5
 
 brightness=$(($brightness + brightshift))
-(($brightness > 99)) && brightness=99 
+(($brightness > 99)) && brightness=99
 (($brightness < 10)) && brightness=10
 
 echo ${brightness} > ${brightnesspath}
-
-
-
-declare -i temperature
-temperaturepath=~/.config/redshift/temperature
-
-if [ -f "$temperaturepath" ]; then
-    read temperature < $temperaturepath 
-else
-    temperature=6000
-fi
 
 tempshift=0
 
@@ -41,11 +41,10 @@ tempshift=0
 
 temperature=$(($temperature + tempshift))
 
-(($temperature > 6500)) && temperature=6500 
+(($temperature > 6500)) && temperature=6500
 (($temperature < 1000)) && temperature=1000
 
 echo ${temperature} > ${temperaturepath}
 
 pkill -f -x redshift &1>/dev/null &2>/dev/null
-redshift -P -O $temperature -b 0.${brightness}:0.${brightness} & 
-
+redshift -P -O $temperature -b 0.${brightness}:0.${brightness} &
