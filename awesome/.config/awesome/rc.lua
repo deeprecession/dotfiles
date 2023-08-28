@@ -26,7 +26,6 @@ local dpi = xresources.apply_dpi
 
 local bling = require("bling")
 
-
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -168,7 +167,7 @@ local function sb_ethernet()
       if string.match(out, "up") then
         ethicon.text = '󰈁 '
     else
-       ethicon.text = '󰈂 '
+       ethicon.text = ''
     end
 end)
 end
@@ -366,7 +365,7 @@ sb_volume()
 local volumewidget = wibox.widget {
           wibox.widget{
                 volicon,
-                fg = beautiful.blue,
+                fg = beautiful.white,
                 widget = wibox.container.background
           },
           wibox.widget{
@@ -401,11 +400,6 @@ baticon.font = beautiful.iconfont .. " 12"
 local batperc = wibox.widget.textbox()
 batperc.font = beautiful.uifont .. " 10"
 
-local charging = wibox.widget {
-text = "",
-font = beautiful.iconfont .. " 12",
-widget = wibox.widget.textbox   }
-
 local battery = wibox.widget {
           wibox.widget{
                 baticon,
@@ -417,12 +411,7 @@ local battery = wibox.widget {
                 fg = beautiful.green,
                 widget = wibox.container.background
           },
-        wibox.widget{
-                charging,
-                fg = beautiful.yellow,
-                widget = wibox.container.background
-          },
-        spacing = dpi(3),
+        spacing = dpi(0),
         layout = wibox.layout.fixed.horizontal,
 }
 
@@ -432,13 +421,11 @@ function sb_battery()
   awful.spawn.easy_async_with_shell('cat /sys/class/power_supply/BA*/capacity' , function(stdout)
   local battery = tonumber(stdout)
    awful.spawn.easy_async_with_shell('cat /sys/class/power_supply/BA*/status' , function(out)
-    if string.match(out, "Charging") then
-      charging.visible = true
-    else
-      charging.visible = false
-    end
       batperc.text = tonumber(battery) .. "%"
-        if battery <= 10 then
+        if string.match(out, "Charging") then
+            baticon.markup = "<span foreground = '" .. beautiful.green .. "'>󰂄 </span>"
+            batperc.markup = "<span foreground = '" .. beautiful.green .. "'>".. tonumber(battery) .. "%" .."</span>"
+        elseif battery <= 10 then
             baticon.markup = "<span foreground = '" .. beautiful.red .. "'>󰂃 </span>"
             batperc.markup = "<span foreground = '" .. beautiful.red .. "'>".. tonumber(battery) .. "%" .."</span>"
         elseif battery <= 20 then
@@ -754,8 +741,10 @@ globalkeys = gears.table.join(
     awful.key({ modkey, }, "BackSpace", function () awful.spawn("powermenu") end,
               {description = "show power menu", group = "launcher"}),
 
-    awful.key({ modkey, }, "F11", function () awful.spawn("mpv --untimed --no-cache --no-osc --no-input-default-bindings --profile=low-latency --input-conf=/dev/null --title=webcam $(ls /dev/video[0,2,4,6,8] | tail -n 1)") end,
+    awful.key({ modkey, }, "F12", function () awful.spawn("mpv --untimed --no-cache --no-osc --no-input-default-bindings --profile=low-latency --input-conf=/dev/null --title=webcam $(ls /dev/video[0,2,4,6,8] | tail -n 1)") end,
               {description = "show web cam if any", group = "launcher"}),
+
+
 
     awful.key({ modkey, "Control"}, "-", function ()
         awful.spawn("temperature-redshift --dec-temp")
@@ -969,6 +958,14 @@ root.keys(globalkeys)
 
 -- {{{ Rules
 -- Rules to apply to new clients (through the "manage" signal).
+
+local rule = { class = "sioyek" }
+client.disconnect_signal("request::geometry", awful.ewmh.geometry)
+client.connect_signal("request::geometry", function(c, context, ...)
+        awful.ewmh.geometry(c, context, ...)
+end)
+
+
 awful.rules.rules = {
     -- All clients will match this rule.
     { rule = { },
@@ -991,7 +988,6 @@ awful.rules.rules = {
           "pinentry",
         },
         class = {
-          "Arandr",
           "Blueman-manager",
           "Gpick",
           "Kruler",
@@ -1127,4 +1123,24 @@ watch('sh -c', 60, function()
     sb_brightness()
     sb_orange()
     sb_volume()
+end)
+
+screen.connect_signal("arrange", function (s)
+    local max = s.selected_tag.layout.name == "max"
+    local only_one = #s.tiled_clients == 1
+    for _, c in pairs(s.clients) do
+        if (max or only_one) and not c.floating or c.maximized then
+            c.border_width = 0
+        else
+            c.border_width = beautiful.border_width
+        end
+    end
+end)
+
+client.connect_signal("focus", function(c)
+  c.border_color = beautiful.border_focus
+end)
+
+client.connect_signal("unfocus", function(c)
+  c.border_color = beautiful.border_normal
 end)

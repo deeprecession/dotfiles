@@ -29,12 +29,6 @@ theme.fg_focus      = "#ffffff"
 theme.fg_urgent     = "#ffffff"
 theme.fg_minimize   = "#ffffff"
 
-theme.useless_gap         = dpi(0)
-theme.border_width        = dpi(0)
-theme.border_color_normal = "#000000"
-theme.border_color_active = "#535d6c"
-theme.border_color_marked = "#91231c"
-
 theme.transparent = "#00000000"
 theme.background = "#1E222A"
 theme.blue = '#61AFEF'
@@ -50,6 +44,14 @@ theme.bluealt = '#253140'
 theme.grey = '#545862'
 theme.orange = '#CAAA6A'
 theme.blackdark = "#15181E"
+
+theme.useless_gap         = dpi(0)
+theme.border_width        = dpi(1)
+theme.border_focus  = "#6F6F6F"
+theme.border_color_normal = "#707678"
+theme.border_color_active = "#535d6c"
+theme.border_color_marked = "#91231c"
+
 
 -- There are other variable sets
 -- overriding the default one when
