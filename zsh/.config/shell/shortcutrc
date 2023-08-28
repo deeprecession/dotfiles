@@ -8,7 +8,7 @@ cdwal="cd ~/Pictures/wallpapers && ls -a" \
 cdbin="cd ~/.local/bin && ls -a" \
 cdcache="cd ~/.cache && ls -a" \
 vid="cd ~/Videos && ls -a" \
-leet="cd ~/garbage_programming/problems/leetcode && ls -a" \
+leet="cd ~/garbage_programming/problems/leetcode/golang && ls -a" \
 cdproblems="cd ~/garbage_programming/problems/" \
 prj="cd ~/garbage_programming/pet_projects && ls -a" \
 prog="cd ~/garbage_programming && ls -a" \
@@ -45,4 +45,5 @@ cpicom="$EDITOR ~/.config/picom/picom.conf " \
 cbspwm="$EDITOR ~/.config/bspwm/bspwmrc " \
 csxhkd="$EDITOR ~/.config/sxhkd/sxhkdrc " \
 cpolybar="$EDITOR ~/.config/polybar/config.ini " \
+cawesome="$EDITOR ~/.config/awesome/rc.lua " \
 
