@@ -669,10 +669,10 @@ globalkeys = gears.table.join(
     awful.key({ modkey           }, "w", function () awful.spawn(browser) end,
               {description = "open a browser", group = "launcher"}),
 
-    awful.key({ modkey,           }, "Print", function () awful.spawn(terminal .. " -e maim -o -s | xclip -selection clipboard -t image/png") end,
+    awful.key({ modkey, "Shift"          }, "Print", function () awful.spawn(terminal .. " -e maim -o -s | xclip -selection clipboard -t image/png") end,
               {description = "copy screen", group = "launcher"}),
 
-    awful.key({ modkey, "Shift"  }, "Print", function () awful.spawn("maimpick-rofi") end,
+    awful.key({ modkey }, "Print", function () awful.spawn("maimpick-rofi") end,
               {description = "copy screen selection", group = "launcher"}),
 
     awful.key({ modkey, "Shift"  }, "w", function () awful.spawn(terminal .. " -e nmtui") end,
@@ -741,7 +741,7 @@ globalkeys = gears.table.join(
     awful.key({ modkey, }, "BackSpace", function () awful.spawn("powermenu") end,
               {description = "show power menu", group = "launcher"}),
 
-    awful.key({ modkey, }, "F12", function () awful.spawn("mpv --untimed --no-cache --no-osc --no-input-default-bindings --profile=low-latency --input-conf=/dev/null --title=webcam $(ls /dev/video[0,2,4,6,8] | tail -n 1)") end,
+    awful.key({ modkey, }, "F12", function () awful.spawn("showcam") end,
               {description = "show web cam if any", group = "launcher"}),
 
 
@@ -958,12 +958,6 @@ root.keys(globalkeys)
 
 -- {{{ Rules
 -- Rules to apply to new clients (through the "manage" signal).
-
-local rule = { class = "sioyek" }
-client.disconnect_signal("request::geometry", awful.ewmh.geometry)
-client.connect_signal("request::geometry", function(c, context, ...)
-        awful.ewmh.geometry(c, context, ...)
-end)
 
 
 awful.rules.rules = {
