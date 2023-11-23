@@ -27,7 +27,13 @@ require('packer').startup(function(use)
   use 'ludovicchabant/vim-gutentags' -- Automatic tags management
 
   use {
-      'j-hui/fidget.nvim';
+    'j-hui/fidget.nvim',
+    tag = 'legacy',
+    config = function()
+      require("fidget").setup {
+        -- options
+      }
+    end,
   }
 
   -- UI to select things (files, grep results, open buffers...)
@@ -375,9 +381,11 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 -- Indent blankline
-require('indent_blankline').setup {
-  char = '┊',
-  show_trailing_blankline_indent = false,
+require("ibl").setup {
+  indent = {char = '┊'},
+    whitespace = {
+        remove_blankline_trail = true,
+    },
 }
 
 -- Gitsigns
