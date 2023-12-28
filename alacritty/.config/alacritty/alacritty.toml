@@ -1,0 +1,14 @@
+[font]
+size = 10.5
+
+[font.normal]
+family = "Noto Sans Mono"
+
+[[keyboard.bindings]]
+action = "ReceiveChar"
+key = "F"
+mods = "Control|Shift"
+
+[window]
+decorations = "none"
+opacity = 0.9

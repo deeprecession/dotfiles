@@ -4,7 +4,7 @@ window:
   decorations: none
 
 font:
-  size: 9
+  size: 10.5
   normal:
     family: Noto Sans Mono
 
