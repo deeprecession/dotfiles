@@ -1,5 +1,5 @@
 #!/bin/bash
 
-sioyek "$(find ~/innop/fal2023/ -type f -print | rofi -dmenu -i -no-fixed-num-lines -theme-str 'window {width: env(WIDTH, 80%);}' -icon-theme \"Papirus\")"
+zathura "$(find ~/innop/spr2024/ -type f -print | rofi -dmenu -i -no-fixed-num-lines -theme-str 'window {width: env(WIDTH, 80%);}' -icon-theme \"Papirus\")"
 
 [[ ! -z "$path" ]] && zathura $path
