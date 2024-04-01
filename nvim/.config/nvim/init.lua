@@ -387,6 +387,7 @@ require("ibl").setup {
     whitespace = {
         remove_blankline_trail = true,
     },
+    scope = {enabled = false},
 }
 
 -- Gitsigns
