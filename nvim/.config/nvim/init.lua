@@ -88,6 +88,7 @@ require('packer').startup(function(use)
   use 'voldikss/vim-floaterm' -- floatterm
 
   -- Debugging
+  use 'nvim-neotest/nvim-nio'
   use 'mfussenegger/nvim-dap'
   use 'leoluz/nvim-dap-go'
   use 'mfussenegger/nvim-dap-python'
