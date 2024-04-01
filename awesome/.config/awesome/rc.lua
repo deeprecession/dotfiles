@@ -669,10 +669,10 @@ globalkeys = gears.table.join(
     awful.key({ modkey           }, "w", function () awful.spawn(browser) end,
               {description = "open a browser", group = "launcher"}),
 
-    awful.key({ modkey, "Shift"          }, "Print", function () awful.spawn(terminal .. " -e maim -o -s | xclip -selection clipboard -t image/png") end,
+    awful.key({ modkey,          }, "Print", function () awful.spawn("copy-selected-area") end,
               {description = "copy screen", group = "launcher"}),
 
-    awful.key({ modkey }, "Print", function () awful.spawn("maimpick-rofi") end,
+    awful.key({ modkey, "Shift" }, "Print", function () awful.spawn("maimpick-rofi") end,
               {description = "copy screen selection", group = "launcher"}),
 
     awful.key({ modkey, "Shift"  }, "w", function () awful.spawn(terminal .. " -e nmtui") end,
