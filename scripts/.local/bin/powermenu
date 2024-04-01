@@ -1,11 +1,16 @@
 #! /bin/sh
 
-chosen=$(printf "  Power Off\n  Restart\n  Sleep\n  Log Out\n  Lock" | rofi -dmenu -i '@import "power.rasi"')
+chosen=$(printf "  Sleep
+  Restart
+  Power Off
+  Log Out
+  Lock" |
+	rofi -dmenu -i '@import "power.rasi"')
 
 case "$chosen" in
-	"  Power Off") poweroff ;;
-	"  Restart") reboot ;;
 	"  Sleep") systemctl suspend ;;
+	"  Restart") reboot ;;
+	"  Power Off") poweroff ;;
 	"  Log Out") bspc quit ;;
 	"  Lock") betterlockscreen -l ;;
 	*) exit 1 ;;
