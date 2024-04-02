@@ -672,6 +672,9 @@ globalkeys = gears.table.join(
     awful.key({ modkey,          }, "Print", function () awful.spawn("copy-selected-area") end,
               {description = "copy screen", group = "launcher"}),
 
+    awful.key({ modkey,          }, "XF86Calculator", function () awful.spawn("speedcrunch") end,
+              {description = "copy screen", group = "launcher"}),
+
     awful.key({ modkey, "Shift" }, "Print", function () awful.spawn("maimpick-rofi") end,
               {description = "copy screen selection", group = "launcher"}),
 
@@ -980,6 +983,7 @@ awful.rules.rules = {
           "DTA",  -- Firefox addon DownThemAll.
           "copyq",  -- Includes session name in class.
           "pinentry",
+          "speedcrunch",
         },
         class = {
           "Blueman-manager",
