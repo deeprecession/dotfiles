@@ -85,6 +85,8 @@ root ALL=(ALL:ALL) ALL
 %wheel ALL=(ALL:ALL) NOPASSWD: ALL
 
 Defaults        passwd_tries=10
+Defaults        editor=/usr/bin/nvim
+
 ## Uncomment to allow members of group sudo to execute any command
 # %sudo	ALL=(ALL:ALL) ALL
 
