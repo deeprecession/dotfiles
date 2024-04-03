@@ -6,7 +6,6 @@ dwm/.local/src/dwm-6.3/dwm
 dwm/.local/src/dmenu/dmenu
 zsh/.cache/zsh/history
 zsh/.config/zsh/.zcompdump
-scripts/.local/share/applications
 nvim/.config/nvim/plugin/packer_compiled.lua
 nvim/.config/nvim/.luarc.json
 redshift/.config/redshift
