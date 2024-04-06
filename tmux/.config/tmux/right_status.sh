@@ -5,30 +5,29 @@ function battery_meter() {
 
     if [ "$(which acpi)" ]; then
 
-        local icon=''
+        local battery_icon='󰁿'
 
         case $batt0 in
-
             # From 100% to 75% display color grey.
-            100%|9[0-9]%|8[0-9]%|7[5-9]%) icon=''
+            100%|9[0-9]%|8[0-9]%|7[5-9]%)
                 ;;
 
             # From 74% to 50% display color green.
-            7[0-4]%|6[0-9]%|5[0-9]%) icon=''
+            7[0-4]%|6[0-9]%|5[0-9]%)
                 ;;
 
             # From 49% to 25% display color yellow.
-            4[0-9]%|3[0-9]%|2[5-9]%) icon=''
+            4[0-9]%|3[0-9]%|2[5-9]%)
                 ;;
 
             # From 24% to 0% display color red.
-            2[0-4]%|1[0-9]%|[0-9]%) icon=''
+            2[0-4]%|1[0-9]%|[0-9]%)
                 ;;
         esac
 
         if [ "$(cat /sys/class/power_supply/AC/online)" == 1 ] ; then
 
-            local icon=''
+            local battery_icon='󰂄'
 
         fi
 
@@ -38,7 +37,7 @@ function battery_meter() {
             local batt0=$(acpi -b 2> /dev/null | awk '/Battery 0/{print $4}' | cut -d, -f1)
 
             # Display the percentage of charge the battery has.
-            printf "%s " "${icon} ${batt0}"
+            printf "%s " "${battery_icon}${batt0}"
 
         fi
     fi
