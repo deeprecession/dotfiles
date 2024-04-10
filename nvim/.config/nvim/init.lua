@@ -15,7 +15,6 @@ require('packer').startup(function(use)
   use 'wbthomason/packer.nvim' -- Package manager
 
   use 'tpope/vim-fugitive' -- Git commands in nvim
-
   use 'tpope/vim-rhubarb' -- Fugitive-companion to interact with github
 
   use 'numToStr/Comment.nvim' -- "gc" to comment visual regions/lines
@@ -25,6 +24,29 @@ require('packer').startup(function(use)
   use 'jose-elias-alvarez/null-ls.nvim' -- linter
 
   use 'ludovicchabant/vim-gutentags' -- Automatic tags management
+
+  use {'nvim-orgmode/orgmode', config = function()
+    require('orgmode').setup{}
+  end
+  }
+
+    use {'akinsho/org-bullets.nvim', config = function()
+        require("org-bullets").setup {
+            symbols = {
+              -- list symbol
+              list = "•",
+              -- headlines can be a list
+              headlines = { "◉", "○", "✸", "✿" },
+              -- or a function that receives the defaults and returns a list
+              headlines = false,
+              checkboxes = {
+                half = { "", "OrgTSCheckboxHalfChecked" },
+                done = { "✓", "OrgDone" },
+                todo = { "˟", "OrgTODO" },
+              },
+            }
+        }
+    end}
 
   use {
     'j-hui/fidget.nvim',
@@ -127,6 +149,7 @@ require('packer').startup(function(use)
   })
 
 end)
+
 
 
 require("mason").setup()
@@ -801,5 +824,9 @@ vim.api.nvim_create_autocmd('BufWritePre', {
   command = '%s/\\s\\+$//e',
 })
 
--- The line beneath this is called `modeline`. See `:help modeline`
--- vim: ts=2 sts=2 sw=2 et
+
+require('orgmode').setup({
+  org_agenda_files = {'~/org/*'},
+  org_default_notes_file = '~/org/refile.org',
+})
+
