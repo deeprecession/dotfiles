@@ -831,3 +831,5 @@ require('orgmode').setup({
     org_agenda_files = { '~/org/*' },
     org_default_notes_file = '~/org/refile.org',
 })
+
+vim.keymap.set('n', '<leader>os', ":Telescope find_files cwd=~/org <CR>")
