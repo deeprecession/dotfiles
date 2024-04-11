@@ -668,6 +668,9 @@ globalkeys = gears.table.join(
     awful.key({ modkey, "Shift"           }, "t", function () awful.spawn(terminal) end,
               {description = "open a terminal", group = "launcher"}),
 
+    awful.key({ modkey, "Control" }, "t", function () awful.spawn(terminal .. " -e nvim -c ':e ~/org/refile.org' -c ':cd %:h' -c ':Telescope find_files'") end,
+              {description = "orgmode refile.org", group = "launcher"}),
+
     awful.key({ modkey           }, "w", function () awful.spawn(browser) end,
               {description = "open a browser", group = "launcher"}),
 
@@ -718,6 +721,7 @@ globalkeys = gears.table.join(
 
     awful.key({ modkey, "Shift" }, "p", function () awful.spawn("rofi -terminal alacritty -show emoji -icon-theme \"Papirus\" -show-icons") end,
               {description = "emoji picker", group = "launcher"}),
+
 
     awful.key({ modkey, "Control" }, "p", function () awful.spawn("systemctl --user restart pipewire") end,
               {description = "emoji picker", group = "launcher"}),
