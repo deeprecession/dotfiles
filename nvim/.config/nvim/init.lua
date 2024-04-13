@@ -833,3 +833,11 @@ require('orgmode').setup({
 })
 
 vim.keymap.set('n', '<leader>os', ":Telescope find_files cwd=~/org <CR>")
+
+
+vim.api.nvim_set_option('langmap', 'ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz')
+
+-- Map Alt+щ to behave like Alt+o in both normal and insert modes
+vim.api.nvim_set_keymap('n', '<A-щ>', '<A-o>', {noremap = true})
+vim.api.nvim_set_keymap('i', '<A-щ>', '<A-o>', {noremap = true})
+
