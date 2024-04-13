@@ -668,7 +668,7 @@ globalkeys = gears.table.join(
     awful.key({ modkey, "Shift"           }, "t", function () awful.spawn(terminal) end,
               {description = "open a terminal", group = "launcher"}),
 
-    awful.key({ modkey, "Control" }, "t", function () awful.spawn(terminal .. " -e nvim -c ':e ~/org/refile.org' -c ':cd %:h' -c ':Telescope find_files'") end,
+    awful.key({ modkey, "Control" }, "t", function () awful.spawn(terminal .. " -e org_tmux_session") end,
               {description = "orgmode refile.org", group = "launcher"}),
 
     awful.key({ modkey           }, "w", function () awful.spawn(browser) end,

@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# opens an `org session if exist
+# creates a new org session if not exist
+(tmux has-session -t org && tmux attach-session -t org) || tmux new-session -s org "nvim -c ':e ~/org/refile.org' -c ':cd %:h'"
+
