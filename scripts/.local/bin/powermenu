@@ -11,7 +11,7 @@ case "$chosen" in
 	"  Sleep") systemctl suspend ;;
 	"  Restart") reboot ;;
 	"  Power Off") poweroff ;;
-	"  Log Out") bspc quit ;;
+	"  Log Out") awesome-client 'awesome.quit()' ;;
 	"  Lock") betterlockscreen -l ;;
 	*) exit 1 ;;
 esac
