@@ -1,0 +1,8 @@
+#!/bin/bash
+
+VPN_IP=$(pass vpn/ip)
+VPN_USERNAME=$(pass vpn/login)
+VPN_PASSWORD=$(pass vpn/password)
+VPN_CERT=$(pass vpn/cert)
+
+echo "yes" | echo "$VPN_PASSWORD" | sudo openconnect -u "$VPN_USERNAME" --passwd-on-stdin --servercert $VPN_CERT "$VPN_IP"

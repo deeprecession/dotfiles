@@ -21,7 +21,7 @@ picom -b &
 
 xrdb merge ${HOME}/.Xresources &
 
-autostart="mpd dunst unclutter blueman-applet"
+autostart="mpd dunst unclutter blueman-applet init_org_session connect-to-vpn"
 
 for program in $autostart; do
     pidof -s "$program" || setsid -f "$program"
