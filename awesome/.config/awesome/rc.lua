@@ -236,7 +236,7 @@ vpnwidget:set_text(" VPN: N/A ")
 vpnwidgettimer = timer({ timeout = 2 })
 vpnwidgettimer:connect_signal("timeout",
     function()
-        status = io.popen("ip a | grep 'tun'", "r")
+        status = io.popen("nmcli c show --active | grep vpn", "r")
         if status:read() == nil then
             vpnwidget:set_markup(" <span color='#FF0000'>VPN: OFF</span> ")
         else
