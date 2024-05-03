@@ -8,22 +8,21 @@ end
 local packer_group = vim.api.nvim_create_augroup('Packer', { clear = true })
 vim.api.nvim_create_autocmd('BufWritePost',
     { command = 'source <afile> | PackerCompile', group = packer_group, pattern = 'init.lua' })
-
 require('packer').startup(function(use)
     use 'nvim-lua/plenary.nvim'
 
-    use 'wbthomason/packer.nvim'        -- Package manager
+    use 'wbthomason/packer.nvim'          -- Package manager
 
-    use 'tpope/vim-fugitive'            -- Git commands in nvim
-    use 'tpope/vim-rhubarb'             -- Fugitive-companion to interact with github
+    use 'tpope/vim-fugitive'              -- Git commands in nvim
+    use 'tpope/vim-rhubarb'               -- Fugitive-companion to interact with github
 
-    use 'numToStr/Comment.nvim'         -- "gc" to comment visual regions/lines
+    use 'numToStr/Comment.nvim'           -- "gc" to comment visual regions/lines
 
-    use 'kdheepak/lazygit.nvim'         -- lazygit
+    use 'kdheepak/lazygit.nvim'           -- lazygit
 
     use 'jose-elias-alvarez/null-ls.nvim' -- linter
 
-    use 'ludovicchabant/vim-gutentags'  -- Automatic tags management
+    use 'ludovicchabant/vim-gutentags'    -- Automatic tags management
 
     use { 'nvim-orgmode/orgmode', config = function()
         require('orgmode').setup {}
@@ -47,6 +46,7 @@ require('packer').startup(function(use)
             }
         }
     end }
+
 
     use {
         'j-hui/fidget.nvim',
@@ -192,6 +192,9 @@ require("null-ls").setup({
         require('null-ls').builtins.formatting.autopep8,
         require('null-ls').builtins.formatting.autoflake,
         -- require('null-ls').builtins.diagnostics.mypy,
+
+        -- Makefile
+        require('null-ls').builtins.diagnostics.checkmake,
 
         -- JSON
         require('null-ls').builtins.diagnostics.jsonlint,
@@ -506,20 +509,20 @@ require 'nvim-treesitter.configs'.setup {
 }
 
 require('nvim-test').setup {
-    run = true,             -- run tests (using for debug)
-    commands_create = true, -- create commands (TestFile, TestLast, ...)
-    filename_modifier = ":.", -- modify filenames before tests run(:h filename-modifiers)
-    silent = false,         -- less notifications
-    term = "terminal",      -- a terminal to run ("terminal"|"toggleterm")
+    run = true,                 -- run tests (using for debug)
+    commands_create = true,     -- create commands (TestFile, TestLast, ...)
+    filename_modifier = ":.",   -- modify filenames before tests run(:h filename-modifiers)
+    silent = false,             -- less notifications
+    term = "terminal",          -- a terminal to run ("terminal"|"toggleterm")
     termOpts = {
         direction = "vertical", -- terminal's direction ("horizontal"|"vertical"|"float")
-        width = 96,         -- terminal's width (for vertical|float)
-        height = 24,        -- terminal's height (for horizontal|float)
-        go_back = false,    -- return focus to original window after executing
-        stopinsert = "auto", -- exit from insert mode (true|false|"auto")
-        keep_one = true,    -- keep only one terminal for testing
+        width = 96,             -- terminal's width (for vertical|float)
+        height = 24,            -- terminal's height (for horizontal|float)
+        go_back = false,        -- return focus to original window after executing
+        stopinsert = "auto",    -- exit from insert mode (true|false|"auto")
+        keep_one = true,        -- keep only one terminal for testing
     },
-    runners = {             -- setup tests runners
+    runners = {                 -- setup tests runners
         go = "nvim-test.runners.go-test",
         python = "nvim-test.runners.pytest",
     }
@@ -678,7 +681,7 @@ end
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 -- Enable the following language servers
-local servers = { 'rust_analyzer', 'jdtls', 'pyright', 'texlab', 'tsserver', 'bashls', 'gopls', 'html', 'sqlls', 'bufls' }
+local servers = { 'rust_analyzer', 'jdtls', 'pyright', 'texlab', 'tsserver', 'bashls', 'gopls', 'html', 'sqlls', 'bufls', 'htmx', 'templ' }
 for _, lsp in ipairs(servers) do
     lspconfig[lsp].setup {
         on_attach = on_attach,
@@ -832,12 +835,13 @@ require('orgmode').setup({
     org_default_notes_file = '~/org/refile.org',
 })
 
+
 vim.keymap.set('n', '<leader>os', ":Telescope find_files cwd=~/org <CR>")
 
 
-vim.api.nvim_set_option('langmap', 'ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz')
+vim.api.nvim_set_option('langmap',
+    'ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz')
 
 -- Map Alt+щ to behave like Alt+o in both normal and insert modes
-vim.api.nvim_set_keymap('n', '<A-щ>', '<A-o>', {noremap = true})
-vim.api.nvim_set_keymap('i', '<A-щ>', '<A-o>', {noremap = true})
-
+vim.api.nvim_set_keymap('n', '<A-щ>', '<A-o>', { noremap = true })
+vim.api.nvim_set_keymap('i', '<A-щ>', '<A-o>', { noremap = true })
