@@ -248,6 +248,17 @@ vpnwidgettimer:connect_signal("timeout",
 vpnwidgettimer:start()
 
 
+local diskspacewidget = wibox.widget.textbox()
+diskspacewidget:set_text("")
+local diskspacetimer = timer({ timeout = 10 })
+
+diskspacetimer:connect_signal("timeout", function()
+    awful.spawn.easy_async_with_shell("sh -c 'df -h | grep \"/$\" | awk \"{ print \\$3 \\\"/\\\" \\$2; }\"'", function(out)
+        diskspacewidget:set_markup("🖴 " .. out)
+    end)
+end)
+diskspacetimer:start()
+
 -- bluetooth widget.
 local bluetooth = wibox.widget {
     wibox.widget {
@@ -296,7 +307,6 @@ end
 
 -- orange widget.
 local orangewidget = wibox.widget {
-    vpnwidget,
 
     wibox.widget {
         orangeicon,
@@ -625,17 +635,27 @@ awful.screen.connect_for_each_screen(function(s)
         {             -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             mykeyboardlayout,
+
             sep_widget,
             wibox.widget.systray(),
+
+            vpnwidget,
+
             sep_widget,
             orangewidget,
+
             sep_widget,
             brightwidget,
-            sep_widget,
+
             sep_widget,
             bluetooth_network_widget,
+
+            sep_widget,
+            diskspacewidget,
+
             sep_widget,
             volumewidget,
+
             sep_widget,
             battery,
             -- s.mylayoutbox,
