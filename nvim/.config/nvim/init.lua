@@ -205,6 +205,7 @@ require("null-ls").setup({
 
         -- YAML
         require('null-ls').builtins.diagnostics.yamllint,
+        require('null-ls').builtins.formatting.yamlfix,
 
         -- Markdown
         require('null-ls').builtins.formatting.markdownlint,
