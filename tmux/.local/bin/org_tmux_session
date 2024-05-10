@@ -1,6 +1,6 @@
 #!/bin/sh
 
-orgPath=~/obsidian/org
+orgPath=~/obsidian/org/today.org
 # opens an `org session if exist
 # creates a new org session if not exist
 (tmux has-session -t org && tmux attach-session -t org) || tmux new-session -s org "nvim -c ':e $orgPath' -c ':cd %:h'"
