@@ -21,7 +21,7 @@ picom -b &
 
 xrdb merge ${HOME}/.Xresources &
 
-autostart="mpd dunst unclutter blueman-applet init_org_session"
+autostart="mpd dunst unclutter blueman-applet init_org_session nm-applet"
 
 for program in $autostart; do
     pidof -s "$program" || setsid -f "$program"
