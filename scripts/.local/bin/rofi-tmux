@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# get all tmux sessions,
+# select one with rofi,
+# and open a alacritty with a chosen session
+
+sessions=$(tmux list-sessions | awk '{ print substr($1, 1, length($1)-1) }')
+
+chosen_session=$(echo "$sessions" | rofi -dmenu -i -no-fixed-num-lines -theme-str 'window {width: env(WIDTH, 80%);}' -icon-theme \"Papirus\")
+
+if [ "$chosen_session" = "" ]; then
+	notify-send "no sessions with name $chosen_session are found"
+	exit 1
+fi
+
+alacritty -e zsh -c "tmux attach-session -t \"$chosen_session\""

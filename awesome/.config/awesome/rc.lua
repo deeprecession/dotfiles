@@ -722,7 +722,9 @@ globalkeys = gears.table.join(
     -- Standard program
     awful.key({ modkey }, "t", function() awful.spawn(terminal .. " -e tmux new-session -A -s main") end,
         { description = "open a terminal with tmux", group = "launcher" }),
-    awful.key({ modkey, "Shift" }, "t", function() awful.spawn(terminal) end,
+    awful.key({ modkey, "Shift" }, "t", function() awful.spawn("rofi-tmux") end,
+        { description = "open a terminal", group = "launcher" }),
+    awful.key({ modkey, "Shift", "Control" }, "t", function() awful.spawn(terminal) end,
         { description = "open a terminal", group = "launcher" }),
     awful.key({ modkey }, "o", function() awful.spawn(terminal .. " -e org_tmux_session") end,
         { description = "orgmode refile.org", group = "launcher" }),
