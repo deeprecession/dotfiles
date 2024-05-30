@@ -24,6 +24,7 @@ require('packer').startup(function(use)
     use {'akinsho/git-conflict.nvim', tag = "*", config = function()
       require('git-conflict').setup()
     end}
+
     use 'jose-elias-alvarez/null-ls.nvim' -- linter
 
     use 'ludovicchabant/vim-gutentags'    -- Automatic tags management
@@ -469,8 +470,8 @@ end, { desc = '[/] Fuzzily search in current buffer]' })
 vim.keymap.set('n', '<leader>sf', function()
     require('telescope.builtin').find_files({
         hidden = true,
-        file_ignore_patterns = {".git/", ".cache", "%.o", "%.a", "%.out", "%.class",
-		"%.pdf", "%.mkv", "%.mp4", "%.zip"},
+        file_ignore_patterns = {".git/", ".cache/", "%.o$", "%.a$", "%.out$", "%.class$",
+		"%.pdf$", "%.mkv$", "%.mp4$", "%.zip$"},
         prompt_title = '[S]earch [F]iles'
     })
 end)vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
