@@ -25,8 +25,7 @@ zmodload zsh/complist
 compinit
 _comp_options+=(globdots)		# Include hidden files.
 
-# vi mode
-bindkey -v
+# vi mode bindkey -v
 export KEYTIMEOUT=1
 
 # Yank to the system clipboard
@@ -108,3 +107,5 @@ source ~/.config/zsh/plugins/poetry 2>/dev/null
 
 # Load syntax highlighting; should be last.
 source ~/.config/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh  2>/dev/null
+
+eval "$(zoxide init --cmd cd zsh)"
