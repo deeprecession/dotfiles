@@ -7,9 +7,10 @@
 [ -f "$XINITRC" ] && alias startx="startx $XINITRC"
 
 # sudo not required for some system commands
-for command in mount umount sv pacman updatedb su shutdown poweroff reboot ; do
-	alias $command="sudo $command"
-done; unset command
+for command in mount umount sv pacman updatedb su shutdown poweroff reboot; do
+	alias "$command=sudo $command"
+done
+unset command
 
 # Verbosity and settings that you pretty much just always are going to want.
 alias \
@@ -37,14 +38,12 @@ alias \
 	e="$EDITOR" \
 	v="nvim" \
 	p="pacman" \
-	z="zathura" \
 	la="ls -a" \
 	ll="ls -l" \
 	lal="ls -la"
-
 
 alias \
 	lf="lfub" \
 	lg="lazygit" \
 	ref="shortcuts >/dev/null; source ${XDG_CONFIG_HOME:-$HOME/.config}/shell/shortcutrc ; source ${XDG_CONFIG_HOME:-$HOME/.config}/shell/zshnameddirrc" \
-	weath="less -S ${XDG_DATA_HOME:-$HOME/.local/share}/weatherreport" \
+	weath="less -S ${XDG_DATA_HOME:-$HOME/.local/share}/weatherreport"
