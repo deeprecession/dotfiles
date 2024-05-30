@@ -848,7 +848,7 @@ require('orgmode').setup({
 })
 
 
-vim.keymap.set('n', '<leader>os', ":Telescope find_files cwd=~/org <CR>")
+vim.keymap.set('n', '<leader>os', ":Telescope find_files cwd=~/obsidian/org <CR>")
 
 
 vim.api.nvim_set_option('langmap',
