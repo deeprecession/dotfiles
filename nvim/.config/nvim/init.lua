@@ -208,8 +208,9 @@ require("null-ls").setup({
         -- require('null-ls').builtins.diagnostics.spectral,
 
         -- YAML
-        require('null-ls').builtins.diagnostics.yamllint,
-        require('null-ls').builtins.formatting.yamlfix,
+        require('null-ls').builtins.formatting.yamlfmt,
+        -- require('null-ls').builtins.diagnostics.yamllint
+        -- require('null-ls').builtins.formatting.yamlfix,
 
         -- Markdown
         require('null-ls').builtins.formatting.markdownlint,
