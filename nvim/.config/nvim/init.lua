@@ -20,6 +20,10 @@ require('packer').startup(function(use)
 
     use 'kdheepak/lazygit.nvim'           -- lazygit
 
+    -- packer.nvim
+    use {'akinsho/git-conflict.nvim', tag = "*", config = function()
+      require('git-conflict').setup()
+    end}
     use 'jose-elias-alvarez/null-ls.nvim' -- linter
 
     use 'ludovicchabant/vim-gutentags'    -- Automatic tags management
