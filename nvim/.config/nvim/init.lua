@@ -1,40 +1,49 @@
--- Install packer
-local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
 
-if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-    vim.fn.execute('!git clone https://github.com/wbthomason/packer.nvim ' .. install_path)
+--Remap space as leader key
+vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
+
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
 end
+vim.opt.rtp:prepend(lazypath)
 
-local packer_group = vim.api.nvim_create_augroup('Packer', { clear = true })
-vim.api.nvim_create_autocmd('BufWritePost',
-    { command = 'source <afile> | PackerCompile', group = packer_group, pattern = 'init.lua' })
-require('packer').startup(function(use)
-    use 'nvim-lua/plenary.nvim'
+require('lazy').setup({
 
-    use 'wbthomason/packer.nvim'          -- Package manager
+    { 'nvim-lua/plenary.nvim' },
 
-    use 'tpope/vim-fugitive'              -- Git commands in nvim
-    use 'tpope/vim-rhubarb'               -- Fugitive-companion to interact with github
+    { 'tpope/vim-fugitive' },              -- Git commands in nvim
+    { 'tpope/vim-rhubarb' },               -- Fugitive-companion to interact with github
 
-    use 'numToStr/Comment.nvim'           -- "gc" to comment visual regions/lines
+    { 'numToStr/Comment.nvim' },           -- "gc" to comment visual regions/lines
 
-    use 'kdheepak/lazygit.nvim'           -- lazygit
+    { 'kdheepak/lazygit.nvim' },           -- lazygit
 
-    -- packer.nvim
-    use {'akinsho/git-conflict.nvim', tag = "*", config = function()
-      require('git-conflict').setup()
-    end}
+    { 'akinsho/git-conflict.nvim', version = "*", config = true },
 
-    use 'jose-elias-alvarez/null-ls.nvim' -- linter
+    {
+        "jay-babu/mason-null-ls.nvim",
+        event = { "BufReadPre", "BufNewFile" },
+        dependencies = {
+          "williamboman/mason.nvim",
+          "nvimtools/none-ls.nvim",
+        },
+    },
 
-    use 'ludovicchabant/vim-gutentags'    -- Automatic tags management
+    { 'jose-elias-alvarez/null-ls.nvim' }, -- linter
 
-    use { 'nvim-orgmode/orgmode', config = function()
-        require('orgmode').setup {}
-    end
-    }
+    { 'ludovicchabant/vim-gutentags' },    -- Automatic tags management
 
-    use { 'akinsho/org-bullets.nvim', config = function()
+    { 'akinsho/org-bullets.nvim', config = function()
         require("org-bullets").setup {
             symbols = {
                 -- list symbol
@@ -50,10 +59,11 @@ require('packer').startup(function(use)
                 },
             }
         }
-    end }
+        end
+    },
 
 
-    use {
+    {
         'j-hui/fidget.nvim',
         tag = 'legacy',
         config = function()
@@ -61,102 +71,128 @@ require('packer').startup(function(use)
                 -- options
             }
         end,
-    }
+    },
 
     -- UI to select things (files, grep results, open buffers...)
-    use {
+    {
         'nvim-telescope/telescope.nvim',
-        requires = { 'nvim-lua/plenary.nvim' }
-    }
-    use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+        dependencies = { 'nvim-lua/plenary.nvim' }
+    },
 
-    use 'nvim-lualine/lualine.nvim' -- Fancier statusline
+    { 'nvim-telescope/telescope-fzf-native.nvim', build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' },
+
+    { 'nvim-lualine/lualine.nvim' }, -- Fancier statusline
 
     -- Add indentation guides even on blank lines
-    use 'lukas-reineke/indent-blankline.nvim'
+    { 'lukas-reineke/indent-blankline.nvim' },
 
     -- Add git related info in the signs columns and popups
-    use { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } }
+    { 'lewis6991/gitsigns.nvim', dependencies = { 'nvim-lua/plenary.nvim' } },
 
     -- Highlight, edit, and navigate code using a fast incremental parsing library
-    use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+
+    { "nvim-treesitter/nvim-treesitter",
+        build = ":TSUpdate",
+        config = function ()
+          local configs = require("nvim-treesitter.configs")
+
+          configs.setup({
+              ensure_installed = { "c", "go", "python", "typescript", "lua", "vim", "vimdoc", "query", "elixir", "heex", "javascript", "html", "sql", "toml", "bash", "proto", "json" },
+              sync_install = false,
+              highlight = { enable = true },
+              indent = { enable = true },
+            })
+        end
+    },
 
     -- Additional textobjects for treesitter
-    use 'nvim-treesitter/nvim-treesitter-textobjects'
+    { 'nvim-treesitter/nvim-treesitter-textobjects' },
 
-    use 'neovim/nvim-lspconfig' -- Collection of configurations for built-in LSP client
+    { 'neovim/nvim-lspconfig' }, -- Collection of configurations for built-in LSP client
+
     -- LSP downloader
-    use {
-        'williamboman/mason.nvim',
-    }
+    { 'williamboman/mason.nvim' },
 
-    use 'hrsh7th/nvim-cmp' -- Autocompletion plugin
-    use 'hrsh7th/cmp-nvim-lsp'
-    use 'hrsh7th/cmp-path'
-    use 'hrsh7th/cmp-buffer'
-    use 'hrsh7th/cmp-nvim-lua'
+    { 'hrsh7th/nvim-cmp' }, -- Autocompletion plugin
+    { 'hrsh7th/cmp-nvim-lsp' },
+    { 'hrsh7th/cmp-path' }, { 'hrsh7th/cmp-buffer' },
+    { 'hrsh7th/cmp-nvim-lua' },
 
     -- Snippets
-    use 'saadparwaiz1/cmp_luasnip'
-    use 'rafamadriz/friendly-snippets'
-    use {
+    { 'saadparwaiz1/cmp_luasnip' },
+    { 'rafamadriz/friendly-snippets' },
+    {
         'L3MON4D3/LuaSnip',
-        -- after = 'friendly-snippets',
         config = function()
             require('luasnip/loaders/from_vscode').load({
                 paths = { '~/.local/share/nvim/site/pack/packer/start/friendly-snippets' }
             })
         end
-    }
+    },
 
 
-    use "rebelot/kanagawa.nvim" -- colorscheme
+    { "rebelot/kanagawa.nvim" }, -- colorscheme
 
-    use 'voldikss/vim-floaterm' -- floatterm
+    { 'voldikss/vim-floaterm' }, -- floatterm
 
     -- Debugging
-    use 'nvim-neotest/nvim-nio'
-    use 'mfussenegger/nvim-dap'
-    use 'leoluz/nvim-dap-go'
-    use 'mfussenegger/nvim-dap-python'
-    use 'rcarriga/nvim-dap-ui'
-    use 'theHamsta/nvim-dap-virtual-text'
-    use 'nvim-telescope/telescope-dap.nvim'
+    { 'nvim-neotest/nvim-nio' },
+    { 'mfussenegger/nvim-dap' },
+    { 'leoluz/nvim-dap-go' },
+    { 'mfussenegger/nvim-dap-python' },
+    { 'rcarriga/nvim-dap-ui' },
+    { 'theHamsta/nvim-dap-virtual-text' },
+    { 'nvim-telescope/telescope-dap.nvim' },
 
     -- Golang
-    use 'fatih/vim-go'
+    { 'fatih/vim-go' },
 
 
-    -- use "steelsojka/pears.nvim" -- autopairs
-    use {
+    -- "steelsojka/pears.nvim" -- autopairs
+    {
         "windwp/nvim-autopairs",
         config = function() require("nvim-autopairs").setup {} end
-    }
+    },
 
     -- Test Runner
-    use "klen/nvim-test"
+    { "klen/nvim-test" },
 
     -- Harpoon
-    use "ThePrimeagen/harpoon"
+    {
+        "ThePrimeagen/harpoon",
+        branch = "harpoon2",
+        dependencies = { "nvim-lua/plenary.nvim" }
+    },
 
     -- guess indent
-    use 'tpope/vim-sleuth'
+    { 'tpope/vim-sleuth' },
 
     -- surround
-    use({
+    {
         "kylechui/nvim-surround",
-        tag = "*", -- Use for stability; omit to use `main` branch for the latest features
+        version = "*", -- Use for stability; omit to use `main` branch for the latest features
+        event = "VeryLazy",
         config = function()
             require("nvim-surround").setup({
                 -- Configuration here, or leave empty to use defaults
             })
         end
-    })
-end)
+    },
 
+    { 'nvim-orgmode/orgmode',
+        config = function()
+            require('orgmode').setup {}
+        end
+    },
+
+
+})
 
 
 require("mason").setup()
+-- require("mason-null-ls").setup({
+--     handlers = {},
+-- })
 
 require('fidget').setup()
 
@@ -304,11 +340,6 @@ vim.api.nvim_create_autocmd({ 'BufEnter' }, {
 vim.keymap.set({ 'n', 'v' }, '<C-d>', '<C-d>zz')
 vim.keymap.set({ 'n', 'v' }, '<C-u>', '<C-u>zz')
 
---Remap space as leader key
-vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
-
 -- Bind compile current file
 vim.keymap.set('n', '<F17>', ":!compiler %<CR>", { silent = true })
 
@@ -362,29 +393,25 @@ require('lualine').setup {
 
 
 -- Harpoon
-require("harpoon").setup({
-    -- sets the marks upon calling `toggle` on the ui, instead of require `:w`
-    save_on_toggle = false,
+local harpoon = require('harpoon')
+harpoon:setup({})
 
-    -- saves the harpoon file upon every change. disabling is unrecommended
-    save_on_change = true,
+local conf = require("telescope.config").values
+local function toggle_telescope(harpoon_files)
+    local file_paths = {}
+    for _, item in ipairs(harpoon_files.items) do
+        table.insert(file_paths, item.value)
+    end
 
-    -- sets harpoon to run the command immediately as it's passed to the terminal when calling `sendCommand`
-    enter_on_sendcmd = false,
-
-    -- closes any tmux windows harpoon that harpoon creates when you close Neovim
-    tmux_autoclose_windows = false,
-
-    -- filetypes that you want to prevent from adding to the harpoon list menu
-    excluded_filetypes = { "harpoon" },
-
-    -- set marks specific to each git branch inside git repository
-    mark_branch = false,
-
-    width = vim.api.nvim_win_get_width(0) - 4
-})
-
-require("telescope").load_extension('harpoon')
+    require("telescope.pickers").new({}, {
+        prompt_title = "Harpoon",
+        finder = require("telescope.finders").new_table({
+            results = file_paths,
+        }),
+        previewer = conf.file_previewer({}),
+        sorter = conf.generic_sorter({}),
+    }):find()
+end
 
 vim.keymap.set('n', '<leader>hh', ":lua require('harpoon.ui').toggle_quick_menu()<CR>")
 vim.keymap.set('n', '<leader>ha', ":lua require('harpoon.mark').add_file()<CR>")
@@ -453,8 +480,19 @@ require('telescope').setup {
     },
 }
 
--- Enable telescope fzf native
-require('telescope').load_extension 'fzf'
+require('telescope').setup {
+  extensions = {
+    fzf = {
+      fuzzy = true,                    -- false will only do exact matching
+      override_generic_sorter = true,  -- override the generic sorter
+      override_file_sorter = true,     -- override the file sorter
+      case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
+                                       -- the default case_mode is "smart_case"
+    }
+  }
+}
+-- require('telescope').load_extension('fzf')
+
 
 --  Telescope shortcuts
 vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
@@ -482,44 +520,6 @@ vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { de
 
 
 
-require 'nvim-treesitter.configs'.setup {
-    ensure_installed = "all",
-    sync_install = false,
-    auto_install = true,
-
-    textobjects = {
-        select = {
-            enable = true,
-            lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
-            keymaps = {
-                -- You can use the capture groups defined in textobjects.scm
-                ['af'] = '@function.outer',
-                ['if'] = '@function.inner',
-                ['ac'] = '@class.outer',
-                ['ic'] = '@class.inner',
-            },
-        },
-    },
-
-    highlight = {
-        enable = true,
-        additional_vim_regex_highlighting = false,
-    },
-
-
-    incremental_selection = {
-        enable = true,
-        keymaps = {
-            init_selection = "gnn",
-            node_incremental = "grn",
-            scope_incremental = "grc",
-            node_decremental = "grm",
-        },
-    },
-    indent = {
-        enable = false
-    }
-}
 
 require('nvim-test').setup {
     run = true,                 -- run tests (using for debug)
@@ -694,7 +694,7 @@ end
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 -- Enable the following language servers
-local servers = { 'rust_analyzer', 'jdtls', 'pyright', 'texlab', 'tsserver', 'bashls', 'gopls', 'html', 'sqlls', 'bufls', 'htmx', 'templ' }
+local servers = { 'rust_analyzer', 'jdtls', 'pyright', 'texlab', 'tsserver', 'bashls', 'gopls', 'html', 'sqlls', 'bufls', 'htmx', 'templ', 'tailwindcss' }
 for _, lsp in ipairs(servers) do
     lspconfig[lsp].setup {
         on_attach = on_attach,
