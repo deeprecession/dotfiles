@@ -190,9 +190,10 @@ require('lazy').setup({
 
 
 require("mason").setup()
--- require("mason-null-ls").setup({
---     handlers = {},
--- })
+require("mason-null-ls").setup({
+    handlers = {},
+})
+
 
 require('fidget').setup()
 
@@ -212,72 +213,6 @@ require("null-ls").setup({
             })
         end
     end,
-    sources = {
-        -- Golang
-        -- require('null-ls').builtins.diagnostics.golangci_lint,
-        require('null-ls').builtins.formatting.gofumpt,
-        require('null-ls').builtins.formatting.goimports_reviser,
-        require('null-ls').builtins.formatting.goimports,
-        require('null-ls').builtins.formatting.golines,
-        -- require('null-ls').builtins.formatting.fmt,
-
-        -- Protobuf
-        require('null-ls').builtins.diagnostics.buf,
-        require('null-ls').builtins.formatting.buf,
-        -- require('null-ls').builtins.diagnostics.protolint,
-
-        -- Python
-        require('null-ls').builtins.diagnostics.flake8,
-        require('null-ls').builtins.diagnostics.pylint,
-        require('null-ls').builtins.formatting.black,
-        require('null-ls').builtins.formatting.autopep8,
-        require('null-ls').builtins.formatting.autoflake,
-        -- require('null-ls').builtins.diagnostics.mypy,
-
-        -- Makefile
-        require('null-ls').builtins.diagnostics.checkmake,
-
-        -- JSON
-        require('null-ls').builtins.diagnostics.jsonlint,
-        require('null-ls').builtins.formatting.fixjson,
-        require('null-ls').builtins.formatting.jq,
-        require('null-ls').builtins.diagnostics.cfn_lint,
-        -- require('null-ls').builtins.diagnostics.spectral,
-
-        -- YAML
-        require('null-ls').builtins.formatting.yamlfmt,
-        -- require('null-ls').builtins.diagnostics.yamllint
-        -- require('null-ls').builtins.formatting.yamlfix,
-
-        -- Markdown
-        require('null-ls').builtins.formatting.markdownlint,
-
-        -- C/C++
-        require('null-ls').builtins.diagnostics.cpplint,
-        -- require('null-ls').builtins.formatting.clang_format,
-
-        -- Vim
-        require('null-ls').builtins.diagnostics.vint,
-
-        -- Latex
-        require('null-ls').builtins.diagnostics.chktex,
-        require('null-ls').builtins.formatting.latexindent,
-
-        -- Bash
-        require('null-ls').builtins.diagnostics.shellcheck,
-        require('null-ls').builtins.formatting.shellharden,
-        require('null-ls').builtins.formatting.shfmt,
-        require('null-ls').builtins.formatting.beautysh,
-
-        -- SQL
-        require('null-ls').builtins.formatting.sqlfluff.with({
-            extra_args = { "--dialect", "postgres" }, -- change to your dialect
-        }),
-        require('null-ls').builtins.formatting.sql_formatter,
-        -- require('null-ls').builtins.diagnostics.sqlfluff.with({
-        --     extra_args = { "--dialect", "postgres" }, -- change to your dialect
-        -- }),
-    },
 })
 
 
@@ -508,7 +443,7 @@ end, { desc = '[/] Fuzzily search in current buffer]' })
 vim.keymap.set('n', '<leader>sf', function()
     require('telescope.builtin').find_files({
         hidden = true,
-        file_ignore_patterns = {".git/", ".cache/", "%.o$", "%.a$", "%.out$", "%.class$",
+        file_ignore_patterns = {".git/", "node_modules/", ".cache/", "%.o$", "%.a$", "%.out$", "%.class$",
 		"%.pdf$", "%.mkv$", "%.mp4$", "%.zip$"},
         prompt_title = '[S]earch [F]iles'
     })
@@ -694,7 +629,7 @@ end
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 -- Enable the following language servers
-local servers = { 'rust_analyzer', 'jdtls', 'pyright', 'texlab', 'tsserver', 'bashls', 'gopls', 'html', 'sqlls', 'bufls', 'htmx', 'templ', 'tailwindcss' }
+local servers = { 'jdtls', 'pyright', 'texlab', 'quick_lint_js', 'tsserver', 'bashls', 'gopls', 'html', 'sqlls', 'bufls', 'htmx', 'templ', 'tailwindcss', 'yamlls', 'cssls', 'jsonls'}
 for _, lsp in ipairs(servers) do
     lspconfig[lsp].setup {
         on_attach = on_attach,
