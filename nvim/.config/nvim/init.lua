@@ -657,7 +657,7 @@ local servers = {
     'pyright',
     'texlab',
     'quick_lint_js',
-    'tsserver',
+    'vtsls',
     'bashls',
     'gopls',
     'html',
