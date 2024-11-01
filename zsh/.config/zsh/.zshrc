@@ -109,3 +109,5 @@ source ~/.config/zsh/plugins/poetry 2>/dev/null
 source ~/.config/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh  2>/dev/null
 
 eval "$(zoxide init --cmd cd zsh)"
+
+[ -f "$HOME/.ghcup/env" ] && . "$HOME/.ghcup/env" # ghcup-env
