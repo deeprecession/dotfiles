@@ -1,6 +1,5 @@
 # vim: filetype=sh
 alias \
-inno="cd ~/innop/spr2024/ && ls -a" \
     cf="cd ~/.config && ls -a" \
     dow="cd ~/Downloads && ls -a" \
     h="cd ~ && ls -a" \
@@ -19,6 +18,7 @@ inno="cd ~/innop/spr2024/ && ls -a" \
     cdst="cd ~/.local/src/st && ls -a" \
     books="cd ~/books && ls -a" \
     cddwmblocks="cd ~/.local/src/dwmblocks && ls -a" \
+    inno="cd ~/innop/fal2024/ && ls -a" \
     cdos="cd ~/innop/fal2023/operating-systems && ls -a" \
     cdai="cd ~/innop/fal2023/intro-to-ai && ls -a" \
     cdbspwm="cd ~/.config/bspwm/ && ls -a" \
