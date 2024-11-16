@@ -3,4 +3,4 @@
 bluetoothctl power off
 bluetoothctl power on
 bluetoothctl power on
-bluetoothctl connect 6C:D3:EE:59:D2:C3
+bluetoothctl connect 74:2A:8A:03:65:EF
