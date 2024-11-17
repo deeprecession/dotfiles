@@ -118,9 +118,9 @@ myawesomemenu = {
 			hotkeys_popup.show_help(nil, awful.screen.focused())
 		end,
 	},
-	{ "manual", terminal .. " -e man awesome" },
+	{ "manual",      terminal .. " -e man awesome" },
 	{ "edit config", editor_cmd .. " " .. awesome.conffile },
-	{ "restart", awesome.restart },
+	{ "restart",     awesome.restart },
 	{
 		"quit",
 		function()
@@ -699,7 +699,7 @@ awful.screen.connect_for_each_screen(function(s)
 			sep_widget,
 		},
 		s.mytasklist, -- Middle widget
-		{ -- Right widgets
+		{       -- Right widgets
 			layout = wibox.layout.fixed.horizontal,
 			mykeyboardlayout,
 
@@ -743,14 +743,14 @@ root.buttons(gears.table.join(
 
 -- {{{ Key bindings
 globalkeys = gears.table.join(
-	-- awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
-	--           {description="show help", group="awesome"}),
-	-- awful.key({ modkey,           }, "Left",   awful.tag.viewprev,
-	--           {description = "view previous", group = "tag"}),
-	-- awful.key({ modkey,           }, "Right",  awful.tag.viewnext,
-	--           {description = "view next", group = "tag"}),
-	-- awful.key({ modkey,           }, "Escape", awful.tag.history.restore,
-	--           {description = "go back", group = "tag"}),
+-- awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
+--           {description="show help", group="awesome"}),
+-- awful.key({ modkey,           }, "Left",   awful.tag.viewprev,
+--           {description = "view previous", group = "tag"}),
+-- awful.key({ modkey,           }, "Right",  awful.tag.viewnext,
+--           {description = "view next", group = "tag"}),
+-- awful.key({ modkey,           }, "Escape", awful.tag.history.restore,
+--           {description = "go back", group = "tag"}),
 
 	awful.key({ modkey }, "j", function()
 		awful.client.focus.byidx(1)
@@ -796,9 +796,6 @@ globalkeys = gears.table.join(
 	awful.key({ modkey, "Shift", "Control" }, "t", function()
 		awful.spawn(terminal)
 	end, { description = "open a terminal", group = "launcher" }),
-	awful.key({ modkey }, "o", function()
-		awful.spawn(terminal .. " -e org_tmux_session")
-	end, { description = "orgmode refile.org", group = "launcher" }),
 	awful.key({ modkey }, "w", function()
 		awful.spawn(browser)
 	end, { description = "open a browser", group = "launcher" }),
@@ -986,37 +983,37 @@ clientkeys = gears.table.join(
 		c:move_to_screen()
 	end, { description = "move to screen", group = "client" })
 
-	-- awful.key({ modkey           }, "t",      function (c) c.ontop = not c.ontop            end,
-	--           {description = "toggle keep on top", group = "client"})
+-- awful.key({ modkey           }, "t",      function (c) c.ontop = not c.ontop            end,
+--           {description = "toggle keep on top", group = "client"})
 
-	-- awful.key({ modkey           }, "n",
-	--     function (c)
-	--         -- The client currently has the input focus, so it cannot be
-	--         -- minimized, since minimized clients can't have the focus.
-	--         c.minimized = true
-	--     end ,
-	--     {description = "minimize", group = "client"}),
+-- awful.key({ modkey           }, "n",
+--     function (c)
+--         -- The client currently has the input focus, so it cannot be
+--         -- minimized, since minimized clients can't have the focus.
+--         c.minimized = true
+--     end ,
+--     {description = "minimize", group = "client"}),
 
-	-- awful.key({ modkey           }, "m",
-	--     function (c)
-	--         c.maximized = not c.maximized
-	--         c:raise()
-	--     end ,
-	--     {description = "(un)maximize", group = "client"}),
+-- awful.key({ modkey           }, "m",
+--     function (c)
+--         c.maximized = not c.maximized
+--         c:raise()
+--     end ,
+--     {description = "(un)maximize", group = "client"}),
 
-	-- awful.key({ modkey, "Control" }, "m",
-	--     function (c)
-	--         c.maximized_vertical = not c.maximized_vertical
-	--         c:raise()
-	--     end ,
-	--     {description = "(un)maximize vertically", group = "client"}),
+-- awful.key({ modkey, "Control" }, "m",
+--     function (c)
+--         c.maximized_vertical = not c.maximized_vertical
+--         c:raise()
+--     end ,
+--     {description = "(un)maximize vertically", group = "client"}),
 
-	-- awful.key({ modkey, "Shift"   }, "m",
-	--     function (c)
-	--         c.maximized_horizontal = not c.maximized_horizontal
-	--         c:raise()
-	--     end ,
-	--     {description = "(un)maximize horizontally", group = "client"})
+-- awful.key({ modkey, "Shift"   }, "m",
+--     function (c)
+--         c.maximized_horizontal = not c.maximized_horizontal
+--         c:raise()
+--     end ,
+--     {description = "(un)maximize horizontally", group = "client"})
 )
 
 -- Bind all key numbers to tags.
@@ -1236,7 +1233,7 @@ tag.connect_signal("request::screen", function(t)
 end)
 
 watch("sh -c", 3, function()
-	sb_wifi() -- update wifi status
+	sb_wifi()   -- update wifi status
 	sb_ethernet() -- update ethernet status
 	sb_bluetooth() -- update bluetooth status
 end)
