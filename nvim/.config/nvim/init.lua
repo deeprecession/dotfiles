@@ -813,6 +813,7 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local servers = {
   'jdtls',
   'pyright',
+  'emmet_ls',
   'texlab',
   'quick_lint_js',
   'vtsls',
