@@ -752,6 +752,15 @@ globalkeys = gears.table.join(
 -- awful.key({ modkey,           }, "Escape", awful.tag.history.restore,
 --           {description = "go back", group = "tag"}),
 
+	awful.key({ modkey }, "b", function()
+		for s in screen do
+			s.mywibox.visible = not s.mywibox.visible
+			if s.mybottomwibox then
+				s.mybottomwibox.visible = not s.mybottomwibox.visible
+			end
+		end
+	end, { description = "toggle wibox", group = "awesome" }),
+
 	awful.key({ modkey }, "j", function()
 		awful.client.focus.byidx(1)
 	end, { description = "focus next by index", group = "client" }),
@@ -900,12 +909,6 @@ globalkeys = gears.table.join(
 		awful.spawn("temperature-redshift --dec-bright")
 		sb_brightness()
 	end, { description = "decrease light temperature", group = "launcher" }),
-	awful.key({ modkey, "Shift" }, "Escape", function()
-		awful.spawn("launch-polybar")
-	end, { description = "restart polybar", group = "launcher" }),
-	awful.key({ modkey }, "b", function()
-		awful.spawn("polybar-toggle")
-	end, { description = "toggle polybar", group = "launcher" }),
 	awful.key({ modkey, "Control", "Shift" }, "c", function()
 		awful.spawn("bluetooth-connect")
 	end, { description = "reconnect to available devices", group = "launcher" }),
