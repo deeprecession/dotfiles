@@ -34,6 +34,13 @@ require('lazy').setup {
   { 'akinsho/git-conflict.nvim', version = '*', config = true },
 
   {
+    'NvChad/nvim-colorizer.lua',
+    event = 'BufReadPre',
+    opts = { -- set to setup table
+    },
+  },
+
+  {
     'jay-babu/mason-null-ls.nvim',
     event = { 'BufReadPre', 'BufNewFile' },
     dependencies = {
@@ -328,6 +335,8 @@ require('mason-null-ls').setup {
 }
 
 require('fidget').setup()
+
+require('colorizer').setup()
 
 -- Linter
 local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
