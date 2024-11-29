@@ -821,7 +821,7 @@ local servers = {
   'gopls',
   'html',
   'sqlls',
-  'bufls',
+  'buf_ls',
   'htmx',
   'templ',
   'cssmodules_ls',
