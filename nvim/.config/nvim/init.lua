@@ -41,6 +41,18 @@ require('lazy').setup {
   },
 
   {
+    'luckasRanarison/tailwind-tools.nvim',
+    name = 'tailwind-tools',
+    build = ':UpdateRemotePlugins',
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter',
+      'nvim-telescope/telescope.nvim', -- optional
+      'neovim/nvim-lspconfig',         -- optional
+    },
+    opts = {},                         -- your configuration
+  },
+
+  {
     'jay-babu/mason-null-ls.nvim',
     event = { 'BufReadPre', 'BufNewFile' },
     dependencies = {
@@ -416,6 +428,10 @@ vim.keymap.set({ 'n', 'v' }, '<C-u>', '<C-u>zz')
 
 -- Bind compile current file
 vim.keymap.set('n', '<F17>', ':!compiler %<CR>', { silent = true })
+
+require('tailwind-tools').setup {
+  -- your configuration
+}
 
 -- Default options:
 require('kanagawa').setup {
