@@ -24,8 +24,8 @@ require('lazy').setup {
 
   { 'nvim-lua/plenary.nvim' },
 
-  { 'tpope/vim-fugitive' },    -- Git commands in nvim
-  { 'tpope/vim-rhubarb' },     -- Fugitive-companion to interact with github
+  { 'tpope/vim-fugitive' }, -- Git commands in nvim
+  { 'tpope/vim-rhubarb' }, -- Fugitive-companion to interact with github
 
   { 'numToStr/Comment.nvim' }, -- "gc" to comment visual regions/lines
 
@@ -41,18 +41,6 @@ require('lazy').setup {
   },
 
   {
-    'luckasRanarison/tailwind-tools.nvim',
-    name = 'tailwind-tools',
-    build = ':UpdateRemotePlugins',
-    dependencies = {
-      'nvim-treesitter/nvim-treesitter',
-      'nvim-telescope/telescope.nvim', -- optional
-      'neovim/nvim-lspconfig',         -- optional
-    },
-    opts = {},                         -- your configuration
-  },
-
-  {
     'jay-babu/mason-null-ls.nvim',
     event = { 'BufReadPre', 'BufNewFile' },
     dependencies = {
@@ -62,6 +50,12 @@ require('lazy').setup {
   },
 
   { 'nvim-tree/nvim-web-devicons' }, -- not strictly required, but recommended
+
+  {
+    'davidmh/mdx.nvim',
+    config = true,
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
+  },
 
   {
     'nvim-neo-tree/neo-tree.nvim',
@@ -76,7 +70,7 @@ require('lazy').setup {
 
   { 'jose-elias-alvarez/null-ls.nvim' }, -- linter
 
-  { 'ludovicchabant/vim-gutentags' },    -- Automatic tags management
+  { 'ludovicchabant/vim-gutentags' }, -- Automatic tags management
 
   {
     'akinsho/org-bullets.nvim',
@@ -126,7 +120,7 @@ require('lazy').setup {
   { 'lukas-reineke/indent-blankline.nvim' },
 
   -- Add git related info in the signs columns and popups
-  { 'lewis6991/gitsigns.nvim',            dependencies = { 'nvim-lua/plenary.nvim' } },
+  { 'lewis6991/gitsigns.nvim', dependencies = { 'nvim-lua/plenary.nvim' } },
 
   -- Highlight, edit, and navigate code using a fast incremental parsing library
 
@@ -429,23 +423,19 @@ vim.keymap.set({ 'n', 'v' }, '<C-u>', '<C-u>zz')
 -- Bind compile current file
 vim.keymap.set('n', '<F17>', ':!compiler %<CR>', { silent = true })
 
-require('tailwind-tools').setup {
-  -- your configuration
-}
-
 -- Default options:
 require('kanagawa').setup {
-  compile = false,  -- enable compiling the colorscheme
+  compile = false, -- enable compiling the colorscheme
   undercurl = true, -- enable undercurls
   commentStyle = { italic = true },
   functionStyle = {},
   keywordStyle = { italic = true },
   statementStyle = { bold = true },
   typeStyle = {},
-  transparent = true,    -- do not set background color
-  dimInactive = false,   -- dim inactive window `:h hl-NormalNC`
+  transparent = true, -- do not set background color
+  dimInactive = false, -- dim inactive window `:h hl-NormalNC`
   terminalColors = true, -- define vim.g.terminal_color_{0,17}
-  colors = {             -- add/modify theme and palette colors
+  colors = { -- add/modify theme and palette colors
     palette = {},
     theme = {
       wave = {},
@@ -459,8 +449,8 @@ require('kanagawa').setup {
   overrides = function(colors) -- add/modify highlights
     return {}
   end,
-  theme = 'wave',  -- Load "wave" theme when 'background' option is not set
-  background = {   -- map the value of 'background' option to a theme
+  theme = 'wave', -- Load "wave" theme when 'background' option is not set
+  background = { -- map the value of 'background' option to a theme
     dark = 'wave', -- try "dragon" !
     light = 'lotus',
   },
@@ -493,15 +483,15 @@ local function toggle_telescope(harpoon_files)
   end
 
   require('telescope.pickers')
-      .new({}, {
-        prompt_title = 'Harpoon',
-        finder = require('telescope.finders').new_table {
-          results = file_paths,
-        },
-        previewer = conf.file_previewer {},
-        sorter = conf.generic_sorter {},
-      })
-      :find()
+    .new({}, {
+      prompt_title = 'Harpoon',
+      finder = require('telescope.finders').new_table {
+        results = file_paths,
+      },
+      previewer = conf.file_previewer {},
+      sorter = conf.generic_sorter {},
+    })
+    :find()
 end
 
 vim.keymap.set('n', '<leader>hh', ":lua require('harpoon.ui').toggle_quick_menu()<CR>")
@@ -571,10 +561,10 @@ require('telescope').setup {
 require('telescope').setup {
   extensions = {
     fzf = {
-      fuzzy = true,                   -- false will only do exact matching
+      fuzzy = true, -- false will only do exact matching
       override_generic_sorter = true, -- override the generic sorter
-      override_file_sorter = true,    -- override the file sorter
-      case_mode = 'smart_case',       -- or "ignore_case" or "respect_case"
+      override_file_sorter = true, -- override the file sorter
+      case_mode = 'smart_case', -- or "ignore_case" or "respect_case"
       -- the default case_mode is "smart_case"
     },
   },
@@ -605,20 +595,20 @@ vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 
 require('nvim-test').setup {
-  run = true,               -- run tests (using for debug)
-  commands_create = true,   -- create commands (TestFile, TestLast, ...)
+  run = true, -- run tests (using for debug)
+  commands_create = true, -- create commands (TestFile, TestLast, ...)
   filename_modifier = ':.', -- modify filenames before tests run(:h filename-modifiers)
-  silent = false,           -- less notifications
-  term = 'terminal',        -- a terminal to run ("terminal"|"toggleterm")
+  silent = false, -- less notifications
+  term = 'terminal', -- a terminal to run ("terminal"|"toggleterm")
   termOpts = {
     direction = 'vertical', -- terminal's direction ("horizontal"|"vertical"|"float")
-    width = 96,             -- terminal's width (for vertical|float)
-    height = 24,            -- terminal's height (for horizontal|float)
-    go_back = false,        -- return focus to original window after executing
-    stopinsert = 'auto',    -- exit from insert mode (true|false|"auto")
-    keep_one = true,        -- keep only one terminal for testing
+    width = 96, -- terminal's width (for vertical|float)
+    height = 24, -- terminal's height (for horizontal|float)
+    go_back = false, -- return focus to original window after executing
+    stopinsert = 'auto', -- exit from insert mode (true|false|"auto")
+    keep_one = true, -- keep only one terminal for testing
   },
-  runners = {               -- setup tests runners
+  runners = { -- setup tests runners
     go = 'nvim-test.runners.go-test',
     python = 'nvim-test.runners.pytest',
   },
@@ -773,7 +763,7 @@ dap.configurations.python = {
 require('neo-tree').setup {
   filesystem = {
     filtered_items = {
-      visible = true,        -- Make sure this is set to true
+      visible = true, -- Make sure this is set to true
       hide_dotfiles = false, -- Set to false to show dotfiles like .git, .env, etc.
     },
   },
@@ -838,6 +828,8 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local servers = {
   'jdtls',
   'pyright',
+  'mdx_analyzer',
+  'eslint',
   'emmet_language_server',
   'texlab',
   'quick_lint_js',
@@ -847,11 +839,11 @@ local servers = {
   'html',
   'sqlls',
   'buf_ls',
-  'htmx',
+  -- 'htmx',
   'templ',
   'cssmodules_ls',
   'somesass_ls',
-  -- 'tailwindcss',
+  'tailwindcss',
   'yamlls',
   'cssls',
   'jsonls',
@@ -918,9 +910,9 @@ lspconfig['clangd'].setup {
 
 function leave_snippet()
   if
-      ((vim.v.event.old_mode == 's' and vim.v.event.new_mode == 'n') or vim.v.event.old_mode == 'i')
-      and require('luasnip').session.current_nodes[vim.api.nvim_get_current_buf()]
-      and not require('luasnip').session.jump_active
+    ((vim.v.event.old_mode == 's' and vim.v.event.new_mode == 'n') or vim.v.event.old_mode == 'i')
+    and require('luasnip').session.current_nodes[vim.api.nvim_get_current_buf()]
+    and not require('luasnip').session.jump_active
   then
     require('luasnip').unlink_current()
   end
@@ -980,10 +972,10 @@ cmp.setup {
   },
 
   sources = {
-    { name = 'luasnip',  priority = 40 },
+    { name = 'luasnip', priority = 40 },
     { name = 'nvim_lsp', priority = 30 },
-    { name = 'path',     priority = 10 },
-    { name = 'orgmode',  priority = 5 },
+    { name = 'path', priority = 10 },
+    { name = 'orgmode', priority = 5 },
   },
   sorting = {
     priority_weight = 1.0,
