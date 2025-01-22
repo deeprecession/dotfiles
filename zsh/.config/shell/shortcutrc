@@ -18,9 +18,7 @@ alias \
     cdst="cd ~/.local/src/st && ls -a" \
     books="cd ~/books && ls -a" \
     cddwmblocks="cd ~/.local/src/dwmblocks && ls -a" \
-    inno="cd ~/innop/fal2024/ && ls -a" \
-    cdos="cd ~/innop/fal2023/operating-systems && ls -a" \
-    cdai="cd ~/innop/fal2023/intro-to-ai && ls -a" \
+    inno="cd ~/innop/spr2025/ && ls -a" \
     cdbspwm="cd ~/.config/bspwm/ && ls -a" \
     cdsxhkd="cd ~/.config/sxhkd/ && ls -a" \
     cdkitty="cd ~/.config/kitty/ && ls -a" \
