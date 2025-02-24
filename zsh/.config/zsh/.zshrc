@@ -140,3 +140,16 @@ if type compdef &>/dev/null; then
 fi
 ###-end-pnpm-completion-###
 
+
+# bun completions
+[ -s "/home/sofia/.bun/_bun" ] && source "/home/sofia/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# Created by `pipx` on 2025-01-27 13:46:22
+export PATH="$PATH:/home/sofia/.local/bin"
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/bin/terraform terraform
