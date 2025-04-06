@@ -97,3 +97,6 @@ end)
 -- Adjust font size
 keymap("n", "<M-=>", function() require('utils').adjust_font_size(1) end, silent)
 keymap("n", "<M-->", function() require('utils').adjust_font_size(-1) end, silent)
+
+-- Shift + tab in insert mode
+keymap("i", "<S-Tab>", "<C-d>")
