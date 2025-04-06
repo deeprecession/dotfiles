@@ -104,6 +104,7 @@ return {
       "JoosepAlviste/nvim-ts-context-commentstring",
       "nvim-treesitter/nvim-treesitter-textobjects",
       "RRethy/nvim-treesitter-textsubjects",
+      "LiadOz/nvim-dap-repl-highlights",
     },
   },
 
