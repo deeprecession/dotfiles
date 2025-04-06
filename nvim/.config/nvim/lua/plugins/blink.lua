@@ -41,18 +41,13 @@ return {
       -- see the "default configuration" section below for full documentation on how to define
       -- your own keymap.
       keymap = {
-        preset = 'super-tab',
         ["<S-k>"] = { "scroll_documentation_up", "fallback" },
         ["<S-j>"] = { "scroll_documentation_down", "fallback" },
-        ['<Tab>'] = {
-          function(cmp)
-            if cmp.is_ghost_text_visible() and not cmp.is_menu_visible() then return cmp.accept() end
-          end,
-          'show_and_insert',
-          'select_next',
-        },
-        ['<S-Tab>'] = { 'show_and_insert', 'select_prev' },
+        ['<Tab>'] = { 'select_next', 'fallback' },
+        ['<S-Tab>'] = { 'select_prev', 'fallback' },
         ['<C-space>'] = { 'show', 'fallback' },
+        ['<CR>'] = { 'accept', 'fallback' },
+
       },
 
       snippets = {
@@ -68,7 +63,7 @@ return {
       },
 
       cmdline = {
-        enabled = true,
+        enabled = false,
         sources = {
           default = {
             'lsp',
