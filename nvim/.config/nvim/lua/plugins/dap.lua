@@ -317,6 +317,14 @@ return {
             processId = dap_utils.pick_process,
             skipFiles = { "<node_internals>/**" },
           },
+          {
+            type = "pwa-node",
+            request = "launch",
+            name = "Launch and debug signle file",
+            program = "${file}",
+            cwd = vim.fn.getcwd(),
+            sourceMaps = true,
+          },
         }
       end
     end,
