@@ -153,3 +153,11 @@ export PATH="$PATH:/home/sofia/.local/bin"
 
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/bin/terraform terraform
+
+# pnpm
+export PNPM_HOME="/home/sofia/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
