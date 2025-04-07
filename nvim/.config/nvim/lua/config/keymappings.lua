@@ -100,3 +100,7 @@ keymap("n", "<M-->", function() require('utils').adjust_font_size(-1) end, silen
 
 -- Shift + tab in insert mode
 keymap("i", "<S-Tab>", "<C-d>")
+
+
+keymap('n', '[d', vim.diagnostic.goto_prev)
+keymap('n', ']d', vim.diagnostic.goto_next)
