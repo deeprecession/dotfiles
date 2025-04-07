@@ -106,6 +106,9 @@ require("mason-lspconfig").setup_handlers {
       handlers = handlers,
       on_attach = require("config.lsp.servers.cssls").on_attach,
       settings = require("config.lsp.servers.cssls").settings,
+      flags = {
+        debounce_text_changes = 1000,
+      },
     })
   end,
 
