@@ -7,21 +7,26 @@ return {
 
       conform.setup({
         formatters_by_ft = {
-          css = { { "prettierd", "prettier" } },
-          graphql = { { "prettierd", "prettier" } },
-          html = { { "prettierd", "prettier" } },
-          javascript = { { "prettierd", "prettier" } },
-          javascriptreact = { { "prettierd", "prettier" } },
-          json = { { "prettierd", "prettier" } },
+          css =  { "prettierd", "prettier" },
+          graphql =  { "prettierd", "prettier" },
+          html =  { "prettierd", "prettier" },
+          javascript =  { "prettierd", "prettier" },
+          javascriptreact =  { "prettierd", "prettier" },
+          json =  { "prettierd", "prettier" },
           lua = { "stylua" },
-          markdown = { { "prettierd", "prettier" } },
+          markdown =  { "prettierd", "prettier" },
           python = { "isort", "black" },
+          c = { "clang-format" },
+          cpp = { "clang-format" },
           sql = { "sql-formatter" },
-          svelte = { { "prettierd", "prettier" } },
-          typescript = { { "prettierd", "prettier", "sql-formatter" } },
-          typescriptreact = { { "prettierd", "prettier" } },
+          svelte =  { "prettierd", "prettier" },
+          typescript =  { "prettierd", "prettier", "sql-formatter" },
+          typescriptreact =  { "prettierd", "prettier" },
           yaml = { "prettier" },
-          xml = { "xmlformatter" }
+          xml = { "xmlformatter" },
+          go = { "goimports", "gofmt" },
+          shell = { "shfmt" },
+          ["_"] = { "trim_whitespace" },
         },
       })
 
