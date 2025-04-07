@@ -88,22 +88,12 @@ return {
             },
           },
         },
-
-        textsubjects = {
-          enable = true,
-          prev_selection = '<BS>',
-          keymaps = {
-            ['<CR>'] = 'textsubjects-smart', -- works in visual mode
-          }
-        },
-
       }
     end,
     dependencies = {
       "hiphish/rainbow-delimiters.nvim",
       "JoosepAlviste/nvim-ts-context-commentstring",
       "nvim-treesitter/nvim-treesitter-textobjects",
-      "RRethy/nvim-treesitter-textsubjects",
       "LiadOz/nvim-dap-repl-highlights",
     },
   },
