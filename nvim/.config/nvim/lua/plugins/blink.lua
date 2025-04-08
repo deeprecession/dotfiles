@@ -111,7 +111,6 @@ return {
           }
         },
       },
-
       completion = {
         trigger = {
           -- When true, will show the completion window after typing a trigger character
@@ -130,6 +129,13 @@ return {
           draw = {
             columns = { { "label", "label_description", gap = 1 }, { "kind_icon", "kind", gap = 1 } },
             treesitter = {},
+          },
+        },
+
+        list = {
+          selection = {
+            preselect = false,
+            auto_insert= false,
           },
         },
 
