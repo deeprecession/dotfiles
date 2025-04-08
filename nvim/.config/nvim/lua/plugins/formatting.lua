@@ -9,7 +9,7 @@ return {
         formatters_by_ft = {
           css =  { "prettierd", "prettier" },
           graphql =  { "prettierd", "prettier" },
-          html =  { "prettierd", "prettier" },
+          html =  { "htmlbeautifier" },
           javascript =  { "prettierd", "prettier" },
           javascriptreact =  { "prettierd", "prettier" },
           json =  { "prettierd", "prettier" },
@@ -34,7 +34,7 @@ return {
         conform.format({
           lsp_fallback = true,
           async = false,
-          timeout_ms = 500,
+          timeout_ms = 5000,
         })
       end, { desc = "format file" })
 
@@ -42,7 +42,7 @@ return {
         conform.format({
           lsp_fallback = true,
           async = false,
-          timeout_ms = 500,
+          timeout_ms = 5000,
         })
       end, { desc = "format selection" })
 
