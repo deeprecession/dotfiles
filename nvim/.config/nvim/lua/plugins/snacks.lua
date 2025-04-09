@@ -24,6 +24,8 @@ return {
               list = {
                 keys = {
                   ["<c-]>"] = "explorer_cd",
+                  ["H"] = "toggle_hidden",
+                  ["I"] = "toggle_ignored",
                 }
               }
             }
