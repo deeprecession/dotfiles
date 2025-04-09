@@ -84,6 +84,7 @@ return {
       { "<leader>sq",  function() Snacks.picker.qflist() end,                                  desc = "quickfix list" },
       { "<leader>sc",  function() Snacks.picker.colorschemes() end,                            desc = "color schemes" },
       { "<leader>sd",  function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "dotfiles" },
+      { "<leader>sk",  function() Snacks.picker.keymaps() end, desc = "keymaps" },
 
       { "<leader>gf",  function() Snacks.picker.git_files() end,                               desc = "git files" },
       { "<leader>gs",  function() Snacks.picker.git_status() end,                              desc = "git status" },
