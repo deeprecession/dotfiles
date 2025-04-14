@@ -20,7 +20,7 @@ return {
           cpp = { "clang-format" },
           sql = { "sql-formatter" },
           svelte =  { "prettierd", "prettier" },
-          typescript =  { "prettier", "sql-formatter" },
+          typescript =  { "prettier" },
           typescriptreact =  { "prettierd", "prettier" },
           yaml = { "prettier" },
           xml = { "xmlformatter" },
