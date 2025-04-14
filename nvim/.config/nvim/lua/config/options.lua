@@ -55,9 +55,8 @@ local globals = {
 }
 
 vim.opt.shortmess:append('c');
-vim.opt.formatoptions:remove('c');
-vim.opt.formatoptions:remove('r');
-vim.opt.formatoptions:remove('o');
+vim.cmd("autocmd BufEnter * set formatoptions-=cro")
+vim.cmd("autocmd BufEnter * setlocal formatoptions-=cro")
 vim.opt.fillchars:append('stl: ');
 vim.opt.fillchars:append('eob: ');
 vim.opt.fillchars:append('fold: ');
