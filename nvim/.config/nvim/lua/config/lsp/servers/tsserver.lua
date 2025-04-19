@@ -27,6 +27,28 @@ local handlers = {
   end,
 }
 
+local mason_registry = require('mason-registry')
+local vue_language_server_path = mason_registry.get_package('vue-language-server'):get_install_path() 
+  .. '/node_modules/@vue/language-server'
+
+local init_options = {
+  plugins = {
+    {
+        -- Name of the TypeScript plugin for Vue
+        name = '@vue/typescript-plugin',
+        location = vue_language_server_path,
+        languages = { 'vue' },
+    },
+  },
+}
+
+local filetypes = {
+  'typescript',
+  'javascript',
+  'javascriptreact',
+  'typescriptreact',
+  'vue',
+}
 
 local settings = {
   -- Performance settings
@@ -82,6 +104,7 @@ local settings = {
     includeCompletionsWithSnippetText = true,
     includeCompletionsWithClassMemberSnippets = true,
     includeCompletionsWithObjectLiteralMethodSnippets = true,
+    includeCompletionsForModuleExports = true,
     useLabelDetailsInCompletionEntries = true,
     allowIncompleteCompletions = true,
     displayPartsForJSDoc = true,
@@ -93,6 +116,12 @@ local settings = {
   complete_function_calls = false,
   include_completions_with_insert_text = true,
   code_lens = "implementations_only",
+
+  -- vue
+  single_file_support = false,
+  tsserver_plugins = {
+    "@vue/typescript-plugin",
+  },
 }
 
 local on_attach = function(client, bufnr)
@@ -103,5 +132,6 @@ end
 M.handlers = handlers
 M.settings = settings
 M.on_attach = on_attach
+M.filetypes = filetypes
 
 return M

@@ -24,6 +24,7 @@ mason_lsp.setup({
     "lua_ls",
     "prismals",
     "tailwindcss",
+    "volar",
   },
   -- Whether servers that are set up (via lspconfig) should be automatically installed if they're not already installed.
   -- This setting has no relation with the `ensure_installed` setting.
@@ -76,29 +77,30 @@ require("mason-lspconfig").setup_handlers {
       handlers = require("config.lsp.servers.tsserver").handlers,
       on_attach = require("config.lsp.servers.tsserver").on_attach,
       settings = require("config.lsp.servers.tsserver").settings,
+      filetypes = require("config.lsp.servers.tsserver").filetypes,
     })
   end,
 
-  ["tailwindcss"] = function()
-    capabilities.textDocument.completion.completionItem.snippetSupport = true
-    capabilities.textDocument.colorProvider = { dynamicRegistration = false }
-    capabilities.textDocument.foldingRange = {
-      dynamicRegistration = false,
-      lineFoldingOnly = true,
-    }
-
-    lspconfig.tailwindcss.setup({
-      capabilities = capabilities,
-      filetypes = require("config.lsp.servers.tailwindcss").filetypes,
-      handlers = handlers,
-      init_options = require("config.lsp.servers.tailwindcss").init_options,
-      on_attach = require("config.lsp.servers.tailwindcss").on_attach,
-      settings = require("config.lsp.servers.tailwindcss").settings,
-      flags = {
-        debounce_text_changes = 1000,
-      },
-    })
-  end,
+  -- ["tailwindcss"] = function()
+  --   capabilities.textDocument.completion.completionItem.snippetSupport = true
+  --   capabilities.textDocument.colorProvider = { dynamicRegistration = false }
+  --   capabilities.textDocument.foldingRange = {
+  --     dynamicRegistration = false,
+  --     lineFoldingOnly = true,
+  --   }
+  --
+  --   lspconfig.tailwindcss.setup({
+  --     capabilities = capabilities,
+  --     filetypes = require("config.lsp.servers.tailwindcss").filetypes,
+  --     handlers = handlers,
+  --     init_options = require("config.lsp.servers.tailwindcss").init_options,
+  --     on_attach = require("config.lsp.servers.tailwindcss").on_attach,
+  --     settings = require("config.lsp.servers.tailwindcss").settings,
+  --     flags = {
+  --       debounce_text_changes = 1000,
+  --     },
+  --   })
+  -- end,
 
   ["cssls"] = function()
     lspconfig.cssls.setup({
@@ -144,13 +146,14 @@ require("mason-lspconfig").setup_handlers {
     })
   end,
 
-  ["vuels"] = function()
-    lspconfig.vuels.setup({
-      filetypes = require("config.lsp.servers.vuels").filetypes,
+  ["volar"] = function()
+    lspconfig.volar.setup({
+      filetypes = require("config.lsp.servers.volar").filetypes,
       handlers = handlers,
-      init_options = require("config.lsp.servers.vuels").init_options,
-      on_attach = require("config.lsp.servers.vuels").on_attach,
-      settings = require("config.lsp.servers.vuels").settings,
+      capabilities = capabilities,
+      init_options = require("config.lsp.servers.volar").init_options,
+      on_attach = on_attach,
+      settings = require("config.lsp.servers.volar").settings,
     })
   end
 }

@@ -12,6 +12,7 @@ return {
           html =  { "htmlbeautifier" },
           javascript =  { "prettierd", "prettier" },
           javascriptreact =  { "prettierd", "prettier" },
+          vue =  { "prettierd", "prettier" },
           json =  { "prettierd", "prettier" },
           lua = { "stylua" },
           markdown =  { "prettierd", "prettier" },
