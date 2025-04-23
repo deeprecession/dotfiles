@@ -31,16 +31,6 @@ local mason_registry = require('mason-registry')
 local vue_language_server_path = mason_registry.get_package('vue-language-server'):get_install_path() 
   .. '/node_modules/@vue/language-server'
 
-local init_options = {
-  plugins = {
-    {
-        -- Name of the TypeScript plugin for Vue
-        name = '@vue/typescript-plugin',
-        location = vue_language_server_path,
-        languages = { 'vue' },
-    },
-  },
-}
 
 local filetypes = {
   'typescript',
@@ -104,7 +94,7 @@ local settings = {
     includeCompletionsWithSnippetText = true,
     includeCompletionsWithClassMemberSnippets = true,
     includeCompletionsWithObjectLiteralMethodSnippets = true,
-    includeCompletionsForModuleExports = true,
+    -- includeCompletionsForModuleExports = true,
     useLabelDetailsInCompletionEntries = true,
     allowIncompleteCompletions = true,
     displayPartsForJSDoc = true,

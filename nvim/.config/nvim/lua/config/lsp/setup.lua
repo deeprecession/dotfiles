@@ -71,13 +71,47 @@ require("mason-lspconfig").setup_handlers {
     }
   end,
 
+  -- ["ts_ls"] = function()
+  --   require("typescript-tools").setup({
+  --     capabilities = capabilities or vim.lsp.protocol.make_client_capabilities(),
+  --     handlers = require("config.lsp.servers.tsserver").handlers,
+  --     on_attach = require("config.lsp.servers.tsserver").on_attach,
+  --     settings = require("config.lsp.servers.tsserver").settings,
+  --     filetypes = require("config.lsp.servers.tsserver").filetypes,
+  --   })
+  -- end,
+
   ["ts_ls"] = function()
-    require("typescript-tools").setup({
-      capabilities = capabilities or vim.lsp.protocol.make_client_capabilities(),
-      handlers = require("config.lsp.servers.tsserver").handlers,
-      on_attach = require("config.lsp.servers.tsserver").on_attach,
-      settings = require("config.lsp.servers.tsserver").settings,
-      filetypes = require("config.lsp.servers.tsserver").filetypes,
+    lspconfig.ts_ls.setup({
+      capabilities = capabilities,
+      handlers = handlers,
+      filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
+      init_options = {
+        plugins = {
+          {
+            name = '@vue/typescript-plugin',
+            location = vim.fn.stdpath 'data' .. '/mason/packages/vue-language-server/node_modules/@vue/language-server',
+            languages = { 'vue' },
+          },
+        },
+      },
+      settings = {
+      typescript = {
+        tsserver = {
+          useSyntaxServer = false,
+        },
+        inlayHints = {
+          includeInlayParameterNameHints = 'all',
+          includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+          includeInlayFunctionParameterTypeHints = false,
+          includeInlayVariableTypeHints = false,
+          includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+          includeInlayPropertyDeclarationTypeHints = true,
+          includeInlayFunctionLikeReturnTypeHints = true,
+          includeInlayEnumMemberValueHints = true,
+        },
+      },
+    },
     })
   end,
 
