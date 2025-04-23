@@ -27,6 +27,19 @@ local bubbles_theme = {
   },
 }
 
+local macro = {
+        'macro',
+        fmt = function()
+          local reg = vim.fn.reg_recording()
+          if reg ~= "" then
+            return "Recording @" .. reg
+          end
+          return nil
+        end,
+        color = { fg = "#ff9e64" },
+        draw_empty = false,
+      }
+
 return {
   {
     'nvim-lualine/lualine.nvim',
@@ -39,7 +52,7 @@ return {
       },
       sections = {
         lualine_a = { { 'mode', separator = { left = '' }, right_padding = 2 } },
-        lualine_b = { 'filename', 'branch' },
+        lualine_b = { macro, 'filename', 'branch' },
         lualine_c = {
           '%=', --[[ add your center components here in place of this comment ]]
         },
