@@ -161,7 +161,7 @@ return {
       },
 
       signature = {
-        enabled = true,
+        enabled = false,
         window = {
           border = nil,
         }
