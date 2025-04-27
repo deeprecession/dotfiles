@@ -1,0 +1,1 @@
+{"JavaScript log":{"prefix":"lg","body":"console.log(`[LOG] ($TM_FILENAME:$TM_LINE_NUMBER): $1`)"},"init options component":{"body":["<script lang=\"ts\">","import { defineComponent } from \"vue\";","","export default defineComponent({});","<\/script>","","<template><\/template>","","<style lang=\"css\" scoped><\/style>"],"prefix":"init options component"}}
