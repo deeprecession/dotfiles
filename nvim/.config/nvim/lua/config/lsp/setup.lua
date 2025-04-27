@@ -1,8 +1,6 @@
 -- Setup installer & lsp configs
 local mason = require("mason")
 local mason_lsp = require("mason-lspconfig")
-local ufo_utils = require("utils._ufo")
-local ufo_config_handler = ufo_utils.handler
 local lspconfig = require("lspconfig")
 
 mason.setup({
@@ -25,6 +23,7 @@ mason_lsp.setup({
     "prismals",
     "tailwindcss",
     "volar",
+    "ts_ls"
   },
   -- Whether servers that are set up (via lspconfig) should be automatically installed if they're not already installed.
   -- This setting has no relation with the `ensure_installed` setting.
@@ -191,8 +190,3 @@ require("mason-lspconfig").setup_handlers {
     })
   end
 }
-
-require("ufo").setup({
-  fold_virt_text_handler = ufo_config_handler,
-  close_fold_kinds_for_ft = { default = { "imports" } },
-})
