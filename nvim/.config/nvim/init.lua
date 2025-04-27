@@ -8,5 +8,6 @@ require('config.lazy')
 require('config.keymappings')
 require('config.autocmds')
 require('config.colorscheme')
+require('config.macros')
 
 require('internal.cursorword')
