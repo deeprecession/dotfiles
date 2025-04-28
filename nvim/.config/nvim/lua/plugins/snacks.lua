@@ -14,6 +14,7 @@ return {
       explorer     = { enabled = true },
       picker       = {
         enabled = true,
+        hidden = true,
         layout = {
           cycle = false,
         },
