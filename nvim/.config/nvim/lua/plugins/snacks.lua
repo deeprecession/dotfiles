@@ -13,6 +13,13 @@ return {
       notifier     = { enabled = true },
       explorer     = { enabled = true },
       picker       = {
+        sources = {
+          explorer = {
+            layout = {
+              auto_hide = { "input" },
+            },
+          }
+        },
         enabled = true,
         hidden = true,
         layout = {
