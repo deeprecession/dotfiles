@@ -13,7 +13,7 @@ return {
       -- },
       "rafamadriz/friendly-snippets",
       -- "fang2hou/blink-copilot",
-      -- "David-Kunz/cmp-npm",
+      "David-Kunz/cmp-npm",
       {
         "L3MON4D3/LuaSnip",
         version = "v2.*",
@@ -73,41 +73,18 @@ return {
           },
 
           providers = {
-            -- codecompanion = {
-            --   name = "CodeCompanion",
-            --   module = "codecompanion.providers.completion.blink",
-            -- },
-            -- copilot = {
-            --   name = "copilot",
-            --   module = "blink-copilot",
-            --   opts = {
-            --     max_completions = 3,
-            --     max_attempts = 4,
-            --   },
-            --   score_offset = 100,
-            --   async = true,
-            --   transform_items = function(_, items)
-            --     local CompletionItemKind = require("blink.cmp.types").CompletionItemKind
-            --     local kind_idx = #CompletionItemKind + 1
-            --     CompletionItemKind[kind_idx] = "Copilot"
-            --     for _, item in ipairs(items) do
-            --       item.kind = kind_idx
-            --     end
-            --     return items
-            --   end,
-            -- },
-            -- npm = {
-            --   name = 'npm',
-            --   module = 'blink.compat.source',
-            --
-            --   -- all blink.cmp source config options work as normal:
-            --   -- score_offset = -3,
-            --
-            --   opts = {
-            --     ignore = {},
-            --     only_semantic_versions = false,
-            --   },
-            -- },
+            npm = {
+              name = 'npm',
+              module = 'blink.compat.source',
+
+              -- all blink.cmp source config options work as normal:
+              -- score_offset = -3,
+
+              opts = {
+                ignore = {},
+                only_semantic_versions = false,
+              },
+            },
           }
         },
       },
