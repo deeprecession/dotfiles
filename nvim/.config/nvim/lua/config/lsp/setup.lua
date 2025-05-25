@@ -21,7 +21,7 @@ mason_lsp.setup({
     "lua_ls",
     "prismals",
     "tailwindcss",
-    "volar",
+    "vue_ls",
     "ts_ls"
   },
   -- Whether servers that are set up (via lspconfig) should be automatically installed if they're not already installed.
@@ -128,11 +128,11 @@ vim.lsp.config('lua_ls', {
       settings = require("config.lsp.servers.lua_ls").settings,
 })
 
-vim.lsp.config('volar', {
-      filetypes = require("config.lsp.servers.volar").filetypes,
+vim.lsp.config('vue_ls', {
+      filetypes = require("config.lsp.servers.vue_ls").filetypes,
       handlers = handlers,
       capabilities = capabilities,
-      init_options = require("config.lsp.servers.volar").init_options,
+      init_options = require("config.lsp.servers.vue_ls").init_options,
       on_attach = on_attach,
-      settings = require("config.lsp.servers.volar").settings,
+      settings = require("config.lsp.servers.vue_ls").settings,
 })
